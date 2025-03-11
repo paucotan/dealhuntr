@@ -1,15 +1,16 @@
 class PagesController < ApplicationController
   def home
     @stores = Store.all
-    @best_deals = Deal
+
+    @deals = Deal
       .where("expiry_date >= ?", Date.today)
       .order(discounted_price: :desc)
       .limit(10)
 
-    if params[:query].present?
-      @search_results = Product.where("name ILIKE ?", "%#{params[:query]}%")
+    @search_results = if params[:query].present?
+      Product.where("name ILIKE ?", "%#{params[:query]}%")
     else
-      @search_results = []
+      nil
     end
   end
 
