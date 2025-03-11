@@ -3,5 +3,6 @@ class Store < ApplicationRecord
 
   validates :name, presence: true
   validates :location, presence: true
-  validates :website_url
+  validates :website_url, presence: true
+  validates :logo_url, presence: true
 end
