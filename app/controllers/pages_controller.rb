@@ -12,4 +12,8 @@ class PagesController < ApplicationController
       @search_results = []
     end
   end
+
+  def dashboard
+    @user = current_user
+  end
 end

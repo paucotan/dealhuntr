@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get 'deals/index'
-  get 'deals/show'
+  get 'favourites/index'
+  get 'favourites/create'
+  get 'favourites/destroy'
+
   devise_for :users
   root to: "pages#home"
 
