@@ -1,0 +1,10 @@
+
+<ul>
+  <%= @deals.each do |deal| %>
+
+    <li> <%= deal.price %></li>
+    <% if deal.discounted_price.present? %>
+      <li> <%= deal.discounted_price %></li>
+    <% end %>
+  <% end %>
+</ul>
