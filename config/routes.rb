@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'favourites/index'
   get 'favourites/create'
   get 'favourites/destroy'
+
   devise_for :users
   root to: "pages#home"
 
