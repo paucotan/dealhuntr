@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @deals = Deal.all
   end
 
   def dashboard
