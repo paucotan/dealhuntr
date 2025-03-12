@@ -1,0 +1,13 @@
+<h1>Results</h1>
+
+<% if @products.any? %>
+  <ul>
+    <% @products.each do |product| %>
+      <li><%= product.name %> - <%= product.category %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Nothing was found...</p>
+<% end %>
+
+<%= link_to "Back to Homepage", root_path, class: "btn btn-outline-dark btn-lg" %>
