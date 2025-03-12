@@ -23,6 +23,7 @@ stores = stores_data.map { |store| Store.create!(store) } # Store created record
 puts "✅ Created #{stores.count} stores"
 
 #Seed One User
+
 user1 = User.create!(
   name: Faker::Name.name,
   email: "user1@example.com",

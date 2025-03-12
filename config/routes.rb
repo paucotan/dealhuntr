@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   resources :stores, only: [:index, :show]
   resources :products, only: [:index]
 
-  resources :deals, only: [:index, :show]
+  resources :deals, only: [:show] do
+    get :related, on: :member
+  end
 
   resources :favourites, only: [:index, :destroy]
   resources :shopping_lists, only: [:index, :create, :update, :destroy] do
