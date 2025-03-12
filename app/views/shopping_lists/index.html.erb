@@ -4,9 +4,12 @@
   <p>Your shopping list is empty.</p>
 <% else %>
   <div class="shopping-list">
-    <% @shopping_list.group_by { |item| item[:store] }.each do |store, items| %>
+    <% @shopping_list.group_by { |item| item[:store] || item.deal.store.name }.each do |store, items| %>
       <div class="store-section">
-        <h2><%= store %></h2>
+        <h2>
+          <%= image_tag(Store.find_by(name: store)&.logo_url, style: "width: 80px; height: 40px;", alt: "#{store} logo") if Store.find_by(name: store)&.logo_url.present? %>
+          <%= store %>
+        </h2>
         <% items.each do |item| %>
           <div class="shopping-item">
             <div class="product-details">
