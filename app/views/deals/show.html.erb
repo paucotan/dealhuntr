@@ -23,7 +23,7 @@
 
     <!-- Buttons -->
     <div class="actions">
-      <%#= button_to "Add To List", shopping_list_path(deal_id: @deal.id), method: :post, class: "add-to-list-btn" %>
+      <%= button_to "Add To Shopping List", shopping_lists_path(deal_id: @deal.id), method: :post, class: "btn btn-primary" %>
       <%#= button_to "⭐", favorites_path(deal_id: @deal.id), method: :post, class: "favorite-btn" %>
     </div>
   </div>
