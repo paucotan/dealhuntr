@@ -1,0 +1,47 @@
+<h1>🛒 My Shopping List</h1>
+
+<% if @shopping_list.empty? %>
+  <p>Your shopping list is empty.</p>
+<% else %>
+  <div class="shopping-list">
+    <% @shopping_list.group_by { |item| item[:store] }.each do |store, items| %>
+      <div class="store-section">
+        <h2><%= store %></h2>
+        <% items.each do |item| %>
+          <div class="shopping-item">
+            <div class="product-details">
+              <%= image_tag "https://images.unsplash.com/photo-1609842947419-ba4f04d5d60f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9vZCUyMGJhc2tldHxlbnwwfHwwfHx8MA%3D%3D", class: "product-image" %>
+              <div class="product-info">
+                <h3><%= item[:name] || item.deal.product.name rescue "Unknown Product" %></h3>
+                <p><strong>Original Price:</strong> €<%= item[:price] || item.deal.price rescue "N/A" %></p>
+                <p><strong>Deal Price:</strong> €<%= item[:discounted_price] || item.deal.discounted_price rescue "N/A" %></p>
+                <p><strong>Expires:</strong> <%= item[:expiry_date] || item.deal.expiry_date.strftime("%d/%m/%Y") rescue "N/A" %></p>
+              </div>
+            </div>
+
+            <div class="actions">
+              <!-- Checkbox to mark as purchased -->
+              <%= button_to shopping_list_path(Deal.find(item[:deal_id])), method: :patch, class: "btn btn-light" do %>
+                <i class="<%= item[:purchased] ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check' %>"></i>
+              <% end %>
+
+              <!-- Trash icon to remove item -->
+              <%= button_to shopping_list_path(Deal.find(item[:deal_id])), method: :delete, class: "btn btn-danger" do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Total Price & Savings -->
+  <div class="totals">
+    <p><strong>Total Savings:</strong> <span class="savings">€<%= @shopping_list.sum { |item| (item[:price] || item.deal.price).to_f - (item[:discounted_price] || item.deal.discounted_price).to_f } %></span></p>
+    <p><strong>Without Discounts:</strong> <span class="without-discounts">€<%= @shopping_list.sum { |item| (item[:price] || item.deal.price).to_f } %></span></p>
+  </div>
+
+  <!-- Reset Button -->
+  <%= button_to "Reset Shopping List", reset_shopping_lists_path, method: :delete, class: "btn btn-warning" %>
+<% end %>
