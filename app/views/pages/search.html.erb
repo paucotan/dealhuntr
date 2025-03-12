@@ -1,9 +1,9 @@
 <h1>Results</h1>
 
-<% if @products.any? %>
+<% if @deals.any? %>
   <ul>
-    <% @products.each do |product| %>
-      <li><%= product.name %> - <%= product.category %></li>
+    <% @deals.each do |deal| %>
+      <li><%= deal.product.name %> - <%= deal.product.category %> / <%= deal.store.name %></li>
     <% end %>
   </ul>
 <% else %>
