@@ -1,16 +1,16 @@
 class PagesController < ApplicationController
   def home
+    if params[:query].present?
+      @products = Product.search_by_name_and_category(params[:query])
+    else
+      @products = Product.all
+    end
+    
     @stores = Store.all
     @best_deals = Deal
       .where("expiry_date >= ?", Date.today)
       .order(discounted_price: :desc)
       .limit(10)
-
-    if params[:query].present?
-      @search_results = Product.where("name ILIKE ?", "%#{params[:query]}%")
-    else
-      @search_results = []
-    end
   end
 
   def dashboard
