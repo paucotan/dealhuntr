@@ -1,5 +1,11 @@
 class PagesController < ApplicationController
   def home
+    if params[:query].present?
+      @products = Product.search_by_name_and_category(params[:query])
+    else
+      @products = Product.all
+    end
+    
     @stores = Store.all
 
     @deals = Deal
