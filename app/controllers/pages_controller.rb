@@ -4,8 +4,8 @@ class PagesController < ApplicationController
 
     @deals = Deal
       .where("expiry_date >= ?", Date.today)
-      .order(discounted_price: :desc)
-      .limit(10)
+      .order(discounted_price: :asc)
+      .limit(20)
 
     @search_results = if params[:query].present?
       Product.where("name ILIKE ?", "%#{params[:query]}%")
