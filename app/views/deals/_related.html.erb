@@ -1,20 +1,27 @@
-<div class="product-details p-3">
-  <h5><%= deal.product.name %></h5>
-  <p><strong>Store:</strong> <%= deal.store.name %></p>
-  <p><strong>Expires:</strong> <%= deal.expiry_date.strftime("%b %d, %Y") %></p>
+<div class="expanded-content p-3">
+  <div class="top-section">
+    <%= image_tag deal.product.image_url, class: "expanded-img" %>
 
-  <h6 class="mt-3">Other stores:</h6>
-  <% if related_deals.any? %>
+    <div class="details">
+      <h5 class="product-name"><%= deal.product.name %></h5>
+      <p class="expiry-date">Exp.: <%= deal.expiry_date.strftime("%d/%m/%Y") %></p>
+      <p class="deal-price">
+        <del class="text-muted">€<%= deal.price %></del>
+        <span class="text-warning font-weight-bold">€<%= deal.discounted_price %></span>
+      </p>
+    </div>
+
+    <button class="btn btn-warning btn-sm add-to-list">Add To List</button>
+  </div>
+
+  <div class="other-stores mt-3">
     <% related_deals.each do |related_deal| %>
-      <div class="small-card shadow-sm p-2 mb-2 rounded">
-        <strong><%= related_deal.store.name %></strong>:
-        <span class="text-danger">€<%= related_deal.discounted_price || related_deal.price %></span>
-        <% if related_deal.discounted_price.present? %>
-          <del class="text-muted">€<%= related_deal.price %></del>
-        <% end %>
+      <div class="small-store-card">
+        <%= image_tag related_deal.store.logo_url, class: "store-logo-small" %>
+        <p class="store-price font-weight-bold">
+          €<%= related_deal.discounted_price || related_deal.price %>
+        </p>
       </div>
     <% end %>
-  <% else %>
-    <p class="text-muted">No other deals available.</p>
-  <% end %>
+  </div>
 </div>
