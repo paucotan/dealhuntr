@@ -1,28 +1,27 @@
 <%= form_with url: search_path, method: :get, local: true do |form| %>
-  <div class="search-bar mb-4">
-    <%= form.text_field :query, placeholder: "Find products...", value: params[:query], class: "form-control" %>
+  <div class="search-bar mb-4 d-flex justify-content-between align-items-center">
+    <%= form.text_field :query, placeholder: "Find products...", value: params[:query], class: "form-control flex-grow-1 mr-2" %>
     <%= form.submit "Search", class: "btn btn-primary" %>
   </div>
 <% end %>
 
-<div class="store-logos d-flex justify-content-start gap-3 mb-4">
+<div class="store-logos d-flex justify-content-center gap-3 mb-4">
   <% @stores.each do |store| %>
-    <%= link_to root_path(store_id: store.id) do %>
+    <%= link_to root_path(store_id: store.id), class: "store-link" do %>
       <%= image_tag store.logo_url, alt: store.name, class: "store-logo #{'active-logo' if params[:store_id].to_i == store.id}" %>
     <% end %>
   <% end %>
 </div>
-
 <h1 class="mt-4">Latest Deals</h1>
 <div class="row">
   <% @deals.each do |deal| %>
-    <div class="col-6 col-md-4 col-lg-3 mb-3 deal-column">
+    <div class="col-6 col-md-4 col-lg-3 deal-column">
       <div class="card shadow-sm"
            data-controller="deal"
            data-deal-id="<%= deal.id %>"
            data-action="click->deal#expandDetails">
 
-        <%= image_tag deal.product.image_url, class: "card-img-top", alt: deal.product.name %>
+        <%= image_tag deal.product.image_url, class: "card-img-top" %>
 
         <div class="card-body">
           <p class="card-text">
@@ -36,6 +35,7 @@
         </div>
 
         <div data-deal-target="details" class="expanded-deals-container"></div>
+
       </div>
     </div>
   <% end %>
