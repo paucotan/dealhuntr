@@ -5,7 +5,7 @@ class ShoppingListsController < ApplicationController
   before_action :authorize_shopping_list
 
   def index
-    @shopping_list = current_user.shopping_lists.includes(:deal)
+    @shopping_list = policy_scope(ShoppingList) # ✅ Correct Pundit scoping
     @total_price = @shopping_list.sum { |item| item[:price].to_f }
     @total_savings = @shopping_list.sum { |item| item[:price].to_f - item[:price].to_f }
   end

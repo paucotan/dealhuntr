@@ -20,12 +20,9 @@ class ShoppingListPolicy < ApplicationPolicy
     user.present? # Only logged-in users can remove items
   end
 
-  class Scope < ApplicationPolicy::Scope
-    # NOTE: Be explicit about which records you allow access to!
-    class Scope < Scope
-      def resolve
-        scope.where(user: user) # Only return the current user's shopping lists
-      end
+  class Scope < Scope
+    def resolve
+      scope.where(user: user) # Only return the current user's shopping lists
     end
   end
 end
