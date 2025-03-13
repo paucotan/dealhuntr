@@ -1,0 +1,20 @@
+<div class="product-details p-3">
+  <h5><%= deal.product.name %></h5>
+  <p><strong>Store:</strong> <%= deal.store.name %></p>
+  <p><strong>Expires:</strong> <%= deal.expiry_date.strftime("%b %d, %Y") %></p>
+
+  <h6 class="mt-3">Other stores:</h6>
+  <% if related_deals.any? %>
+    <% related_deals.each do |related_deal| %>
+      <div class="small-card shadow-sm p-2 mb-2 rounded">
+        <strong><%= related_deal.store.name %></strong>:
+        <span class="text-danger">€<%= related_deal.discounted_price || related_deal.price %></span>
+        <% if related_deal.discounted_price.present? %>
+          <del class="text-muted">€<%= related_deal.price %></del>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-muted">No other deals available.</p>
+  <% end %>
+</div>
