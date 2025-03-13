@@ -23,6 +23,7 @@ stores = stores_data.map { |store| Store.create!(store) } # Store created record
 puts "✅ Created #{stores.count} stores"
 
 #Seed One User
+
 user1 = User.create!(
   name: Faker::Name.name,
   email: "user1@example.com",
@@ -36,7 +37,8 @@ products = []
 10.times do
   products << Product.create!(
     name: Faker::Food.ingredient,
-    category: Faker::Food.ethnic_category
+    category: Faker::Food.ethnic_category,
+    image_url: "https://images.unsplash.com/photo-1615486171815-2611a6e3cd02?q=80&w=3880&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   )
   end
   puts "✅ Created #{products.count} products"
