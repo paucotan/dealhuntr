@@ -1,7 +1,7 @@
-<%= form_with url: search_path, method: :get, local: true do |form| %>
-  <div class="search-bar mb-4 d-flex justify-content-between align-items-center">
-    <%= form.text_field :query, placeholder: "Find products...", value: params[:query], class: "form-control flex-grow-1 mr-2" %>
-    <%= form.submit "Search", class: "btn btn-primary" %>
+<%= form_with url: root_path, method: :get, local: true do |form| %>
+  <div class="search-bar">
+    <%= form.text_field :query, placeholder: "Find products...", value: params[:query] %>
+    <%= form.submit "Search" %>
   </div>
 <% end %>
 
@@ -12,31 +12,7 @@
     <% end %>
   <% end %>
 </div>
-<h1 class="mt-4">Latest Deals</h1>
-<div class="row">
-  <% @deals.each do |deal| %>
-    <div class="col-6 col-md-4 col-lg-3 deal-column">
-      <div class="card shadow-sm"
-           data-controller="deal"
-           data-deal-id="<%= deal.id %>"
-           data-action="click->deal#expandDetails">
 
-        <%= image_tag deal.product.image_url, class: "card-img-top" %>
-
-        <div class="card-body">
-          <p class="card-text">
-            <% if deal.discounted_price.present? %>
-              <del class="text-muted">€<%= deal.price %></del>
-              <span class="text-danger ml-1 font-weight-bold">€<%= deal.discounted_price %></span>
-            <% else %>
-              <span class="text-dark font-weight-bold">€<%= deal.price %></span>
-            <% end %>
-          </p>
-        </div>
-
-        <div data-deal-target="details" class="expanded-deals-container"></div>
-
-      </div>
-    </div>
-  <% end %>
+<div id="search-results">
+  <%= render "search_results", deals: @deals %>
 </div>
