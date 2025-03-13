@@ -23,10 +23,7 @@
             </div>
 
             <div class="actions">
-              <!-- Checkbox to mark as purchased -->
-              <%= button_to shopping_list_path(Deal.find(item[:deal_id])), method: :patch, class: "btn btn-light" do %>
-                <i class="<%= item[:purchased] ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check' %>"></i>
-              <% end %>
+              <!-- Removed Check Button -->
 
               <!-- Trash icon to remove item -->
               <%= button_to shopping_list_path(Deal.find(item[:deal_id])), method: :delete, class: "btn btn-danger" do %>
@@ -41,10 +38,12 @@
 
   <!-- Total Price & Savings -->
   <div class="totals">
-    <p><strong>Total Savings:</strong> <span class="savings">€<%= @shopping_list.sum { |item| (item[:price] || item.deal.price).to_f - (item[:discounted_price] || item.deal.discounted_price).to_f } %></span></p>
-    <p><strong>Without Discounts:</strong> <span class="without-discounts">€<%= @shopping_list.sum { |item| (item[:price] || item.deal.price).to_f } %></span></p>
+    <p><strong>Total Savings This Trip:</strong> <span class="savings">€<%= @shopping_list.sum { |item| (item[:price] || item.deal.price).to_f - (item[:discounted_price] || item.deal.discounted_price).to_f } %></span></p>
+    <p class="savings-message"><i>Nice! You saved some money on this trip. Keep hunting for great deals! 🛍️</i></p>
   </div>
 
   <!-- Reset Button -->
-  <%= button_to "Reset Shopping List", reset_shopping_lists_path, method: :delete, class: "btn btn-warning" %>
+  <%= button_to "Reset Shopping List", reset_shopping_lists_path, method: :delete, class: "btn btn-warning m-2" %>
+  <!-- Back to Homepage Button -->
+  <%= button_to "Back to Homepage", root_path, class: "btn btn-primary m-2" %>
 <% end %>
