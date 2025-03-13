@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:home, :search]  # ✅ Allow public access to homepage and search
+
   def home
+    authorize :page, :home?
     @stores = Store.limit(4)
 
     if params[:query].present?
@@ -27,5 +30,6 @@ class PagesController < ApplicationController
 
   def dashboard
     @user = current_user
+    authorize :page, :dashboard? # ✅ Restrict dashboard access with Pundit
   end
 end
