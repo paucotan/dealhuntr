@@ -1,26 +1,33 @@
 class PagesController < ApplicationController
   def home
     @stores = Store.all
-    if params[:query].present?
-      @deals = Product.search_by_name_and_category(params[:query])
-    else
-      @deals = Deal
-                .where("expiry_date >= ?", Date.today)
-                .order(discounted_price: :asc)
-                .limit(20)
-    end
+    @deals = fetch_deals(params[:query])
   end
 
   def search
-    if params[:query].present?
-      @products = Product.search_by_name_and_category(params[:query])
-      @deals = Deal.where(product_id: @products.first.id)
-    else
-      @products = Product.none
+    @deals = fetch_deals(params[:query])
+
+    respond_to do |format|
+      format.html { render "home" }
+      format.js { render partial: "search_results", locals: { deals: @deals } }
     end
   end
 
   def dashboard
     @user = current_user
+  end
+
+  private
+
+  def fetch_deals(query)
+    if query.present?
+      Deal.includes(:product, :store)
+          .joins(:product)
+          .where("products.name ILIKE ? OR products.category ILIKE ?", "%#{query}%", "%#{query}%")
+    else
+      Deal.where("expiry_date >= ?", Date.today)
+          .order(discounted_price: :asc)
+          .limit(20)
+    end
   end
 end
