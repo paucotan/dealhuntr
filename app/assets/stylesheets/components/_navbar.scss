@@ -5,11 +5,26 @@
 }
 
 .navbar-dealhuntr .nav-link {
-  color: #F99417;
   font-size: 24px;
   text-decoration: none;
 }
 
 .navbar-dealhuntr .nav-link:hover {
   color: #D87C0A; /* Darker shade of orange */
+}
+
+/* Default icon color */
+.navbar-dealhuntr .nav-link i {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+/* Change color on hover */
+.navbar-dealhuntr .nav-link:hover i {
+  color: orange;
+}
+
+/* Make the home icon orange when on the homepage */
+.navbar-dealhuntr .active-icon i {
+  color: orange !important;
 }
