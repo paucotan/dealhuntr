@@ -19,15 +19,6 @@ class PagesController < ApplicationController
     end
   end
 
-  def search
-    @deals = fetch_deals(params[:query])
-
-    respond_to do |format|
-      format.html { render "home" }
-      format.js { render partial: "search_results", locals: { deals: @deals } }
-    end
-  end
-
   def dashboard
     @user = current_user
     authorize :page, :dashboard? # ✅ Restrict dashboard access with Pundit
@@ -37,9 +28,9 @@ class PagesController < ApplicationController
 
   def fetch_deals(query)
     if query.present?
-      Deal.includes(:product, :store)
-          .joins(:product)
-          .where("products.name ILIKE ? OR products.category ILIKE ?", "%#{query}%", "%#{query}%")
+      @results = Product.search(params[:query])
+      @products = @results.pluck(:id)
+      @deals = Deal.where(product_id: @products)
     else
       Deal.where("expiry_date >= ?", Date.today)
           .order(discounted_price: :asc)

@@ -32,6 +32,10 @@ gem 'faker'
 
 gem 'pg_search'
 
+gem "searchkick"
+
+gem "opensearch-ruby"
+
 gem 'pundit'
 
 # Use Redis adapter to run Action Cable in production
