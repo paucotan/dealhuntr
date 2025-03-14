@@ -1,16 +1,18 @@
 <%= form_with url: root_path, method: :get, local: true do |form| %>
-  <div class="search-bar">
+  <div class="search-bar ">
     <%= form.text_field :query, placeholder: "Find products...", value: params[:query] %>
     <%= form.submit "Search" %>
   </div>
 <% end %>
 <div class="stores-card shadow-sm">
-  <div class="d-flex justify-content-center gap-3 ">
+  <div class="d-flex justify-content-center gap-3">
     <% @stores.each do |store| %>
+
       <%= link_to root_path(store_id: store.id), class: "store-link" do %>
-        <%= image_tag store.logo_url, alt: store.name, class: "banner-logo #{'active-logo' if params[:store_id].to_i == store.id}" %>
+        <%= image_tag store.logo_url, alt: store.name, class: "banner-logo #{'active-logo' if params[:store_id].to_i == store.id} shadow-sm"%>
+        <% end %>
       <% end %>
-    <% end %>
+
   </div>
 </div>
 
