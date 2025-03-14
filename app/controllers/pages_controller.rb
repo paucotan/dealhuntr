@@ -5,6 +5,10 @@ class PagesController < ApplicationController
     authorize :page, :home?
     @stores = Store.all
     @deals = fetch_deals(params[:query])
+
+    if params[:store_id].present?
+      @deals = @deals.where(store_id: params[:store_id])
+    end
   end
 
   def dashboard
