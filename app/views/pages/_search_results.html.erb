@@ -11,7 +11,7 @@
           <p class="card-text">
             <% if deal.discounted_price.present? %>
               <del class="text-muted">€<%= deal.price %></del>
-              <span class="text-danger ml-1 font-weight-bold">€<%= deal.discounted_price %></span>
+              <span class="discounted-price-text ml-1 font-weight-bold">€<%= deal.discounted_price %></span>
             <% else %>
               <span class="text-dark font-weight-bold">€<%= deal.price %></span>
             <% end %>
