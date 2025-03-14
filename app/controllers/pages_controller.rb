@@ -2,21 +2,8 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home, :search]  # ✅ Allow public access to homepage and search
 
   def home
-    authorize :page, :home?
-    @stores = Store.limit(4)
-
-    if params[:query].present?
-      @deals = Product.search_by_name_and_category(params[:query])
-    elsif params[:store_id].present?
-      @deals = Deal.where(store_id: params[:store_id])
-                   .where("expiry_date >= ?", Date.today)
-                   .order(discounted_price: :asc)
-                   .limit(20)
-    else
-      @deals = Deal.where("expiry_date >= ?", Date.today)
-                   .order(discounted_price: :asc)
-                   .limit(20)
-    end
+    @stores = Store.all
+    @deals = fetch_deals(params[:query])
   end
 
   def dashboard
