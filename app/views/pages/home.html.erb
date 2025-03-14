@@ -5,31 +5,15 @@
   </div>
 <% end %>
 
-<div class="store-logos d-flex justify-content-center gap-3 mb-4">
+<div class="d-flex justify-content-center gap-3 mb-4">
   <% @stores.each do |store| %>
     <%= link_to root_path(store_id: store.id), class: "store-link" do %>
       <%= image_tag store.logo_url, alt: store.name, class: "store-logo #{'active-logo' if params[:store_id].to_i == store.id}" %>
     <% end %>
   <% end %>
 </div>
+<h1 class="mt-4">Latest Deals</h1>
 
-
-        <%= image_tag deal.product.image_url, class: "card-img-top" %>
-
-        <div class="card-body">
-          <p class="card-text">
-            <% if deal.discounted_price.present? %>
-              <del class="text-muted">€<%= deal.price %></del>
-              <span class="text-danger ml-1 font-weight-bold">€<%= deal.discounted_price %></span>
-            <% else %>
-              <span class="text-dark font-weight-bold">€<%= deal.price %></span>
-            <% end %>
-          </p>
-        </div>
-
-        <div data-deal-target="details" class="expanded-deals-container"></div>
-
-      </div>
-    </div>
-  <% end %>
+<div id="search-results">
+  <%= render "search_results", deals: @deals %>
 </div>
