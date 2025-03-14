@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'shopping_lists/index'
-  get 'shopping_lists/create'
   patch 'shopping_lists/update'
   delete 'shopping_lists/destroy'
   delete 'shopping_lists/reset'

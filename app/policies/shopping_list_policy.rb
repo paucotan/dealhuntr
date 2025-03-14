@@ -20,6 +20,10 @@ class ShoppingListPolicy < ApplicationPolicy
     user.present? # Only logged-in users can remove items
   end
 
+  def reset?
+    user.present?
+  end
+
   class Scope < Scope
     def resolve
       scope.where(user: user) # Only return the current user's shopping lists

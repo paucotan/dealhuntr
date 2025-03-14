@@ -24,4 +24,7 @@ export default class extends Controller {
       })
       .catch(err => console.error(err));
   }
+  preventExpand(event) {
+    event.stopPropagation();
+  }
 }
