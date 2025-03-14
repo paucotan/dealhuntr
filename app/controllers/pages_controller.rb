@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home, :search]  # ✅ Allow public access to homepage and search
 
   def home
+    authorize :page, :home?
     @stores = Store.all
     @deals = fetch_deals(params[:query])
   end
