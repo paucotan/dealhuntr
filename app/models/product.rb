@@ -12,6 +12,6 @@ class Product < ApplicationRecord
   private
 
   def set_reindex
-    super.reindex
+    Product.reindex
   end
 end
