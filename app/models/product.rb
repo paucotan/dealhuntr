@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
-  after_commit :set_reindex, on: :create
+  # after_commit :set_reindex, on: :create
 
-  searchkick word_start: [:name, :category]
+  # searchkick word_start: [:name, :category]
 
   has_many :deals
   has_many :favourites
@@ -9,9 +9,9 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :category, presence: true
 
-  private
+  # private
 
-  def set_reindex
-    Product.reindex
-  end
+  # def set_reindex
+  #   Product.reindex
+  # end
 end

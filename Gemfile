@@ -34,7 +34,7 @@ gem 'pg_search'
 
 gem "searchkick"
 
-gem "opensearch-ruby"
+gem "elasticsearch"
 
 gem 'pundit'
 
