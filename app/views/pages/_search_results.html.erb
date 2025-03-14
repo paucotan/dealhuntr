@@ -1,0 +1,25 @@
+<% if deals.any? %>
+  <h1>Latest Deals</h1>
+  <div class="row">
+    <% deals.each do |deal| %>
+      <div class="col-6">
+        <div class="card mb-2 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><%= deal.product.name %></h5>
+            <p class="card-text"><strong>Store:</strong> <%= deal.store.name %></p>
+            <p class="card-text"><strong>Price:</strong> <span class="text-danger">€<%= deal.discounted_price || deal.price %></span></p>
+
+            <% if deal.discounted_price.present? %>
+              <p class="card-text"><del>€<%= deal.price %></del> (Discounted!)</p>
+            <% end %>
+
+            <p class="card-text"><strong>Expires:</strong> <%= deal.expiry_date.strftime("%b %d, %Y") %></p>
+            <a href="<%= deal_path(deal) %>" class="btn btn-primary">View Deal</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No deals found.</p>
+<% end %>
