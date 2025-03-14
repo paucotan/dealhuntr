@@ -15,7 +15,8 @@ class ShoppingListsController < ApplicationController
     shopping_list = current_user.shopping_lists.create(deal: deal)
     authorize shopping_list
 
-    redirect_to shopping_lists_path, notice: "Deal added to your shopping list!"
+    flash[:alert] = "Deal added to your shopping list!"
+    redirect_to shopping_lists_path
   end
 
   def destroy
@@ -23,14 +24,16 @@ class ShoppingListsController < ApplicationController
     authorize item
     item&.destroy
 
-    redirect_to shopping_lists_path, notice: "Deal removed from your shopping list."
+    flash[:alert] = "Deal removed from your shopping list."
+    redirect_to shopping_lists_path
   end
 
   def reset
     authorize current_user.shopping_lists
     current_user.shopping_lists.destroy_all
 
-    redirect_to shopping_lists_path, notice: "Shopping list cleared."
+    flash[:alert] = "Shopping list cleared."
+    redirect_to shopping_lists_path
   end
 
   private

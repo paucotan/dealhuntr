@@ -11,7 +11,7 @@
       </p>
     </div>
 
-    <button class="btn btn-warning btn-sm add-to-list">Add To List</button>
+    <%= button_to "Add To List", shopping_lists_path(deal_id: deal.id), method: :post, class: "btn btn-warning btn-sm add-to-list", data: { action: "click->deal#preventExpand" } %>
   </div>
 
   <div class="other-stores mt-3">

@@ -1,6 +1,33 @@
 .alert {
+  color: white;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
   position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 1000;
+  /* Removed top property for responsive design */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  width: 50%;
+  max-width: 500px;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Default for larger screens (Desktop) */
+@media (min-width: 991px) {
+  .alert {
+    top: 20px; /* Show at the top */
+  }
+}
+
+/* For mobile screens (width < 991px) */
+@media (max-width: 990px) {
+  .alert {
+    bottom: 20px; /* Show at the bottom */
+    top: auto; /* Reset top */
+  }
+}
+.alert:empty {
+  display: none;
 }
