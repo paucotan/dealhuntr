@@ -4,15 +4,15 @@
     <%= form.submit "Search" %>
   </div>
 <% end %>
-
-<div class="d-flex justify-content-center gap-3 mb-4">
-  <% @stores.each do |store| %>
-    <%= link_to root_path(store_id: store.id), class: "store-link" do %>
-      <%= image_tag store.logo_url, alt: store.name, class: "store-logo #{'active-logo' if params[:store_id].to_i == store.id}" %>
+<div class="stores-card shadow-sm">
+  <div class="d-flex justify-content-center gap-3 ">
+    <% @stores.each do |store| %>
+      <%= link_to root_path(store_id: store.id), class: "store-link" do %>
+        <%= image_tag store.logo_url, alt: store.name, class: "banner-logo #{'active-logo' if params[:store_id].to_i == store.id}" %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
-<h1 class="mt-4">Latest Deals</h1>
 
 <div id="search-results">
   <%= render "search_results", deals: @deals %>

@@ -2,13 +2,20 @@
 body {
   padding: 10px;
 }
+.stores-card {
 
-.store-logos {
+  border-radius: 10px;
+  height: 100px;
+
+  .banner-logo {
   display: flex;
+  height: 60px;
   justify-content: space-around;
   align-items: center;
   gap: 15px;
   margin-bottom: 10px;
+  width: 70px;
+  }
 }
 
 .store-logo {
@@ -48,8 +55,13 @@ body {
 
   &.expanded {
     flex: 0 0 100%;
-    max-width: 100%;
+    width: 350px;
+
+    .card-text {
+      display: none;
+    }
   }
+
 }
 
 /* 📌 Kart içeriği optimize edildi */
@@ -72,16 +84,14 @@ body {
     text-align: center;
   }
 
-  /* 📌 Expanded modda sadece içeriği göster */
-  &.expanded .card-img-top {
-    display: none;
-  }
+
+
 }
 
 /* 📌 Expanded içeriği */
 .expanded-content {
-  max-width: 500px;
-  width: 100%;
+  max-width: 200px;
+  height: 300px;
   border-radius: 10px;
   background: #fff;
   padding: 15px;
@@ -90,17 +100,14 @@ body {
   align-items: center;
   margin: 0 auto;
 
+
+
+
   .top-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-  }
-
-  .expanded-img {
-    height: 80px;
-    width: 80px;
-    object-fit: cover;
   }
 
   .add-to-list {
@@ -110,7 +117,7 @@ body {
   /* 📌 Store logoları */
   .other-stores {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     width: 100%;
     gap: 10px;
 
