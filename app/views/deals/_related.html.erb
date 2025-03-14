@@ -1,9 +1,9 @@
 <div class="expanded-content p-3">
   <div class="top-section">
-    <%= image_tag deal.product.image_url, class: "expanded-img" %>
 
     <div class="details">
       <h5 class="product-name"><%= deal.product.name %></h5>
+      <%= image_tag deal.store.logo_url, class: "store-logo-small", style:"height: 50px; width: 50px;" %>
       <p class="expiry-date">Exp.: <%= deal.expiry_date.strftime("%d/%m/%Y") %></p>
       <p class="deal-price">
         <del class="text-muted">€<%= deal.price %></del>
