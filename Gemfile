@@ -38,6 +38,16 @@ gem "elasticsearch"
 
 gem 'pundit'
 
+gem "selenium-webdriver" #for scraping JS websites
+
+gem 'nokogiri' # for parsing HTML
+
+#for scraper to run automatically
+gem 'whenever', require: false
+
+# add pagination
+gem 'will_paginate'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -82,5 +92,5 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
+
 end
