@@ -23,14 +23,24 @@ class PagesController < ApplicationController
   private
 
   def fetch_deals(query)
+    # if query.present?
+    #   @results = Product.search(params[:query])
+    #   @products = @results.pluck(:id)
+    #   @deals = Deal.where(product_id: @products)
+    # else
+    #   Deal.where("expiry_date >= ?", Date.today)
+    #       .order(discounted_price: :asc)
+    #      # .limit(20)
+    # end
+
     if query.present?
-      @results = Product.search(params[:query])
-      @products = @results.pluck(:id)
-      @deals = Deal.where(product_id: @products)
+      product_ids = Product.search_by_name_and_category(query).pluck(:id)
+      Deal.where(product_id: product_ids)
+          .where("expiry_date >= ?", Date.today)
+          .order(discounted_price: :asc)
     else
       Deal.where("expiry_date >= ?", Date.today)
           .order(discounted_price: :asc)
-         # .limit(20)
     end
   end
 end
