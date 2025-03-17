@@ -15,38 +15,39 @@ class AlbertHeijnScraper
   end
 
   def scrape
-    puts "Opening #{AH_BONUS_URL}..."
-    @driver.get(AH_BONUS_URL)
-    sleep 5 # Extra wait for JS to load
-    puts "Page loaded. Grabbing HTML..."
+    begin
+      puts "Opening #{AH_BONUS_URL}..."
+      @driver.get(AH_BONUS_URL)
+      sleep 5 # Extra wait for JS to load
+      puts "Page loaded. Grabbing HTML..."
 
-    html = @driver.page_source
-    doc = Nokogiri::HTML(html)
+      html = @driver.page_source
+      doc = Nokogiri::HTML(html)
 
-    # Get expiry date from the nested header structure
-    expiry_date = doc.at_css('span.period-toggle-button_label__rRyWQ')&.text[/t\/m (\d+ \w+)/, 1]
-    puts "Expiry Date: #{expiry_date}"
+      # Get expiry date from the nested header structure
+      expiry_date = doc.at_css('span.period-toggle-button_label__rRyWQ')&.text[/t\/m (\d+ \w+)/, 1]
+      puts "Expiry Date: #{expiry_date}"
 
-    # Parse the expiry date safely
-    parsed_expiry_date = parse_date(expiry_date)
-    puts "Parsed Expiry Date: #{parsed_expiry_date}"
+      # Parse the expiry date safely
+      parsed_expiry_date = parse_date(expiry_date)
+      puts "Parsed Expiry Date: #{parsed_expiry_date}"
 
-    # Find deal cards
-    deals = doc.css('a.promotion-card_root__tQA3z')
-    puts "Found #{deals.count} deal cards."
+      # Find deal cards
+      deals = doc.css('a.promotion-card_root__tQA3z')
+      puts "Found #{deals.count} deal cards."
 
-    # Limit to first 5 deals for testing
-    deals.first(5).each_with_index do |deal, index|
-      process_deal(deal, expiry_date, parsed_expiry_date, index)
+      deals.each_with_index do |deal, index|
+        process_deal(deal, expiry_date, parsed_expiry_date, index)
+      end
+
+      puts "Scraping done!"
+    rescue Selenium::WebDriver::Error::WebDriverError => e
+      puts "Website is down or inaccessible: #{e.message}. Skipping scrape."
+    rescue StandardError => e
+      puts "An error occurred during scraping: #{e.message}. Consider checking the website status."
+    ensure
+      @driver.quit
     end
-
-    # Uncomment code below to scrape all deals:
-    # deals.each_with_index do |deal, index|
-     # process_deal(deal, expiry_date, parsed_expiry_date, index)
-    # end
-
-    puts "Scraping done!"
-    @driver.quit
   end
 
   private
@@ -58,15 +59,33 @@ class AlbertHeijnScraper
     price_element = deal.at_css('[data-testhook="price"]')
     regular_price = price_element&.[]('data-testpricewas')&.gsub(',', '.')&.to_f || 0.0
     discounted_price = price_element&.[]('data-testpricenow')&.gsub(',', '.')&.to_f || 0.0
-    deal_type = deal.css('[data-testhook="promotion-shields"]').text.strip.gsub(/(\d)([a-zA-Z])/, '\1 \2').gsub(/voor(\d)/, 'voor \1')
-    image_url = deal.css('img').first&.[]('src') || 'No image'
+    deal_type = deal.css('[data-testhook="promotion-shields"]').text.strip.gsub(/(\d)([a-zA-Z])/, '\1 \2').gsub(/voor(\d+)/, 'voor \1').gsub(/\s+/, ' ').strip
 
-    # Only show regular price if it exists
+    # Wait for the image to load
+    image_element = deal.at_css('img')
+    image_url = 'No image'
+    if image_element
+      temp_image_url = image_element['data-src'] || image_element['src']
+      unless temp_image_url.match?(/data:image\/gif;base64/)
+        image_url = temp_image_url
+      else
+        @driver.execute_script("arguments[0].scrollIntoView(true);", @driver.find_element(:css, "a.promotion-card_root__tQA3z:nth-child(#{index + 1}) img"))
+        begin
+          wait = Selenium::WebDriver::Wait.new(timeout: 5)
+          image_url = wait.until do
+            src = @driver.find_element(:css, "a.promotion-card_root__tQA3z:nth-child(#{index + 1}) img")['src']
+            src unless src.match?(/data:image\/gif;base64/)
+          end || 'No image'
+        rescue Selenium::WebDriver::Error::TimeoutError
+          puts "Timeout waiting for image to load for Deal ##{index + 1}, using placeholder: #{temp_image_url}"
+          image_url = 'No image'
+        end
+      end
+    end
+
     regular_price_display = regular_price.zero? && price_element&.[]('data-testpricewas').nil? ? 'N/A' : regular_price
 
-    # Save to database with explicit error handling
     begin
-      # Find or create store by name only
       store = Store.find_or_create_by!(name: 'Albert Heijn') do |s|
         s.website_url = AH_BONUS_URL
       end
@@ -93,16 +112,17 @@ class AlbertHeijnScraper
         store_id: store.id,
         price: regular_price_display == 'N/A' ? nil : regular_price,
         discounted_price: discounted_price,
-        expiry_date: parsed_expiry_date
+        expiry_date: parsed_expiry_date,
+        deal_type: deal_type # Add deal_type to the attributes
       }
       puts "Deal attributes: #{deal_attributes.inspect}"
 
-      # Check for existing deal to avoid duplicates
       existing_deal = Deal.find_by(
         product_id: product.id,
         store_id: store.id,
         discounted_price: discounted_price,
-        expiry_date: parsed_expiry_date
+        expiry_date: parsed_expiry_date,
+        deal_type: deal_type # Add to the find_by check
       )
 
       if existing_deal
@@ -123,11 +143,10 @@ class AlbertHeijnScraper
       puts "Error saving Deal ##{index + 1}: #{e.message}"
     end
 
-    # Print the deal
     puts "\nDeal ##{index + 1}:"
     puts "  Name: #{name}"
     puts "  Description: #{description}"
-    puts "  Regular Price: #{regular_price_display.is_a?(Numeric) ? "€#{regular_price_display}" : regular_price_display}"
+    puts "  Regular Price: #{regular_price_display.is_a?(Numeric) ? '€' + regular_price_display.to_s : regular_price_display}"
     puts "  Discounted Price: €#{discounted_price}"
     puts "  Deal Type: #{deal_type}"
     puts "  Image URL: #{image_url}"
