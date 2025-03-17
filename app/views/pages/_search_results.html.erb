@@ -6,7 +6,11 @@
            data-deal-id="<%= deal.id %>"
            data-action="click->deal#expandDetails">
 
-        <%= image_tag deal.product.image_url, class: "card-img-top" %>
+
+        <% unless deal.product.image_url == "No image" || deal.product.image_url.blank? %>
+          <%= image_tag deal.product.image_url, class: "card-img-top" %>
+        <% end %>
+
         <div class="card-body">
           <p class="card-text">
             <% if deal.discounted_price.present? %>
@@ -19,9 +23,23 @@
           <% if deal.deal_type.present? %>
             <p class="deal-type-text text-danger font-weight-bold mb-0"><%= deal.deal_type %></p>
           <% end %>
+          <p class="category-text text-muted mb-0">
+            Category: <%= deal.category || "Uncategorized" %>
+          </p>
         </div>
         <div data-deal-target="details" class="expanded-deals-container"></div>
       </div>
     </div>
   <% end %>
 </div>
+
+<style>
+  .category-text {
+    font-size: 0.9rem;
+  }
+  .debug-text {
+    font-size: 0.8rem;
+    color: #888;
+    word-break: break-all;
+  }
+</style>

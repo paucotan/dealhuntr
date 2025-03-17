@@ -1,9 +1,12 @@
+<!-- Search bar -->
 <%= form_with url: root_path, method: :get, local: true do |form| %>
-  <div class="search-bar ">
+  <div class="search-bar">
     <%= form.text_field :query, placeholder: "Find products...", value: params[:query] %>
     <%= form.submit "Search" %>
   </div>
 <% end %>
+
+<!-- Store filter -->
 <div class="stores-card shadow-sm">
   <div class="d-flex justify-content-center gap-3">
     <% @stores.each do |store| %>
@@ -14,8 +17,35 @@
   </div>
 </div>
 
+<!-- Category filter bar -->
+<div class="category-filter-bar">
+  <%= form_with url: root_path, method: :get, local: true, class: "filter-form" do %>
+    <label for="category">Filter by Category:</label>
+    <%= select_tag :category,
+                   options_for_select([["All Categories", nil]] + @categories.map { |c| [c, c] }, params[:category]),
+                   onchange: "this.form.submit()" %>
+    <%= hidden_field_tag :query, params[:query] %>
+    <%= hidden_field_tag :store_id, params[:store_id] %>
+  <% end %>
+</div>
+
+<!-- Deals list -->
 <div id="search-results">
   <%= render "search_results", deals: @deals %>
 </div>
 
-<%= will_paginate @deals, class: "d-flex justify-content-center"%>
+<%= will_paginate @deals, class: "d-flex justify-content-center" %>
+
+<style>
+  .category-filter-bar {
+    margin: 20px 0;
+    text-align: center;
+  }
+  .filter-form label {
+    margin-right: 10px;
+  }
+  .filter-form select {
+    padding: 5px;
+    border-radius: 4px;
+  }
+</style>
