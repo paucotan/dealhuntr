@@ -1,9 +1,12 @@
+<!-- Search bar -->
 <%= form_with url: root_path, method: :get, local: true do |form| %>
-  <div class="search-bar ">
+  <div class="search-bar d-flex justify-content-center ">
     <%= form.text_field :query, placeholder: "Find products...", value: params[:query] %>
     <%= form.submit "Search" %>
   </div>
 <% end %>
+
+<!-- Store filter -->
 <div class="stores-card shadow-sm">
   <div class="d-flex justify-content-center gap-3">
     <% @stores.each do |store| %>
@@ -14,8 +17,23 @@
   </div>
 </div>
 
-<div id="search-results">
-  <%= render "search_results", deals: @deals %>
+<!-- Category filter bar -->
+<div class="category-filter-bar">
+  <%= form_with url: root_path, method: :get, local: true, class: "filter-form" do %>
+    <label for="category">Filter by Category:</label>
+    <%= select_tag :category,
+                   options_for_select([["All Categories", nil]] + @categories.map { |c| [c, c] }, params[:category]),
+                   onchange: "this.form.submit()" %>
+    <%= hidden_field_tag :query, params[:query] %>
+    <%= hidden_field_tag :store_id, params[:store_id] %>
+  <% end %>
 </div>
 
-<%= will_paginate @deals, class: "d-flex justify-content-center"%>
+<!-- Deals list -->
+
+<div id="search-results" class="container-fluid">
+  <%= render "search_results", deals: @deals %>
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+</div>
+
+<%= will_paginate @deals, class: "d-flex justify-content-center" %>

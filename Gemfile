@@ -96,3 +96,5 @@ group :test do
   gem "capybara"
 
 end
+
+gem "pagy", "~> 9.3"

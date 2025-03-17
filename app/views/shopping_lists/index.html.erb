@@ -6,10 +6,15 @@
   <div class="shopping-list">
     <% @shopping_list.group_by { |item| item[:store] || item.deal.store.name }.each do |store, items| %>
       <div class="store-section">
-        <h2>
-          <%= image_tag(Store.find_by(name: store)&.logo_url, style: "width: 80px; height: 40px;", alt: "#{store} logo") if Store.find_by(name: store)&.logo_url.present? %>
-          <%= store %>
-        </h2>
+        <% store_obj = Store.find_by(name: store) %>
+        <% if store_obj %>
+          <%= link_to store_path(store_obj), class: "store-link d-flex align-items-center" do %>
+            <%= image_tag(store_obj.logo_url, style: "width: 80px; height: 40px;", alt: "#{store_obj.name} logo") if store_obj.logo_url.present? %>
+            <h2 class="ms-2"><%= store_obj.name %></h2>
+          <% end %>
+        <% else %>
+          <h2><%= store %></h2>
+        <% end %>
         <% items.each do |item| %>
           <div class="shopping-item">
             <div class="product-details">
@@ -38,7 +43,10 @@
 
   <!-- Total Price & Savings -->
   <div class="totals">
-    <p><strong>Total Savings This Trip:</strong> <span class="savings">€<%= @shopping_list.sum { |item| (item[:price] || item.deal.price).to_f - (item[:discounted_price] || item.deal.discounted_price).to_f } %></span></p>
+    <p><strong>Total Savings This Trip:</strong> <span class="savings">€<%= number_with_precision(
+      @shopping_list.sum { |item| (item[:price] || item.deal.price).to_f - (item[:discounted_price] || item.deal.discounted_price).to_f },
+      precision: 2
+    ) %></span></p>
     <p class="savings-message"><i>Nice! You saved some money on this trip. Keep hunting for great deals! 🛍️</i></p>
   </div>
 

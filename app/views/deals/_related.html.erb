@@ -1,20 +1,23 @@
 <div class="expanded-content">
   <div class="product-frame">
     <div class="product-image-card">
-      <%= image_tag deal.product.image_url, class: "card-img-top" %>
+      <% if deal.product.image_url.present? %>
+        <%= image_tag deal.product.image_url, class: "card-img-top" %>
+      <% else %>
+        <p>Ürün görseli bulunamadı!</p>
+      <% end %>
       <div class="deal-prices">
-        <p class="text-muted">€ <%= deal.price %></p>
-        <p class="discounted-price-text font-weight-bold">€ <%= deal.discounted_price %></p>
+        <p class="text-muted">€<%= deal.price %></p>
+        <p class="discounted-price-text font-weight-bold">€<%= deal.discounted_price %></p>
       </div>
     </div>
     <div class="product-info">
       <div class="details">
-
-        <h2 class="product-name"><%= deal.product.name %></h5>
+        <h5 class="product-name"><%= deal.product.name %></h5>
         <p class="expiry-date">Exp.: <%= deal.expiry_date.strftime("%d/%m/%Y") %></p>
         <p>Quantity</p>
         <p>Deal discount type</p>
-        <%= image_tag deal.store.logo_url, class: "choosen_store_id", style:"height: 50px; width: 50px;" %>
+        <%= image_tag deal.store.logo_url, class: "choosen_store_id" %>
       </div>
       <%= button_to "Add To List", shopping_lists_path(deal_id: deal.id), method: :post, class: "btn btn-warning btn-sm add-to-list", data: { action: "click->deal#preventExpand" } %>
     </div>

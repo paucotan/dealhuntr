@@ -1,139 +1,58 @@
-// Specific CSS for your home-page
 body {
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 }
-.stores-card {
 
+
+
+#search-results {
+  overflow: scroll;
+  height: 65vh;
+}
+
+.search-bar {
+  margin-bottom: 1rem;
+
+  input[type="text"] {
+    width: 70%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  input[type="submit"] {
+    padding: 0.5rem 1rem;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #e65c00;
+    }
+  }
+}
+
+.stores-card {
   border-radius: 10px;
-  height: 100px;
-  margin: 10px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
 
   .banner-logo {
-    display: flex;
-    height: 90px;
-    justify-content: space-around;
-    align-items: center;
-    gap: 15px;
-    border-radius: 10px;
-    width: 90px;
+    height: 70px;
+    width: 70px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
 
-
-    &:hover, &.active-logo {
-      opacity: 1;
+    &.active-logo,
+    &:hover {
       transform: scale(1.1);
     }
-
   }
 }
-.expanded-content {
-  min-width: 350px;
-  max-width: 370px;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  background: #fff;
 
-  &.collapsed {
-    height: 150px;
-  }
-
-  &.expanded {
-    height: 515px;
-  }
-
-  .product-frame {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding: 0.8rem;
-
-    .product-image-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-      width: 35%;
-      cursor: pointer;
-      .choosen_store_id {
-        height: 50px;
-        width: 50px;
-        object-fit: contain;
-      }
-
-      .deal-prices {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .text-muted {
-          text-decoration: line-through;
-          font-size: 0.8rem;
-          color: gray;
-        }
-
-        .discounted-price-text {
-          font-size: 1.3rem;
-          color: #ff6600;
-        }
-      }
-    }
-
-    .product-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 0.3rem;
-      width: 60%;
-
-      .details {
-        .product-name {
-          font-size: 0.95rem;
-          font-weight: bold;
-        }
-
-        .expiry-date {
-          font-size: 0.75rem;
-          color: gray;
-        }
-      }
-
-      .add-to-list {
-        align-self: flex-start;
-        padding: 0.3rem 0.6rem;
-        font-size: 0.75rem;
-      }
-    }
-  }
-
-  .other-stores {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.5rem;
-
-    .small-store-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 0.5rem;
-      flex: 1;
-
-      .store-logo-small {
-        height: 35px;
-        width: 35px;
-        object-fit: contain;
-      }
-
-      .store-price {
-        margin-top: 0.4rem;
-        font-size: 0.85rem;
-      }
-    }
-  }
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
