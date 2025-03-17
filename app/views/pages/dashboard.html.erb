@@ -1,5 +1,14 @@
 <h1>Welcome, <%= current_user.name %>!</h1>
 
-<p>This is your dashboard. You can view your saved deals and manage your account here.</p>
-
-<%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-danger", data: { turbo_method: :delete } %>
+<div class="dashboard-list">
+  <%= link_to "My Favourites", favourites_path, class:"text-decoration-none"%>
+  <hr>
+  <%= link_to "My Savings", dashboard_path , class:"text-decoration-none" %>
+  <hr>
+  <%= link_to "Leave Us a Feedback", dashboard_path , class:"text-decoration-none"%>
+  <hr>
+  <%= link_to "Settings", dashboard_path , class:"text-decoration-none"%>
+  <hr>
+  <%= link_to "Contact Us", dashboard_path , class:"text-decoration-none" %>
+</div>
+  <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-danger", data: { turbo_method: :delete } %>

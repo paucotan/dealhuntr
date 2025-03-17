@@ -1,4 +1,3 @@
-
 @import "bootstrap";
 @import "font-awesome";
 
@@ -6,9 +5,4 @@
 @import "pages/index";
 @import "components/navbar";
 @import 'components/deal_card';
-
-@media (min-width: 992px) {
-  body {
-    padding-top: 60px; /* Adjust based on navbar height */
-  }
-}
+@import 'components/dashboard';

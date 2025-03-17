@@ -1,5 +1,5 @@
 <%= form_with url: root_path, method: :get, local: true do |form| %>
-  <div class="search-bar ">
+  <div class="search-bar d-flex justify-content-center ">
     <%= form.text_field :query, placeholder: "Find products...", value: params[:query] %>
     <%= form.submit "Search" %>
   </div>
@@ -14,8 +14,7 @@
   </div>
 </div>
 
-<div id="search-results">
+<div id="search-results" class="container-fluid">
   <%= render "search_results", deals: @deals %>
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
 </div>
-
-<%= will_paginate @deals, class: "d-flex justify-content-center"%>
