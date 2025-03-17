@@ -9,12 +9,65 @@ require_relative '../../app/models/deal'
 
 class JumboScraper
   JUMBO_DEALS_URL = 'https://www.jumbo.com/aanbiedingen/nu'.freeze
-  DEAL_CARD_SELECTOR = 'li.jum-card.card-promotion'.freeze
-  EXPIRY_DATE_SELECTOR = 'p.description[data-v-1a478f07]'.freeze
-  IMAGE_SELECTOR = 'img.image'.freeze
-  TITLE_SELECTOR = 'h3.title'.freeze
+  CATEGORY_SELECTOR = 'section.category-section'.freeze
+  CATEGORY_NAME_SELECTOR = 'h4.jum-heading.h4.category-heading strong'.freeze
+  DEAL_CARD_GRID_SELECTOR = 'div.jum-card-grid'.freeze
+  DEAL_CARD_SELECTOR = 'article.jum-card.card-promotion'.freeze
+  EXPIRY_DATE_SELECTOR = 'p.subtitle'.freeze
+  TARGET_IMAGE_SELECTOR = 'div.card-image img'.freeze
+  TITLE_SELECTOR = 'h3.jum-heading.bold.h6.title'.freeze
   DEAL_TYPE_SELECTOR = '.jum-tag .lower'.freeze
   SUBTITLE_SELECTOR = 'p.subtitle'.freeze
+
+  CATEGORY_MAPPING = {
+    # AH Categories
+    "Groente, aardappelen" => "Fruits & Vegetables",
+    "Fruit, verse sappen" => "Fruits & Vegetables",
+    "Maaltijden, salades" => "Ready Meals",
+    "Vlees" => "Meat & Fish",
+    "Vleeswaren" => "Meat & Fish",
+    "Kaas" => "Cheese",
+    "Zuivel, eieren" => "Dairy & Eggs",
+    "Bakkerij" => "Bakery",
+    "Borrel, chips, snacks" => "Snacks & Sweets",
+    "Pasta, rijst, wereldkeuken" => "Pasta, Rice & International",
+    "Soepen, sauzen, kruiden, olie" => "Canned Goods & Condiments",
+    "Snoep, chocolade, koek" => "Snacks & Sweets",
+    "Ontbijtgranen, beleg" => "Breakfast & Spreads",
+    "Diepvries" => "Frozen Foods",
+    "Koffie, thee" => "Coffee & Tea",
+    "Frisdrank, sappen, water" => "Beverages",
+    "Bier, wijn, aperitieven" => "Alcohol",
+    "Drogisterij" => "Drugstore",
+    "Huishouden" => "Household",
+    "Baby en kind" => "Baby Products",
+    "Koken, tafelen, vrije tijd" => "Non-Food",
+    "Pasen" => "Seasonal",
+    "Alleen online" => "Online Only",
+    "Online aanbiedingen" => "Online Only",
+    "Gall & Gall acties" => "Alcohol",
+    "Gall & Gall Premium" => "Alcohol",
+    "Etos acties" => "Drugstore",
+
+    # Jumbo Categories
+    "Aardappelen, groente en fruit" => "Fruits & Vegetables",
+    "Verse maaltijden en gemak" => "Ready Meals",
+    "Vlees, vis en vega" => "Meat & Fish",
+    "Brood en gebak" => "Bakery",
+    "Vleeswaren, kaas en tapas" => "Deli", # Default; will refine with product name logic
+    "Zuivel, eieren, boter" => "Dairy & Eggs",
+    "Conserven, soepen, sauzen, oliën" => "Canned Goods & Condiments",
+    "Wereldkeukens, kruiden, pasta en rijst" => "Pasta, Rice & International",
+    "Ontbijt, broodbeleg en bakproducten" => "Breakfast & Spreads",
+    "Koek, snoep, chocolade en chips" => "Snacks & Sweets",
+    "Koffie en thee" => "Coffee & Tea",
+    "Frisdrank en sappen" => "Beverages",
+    "Bier en wijn" => "Alcohol",
+    # Removed duplicate "Diepvries" => "Frozen Foods"
+    "Drogisterij en baby" => "Drugstore", # Default; will refine with product name logic
+    "Huishouden en dieren" => "Household", # Default; will refine with product name logic
+    "Non-food en servicebalie" => "Non-Food"
+  }.freeze
 
   def initialize
     @driver = Selenium::WebDriver.for :chrome
@@ -31,17 +84,26 @@ class JumboScraper
       html = @driver.page_source
       doc = Nokogiri::HTML(html)
 
-      expiry_date = doc.at_css(EXPIRY_DATE_SELECTOR)&.text[/Tot en met (\w+ \d+ \w+)/, 1]&.gsub('dinsdag', '')&.strip
-      puts "Expiry Date: #{expiry_date}"
+      categories = doc.css(CATEGORY_SELECTOR)
+      puts "Found #{categories.count} categories."
 
-      parsed_expiry_date = parse_date(expiry_date)
-      puts "Parsed Expiry Date: #{parsed_expiry_date}"
+      categories.each_with_index do |category, category_index|
+        category_name = category.at_css(CATEGORY_NAME_SELECTOR)&.text&.strip || "Unknown Category ##{category_index + 1}"
+        puts "\nProcessing Category ##{category_index + 1}: #{category_name}"
 
-      deals = doc.css(DEAL_CARD_SELECTOR)
-      puts "Found #{deals.count} deal cards."
+        deal_grid = category.at_css(DEAL_CARD_GRID_SELECTOR)
+        unless deal_grid
+          puts "No deal grid found for category '#{category_name}'. Skipping..."
+          next
+        end
 
-      deals.each_with_index do |deal, index|
-        process_deal(deal, expiry_date, parsed_expiry_date, index)
+        deals = deal_grid.css(DEAL_CARD_SELECTOR)
+        puts "Found #{deals.count} deals in category '#{category_name}'."
+
+        deals.each_with_index do |deal, deal_index|
+          expiry_date = deal.at_css(EXPIRY_DATE_SELECTOR)&.text&.strip&.match(/wo \d+ t\/m di (\d+ \w+)/)&.[](1)
+          process_deal(deal, expiry_date, deal_index, category_name)
+        end
       end
 
       puts "Scraping done!"
@@ -56,7 +118,7 @@ class JumboScraper
 
   private
 
-  def process_deal(deal, expiry_date, parsed_expiry_date, index)
+  def process_deal(deal, expiry_date, index, category_name)
     deal_data = extract_deal_data(deal, index)
     return if deal_data.nil?
 
@@ -66,35 +128,46 @@ class JumboScraper
     product = save_product(deal_data)
     return unless product
 
-    save_deal(deal_data, store, product, parsed_expiry_date, index)
+    parsed_expiry_date = parse_date(deal, expiry_date)
+    save_deal(deal_data, store, product, parsed_expiry_date, index, category_name)
 
-    log_deal(deal_data, index, expiry_date)
+    log_deal(deal_data, index, expiry_date, category_name)
   end
 
   def extract_deal_data(deal, index)
     name = deal.at_css(TITLE_SELECTOR)&.text&.strip || 'No name'
+    puts "Extracted name: #{name} from deal ##{index + 1}"
     subtitle = deal.at_css(SUBTITLE_SELECTOR)&.text&.strip || 'No subtitle'
-    deal_type_element = deal.at_css('.jum-tag .lower')
-    deal_type_text = deal_type_element&.text&.strip || 'No deal type'
 
-    # Extract the deal URL from the title link
-    deal_url = deal.at_css('h3.title a.title-link')&.[]('href')
+    deal_type_element = deal.at_css('.jum-tag .lower') || deal.at_css('.jum-tag') || deal.at_css('.tag')
+    deal_type_text = deal_type_element&.text&.strip || 'No deal type'
+    puts "Extracted deal type text: #{deal_type_text} from deal ##{index + 1}"
+    if deal_type_text == 'No deal type'
+      puts "Debug: Raw HTML for deal ##{index + 1}: #{deal.to_html}"
+    end
+
+    deal_url = deal.at_css('h3.title a')&.[]('href')
     deal_url = "https://www.jumbo.com#{deal_url}" if deal_url && !deal_url.start_with?('http')
 
-    # Initialize prices
-    regular_price = nil # Jumbo doesn't provide regular price
+    regular_price = nil
     discounted_price = 0.0
 
-    # Parse deal type and price if present
     if deal_type_text.present? && deal_type_text.match?(/(\d+)\s*(?:voor|for)\s*€?([\d,.]+)/i)
       match = deal_type_text.match(/(\d+)\s*(?:voor|for)\s*€?([\d,.]+)/i)
       quantity = match[1].to_i
       total_price = match[2].gsub(',', '.').to_f
-      discounted_price = total_price # Total price for the quantity
-      # Estimate regular price with 25% discount (33.3% markup)
+      discounted_price = total_price
       regular_price = (total_price / 0.75).round(2) if total_price > 0
-    elsif deal_type_text.present? # No price, e.g., "2+1 gratis" or "25% korting"
-      discounted_price = -1.0 # Flag for manual review or no price
+    elsif deal_type_text.present?
+      case deal_type_text.downcase
+      when /2\+1 gratis/i
+        discounted_price = nil
+      when /([\d.]+)% korting/i
+        percentage = deal_type_text.match(/([\d.]+)% korting/i)[1].to_f
+        discounted_price = nil
+      else
+        discounted_price = nil
+      end
     end
 
     image_url = extract_image_url(deal, index)
@@ -114,7 +187,7 @@ class JumboScraper
   end
 
   def extract_image_url(deal, index)
-    image_element = deal.at_css(IMAGE_SELECTOR)
+    image_element = deal.at_css(TARGET_IMAGE_SELECTOR)
     return 'No image' unless image_element
 
     temp_image_url = image_element['src']
@@ -123,10 +196,10 @@ class JumboScraper
     end
 
     begin
-      @driver.execute_script("arguments[0].scrollIntoView(true);", @driver.find_element(:css, "#{DEAL_CARD_SELECTOR}:nth-child(#{index + 1}) #{IMAGE_SELECTOR}"))
+      @driver.execute_script("arguments[0].scrollIntoView(true);", @driver.find_element(:css, "#{DEAL_CARD_SELECTOR}:nth-child(#{index + 1}) #{TARGET_IMAGE_SELECTOR}"))
       wait = Selenium::WebDriver::Wait.new(timeout: 5)
       wait.until do
-        src = @driver.find_element(:css, "#{DEAL_CARD_SELECTOR}:nth-child(#{index + 1}) #{IMAGE_SELECTOR}")['src']
+        src = @driver.find_element(:css, "#{DEAL_CARD_SELECTOR}:nth-child(#{index + 1}) #{TARGET_IMAGE_SELECTOR}")['src']
         src unless src.match?(/data:image\/gif;base64/)
       end || 'No image'
     rescue Selenium::WebDriver::Error::TimeoutError
@@ -150,15 +223,49 @@ class JumboScraper
   end
 
   def save_product(deal_data)
-    product = Product.find_or_create_by!(name: deal_data[:name], image_url: deal_data[:image_url], source: 'scraped')
-    puts "Product saved: #{product.inspect}"
+    product = Product.find_or_create_by!(
+      name: deal_data[:name],
+      image_url: deal_data[:image_url],
+      source: 'scraped'
+    )
+    puts "Saved or found product: #{product.inspect} for name: #{deal_data[:name]}"
     product
   rescue ActiveRecord::RecordInvalid => e
     puts "Failed to save Product: #{e.message}"
     nil
   end
 
-  def save_deal(deal_data, store, product, parsed_expiry_date, index)
+  def save_deal(deal_data, store, product, parsed_expiry_date, index, category_name)
+    # Normalize the category
+    standardized_category = CATEGORY_MAPPING[category_name] || category_name
+
+    # Handle ambiguous categories with product name logic
+    case category_name
+    when "Vleeswaren, kaas en tapas"
+      name = deal_data[:name].downcase
+      if name.include?("kaas")
+        standardized_category = "Cheese"
+      elsif name.match?(/vleeswaren|ham|spek|salami|worst/)
+        standardized_category = "Meat & Fish"
+      else
+        standardized_category = "Deli" # Default for tapas or ambiguous items
+      end
+    when "Drogisterij en baby"
+      name = deal_data[:name].downcase
+      if name.match?(/luier|babyvoeding|speen|fles/)
+        standardized_category = "Baby Products"
+      else
+        standardized_category = "Drugstore"
+      end
+    when "Huishouden en dieren"
+      name = deal_data[:name].downcase
+      if name.match?(/hondenvoer|kattenvoer|kattenbak|dieren/)
+        standardized_category = "Pet Products"
+      else
+        standardized_category = "Household"
+      end
+    end
+
     deal_attributes = {
       product_id: product.id,
       store_id: store.id,
@@ -166,7 +273,8 @@ class JumboScraper
       discounted_price: deal_data[:discounted_price],
       expiry_date: parsed_expiry_date,
       deal_type: deal_data[:deal_type],
-      deal_url: deal_data[:deal_url]
+      deal_url: deal_data[:deal_url],
+      category: standardized_category # Use the standardized category
     }
     puts "Deal attributes: #{deal_attributes.inspect}"
 
@@ -196,7 +304,36 @@ class JumboScraper
     puts "Error saving Deal ##{index + 1}: #{e.message}"
   end
 
-  def log_deal(deal_data, index, expiry_date)
+  def log_deal(deal_data, index, expiry_date, category_name)
+    standardized_category = CATEGORY_MAPPING[category_name] || category_name
+
+    # Apply the same product name logic as in save_deal to ensure consistency
+    case category_name
+    when "Vleeswaren, kaas en tapas"
+      name = deal_data[:name].downcase
+      if name.include?("kaas")
+        standardized_category = "Cheese"
+      elsif name.match?(/vleeswaren|ham|spek|salami|worst/)
+        standardized_category = "Meat & Fish"
+      else
+        standardized_category = "Deli"
+      end
+    when "Drogisterij en baby"
+      name = deal_data[:name].downcase
+      if name.match?(/luier|babyvoeding|speen|fles/)
+        standardized_category = "Baby Products"
+      else
+        standardized_category = "Drugstore"
+      end
+    when "Huishouden en dieren"
+      name = deal_data[:name].downcase
+      if name.match?(/hondenvoer|kattenvoer|kattenbak|dieren/)
+        standardized_category = "Pet Products"
+      else
+        standardized_category = "Household"
+      end
+    end
+
     puts "\nDeal ##{index + 1}:"
     puts "  Name: #{deal_data[:name]}"
     puts "  Description: #{deal_data[:description]}"
@@ -206,10 +343,21 @@ class JumboScraper
     puts "  Image URL: #{deal_data[:image_url]}"
     puts "  Deal URL: #{deal_data[:deal_url]}" if deal_data[:deal_url]
     puts "  Expiry Date: #{expiry_date}"
+    puts "  Original Category: #{category_name}"
+    puts "  Standardized Category: #{standardized_category}"
   end
 
-  def parse_date(date_str)
+  def parse_date(deal, date_str)
     return nil unless date_str
+
+    expiration_date = deal['expiration-date']
+    if expiration_date
+      begin
+        return Date.parse(expiration_date)
+      rescue ArgumentError
+        # Fallback to parsing the date string
+      end
+    end
 
     dutch_to_english = {
       'jan' => 'Jan', 'feb' => 'Feb', 'mrt' => 'Mar', 'apr' => 'Apr',
@@ -218,9 +366,9 @@ class JumboScraper
     }
 
     begin
-      day, month = date_str.split.last(2) # Extract last two parts (e.g., "18 mrt")
-      english_date = "#{day} #{dutch_to_english[month.downcase]}"
-      Date.strptime(english_date, '%d %b')
+      day, month = date_str.split.last(2)
+      english_date = "#{day} #{dutch_to_english[month.downcase]} #{Time.now.year}"
+      Date.strptime(english_date, '%d %b %Y')
     rescue ArgumentError
       nil
     end

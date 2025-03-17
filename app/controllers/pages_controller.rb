@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :search]  # ✅ Allow public access to homepage and search
+  skip_before_action :authenticate_user!, only: [:home, :search] # ✅ Allow public access to homepage and search
 
   def home
     authorize :page, :home?
@@ -11,7 +11,18 @@ class PagesController < ApplicationController
       @deals = @deals.where(store_id: params[:store_id])
     end
 
+    # Apply category filter if category is present
+    if params[:category].present?
+      if params[:category] == "Uncategorized"
+        @deals = @deals.where(category: [nil, "Uncategorized"])
+      else
+        @deals = @deals.where(category: params[:category])
+      end
+    end
+
     # Add pagination to the deals query
+    # Get unique categories for the filter bar
+    @categories = Deal.distinct.pluck(:category).map { |c| c || "Uncategorized" }.uniq.sort
     @pagy, @deals = pagy(@deals)
   end
 
@@ -23,6 +34,14 @@ class PagesController < ApplicationController
   private
 
   def fetch_deals(query)
+#     deals = Deal.where("expiry_date >= ?", Date.today)
+#                 .order(discounted_price: :asc)
+
+#     if query.present?
+#       @results = Product.search(params[:query])
+#       @products = @results.pluck(:id)
+#       deals = deals.where(product_id: @products)
+
     # if query.present?
     #   @results = Product.search(params[:query])
     #   @products = @results.pluck(:id)
@@ -42,5 +61,6 @@ class PagesController < ApplicationController
       Deal.where("expiry_date >= ?", Date.today)
           .order(discounted_price: :asc)
     end
+    deals
   end
 end
