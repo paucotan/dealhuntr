@@ -6,9 +6,13 @@ class PagesController < ApplicationController
     @stores = Store.all
     @deals = fetch_deals(params[:query])
 
+    # Apply store filter if store_id is present
     if params[:store_id].present?
       @deals = @deals.where(store_id: params[:store_id])
     end
+
+    # Add pagination to the deals query
+    @deals = @deals.paginate(page: params[:page], per_page: 20)
   end
 
   def dashboard
@@ -26,7 +30,7 @@ class PagesController < ApplicationController
     else
       Deal.where("expiry_date >= ?", Date.today)
           .order(discounted_price: :asc)
-          .limit(20)
+         # .limit(20)
     end
   end
 end
