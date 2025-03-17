@@ -42,6 +42,8 @@ gem "selenium-webdriver" #for scraping JS websites
 
 gem 'nokogiri' # for parsing HTML
 
+gem 'deepl-rb', require: 'deepl'
+
 #for scraper to run automatically
 gem 'whenever', require: false
 

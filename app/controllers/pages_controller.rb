@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :search] # ✅ Allow public access to homepage and search
+  skip_before_action :authenticate_user!, only: [:home, :search]  # ✅ Allow public access to homepage and search
+  DEEPL_AUTH_KEY = ENV["DEEPL_AUTH_KEY"]
+  HOST = ENV["DEEPL_HOST"]
 
   def home
     authorize :page, :home?
@@ -53,7 +55,9 @@ class PagesController < ApplicationController
     # end
 
     if query.present?
-      product_ids = Product.search_by_name_and_category(query).pluck(:id)
+      translated_query = DeepL.translate(query, 'EN', 'NL', auth_key: DEEPL_AUTH_KEY,
+      host: HOST ).text
+      product_ids = Product.search_by_name_and_category(translated_query).pluck(:id)
       Deal.where(product_id: product_ids)
           .where("expiry_date >= ?", Date.today)
           .order(discounted_price: :asc)
