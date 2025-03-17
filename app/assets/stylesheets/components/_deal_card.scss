@@ -1,0 +1,223 @@
+.deal-column {
+  padding: 0 0.25rem;
+  margin-bottom: 0.5rem;
+
+  .card {
+    width: 100%;
+    max-width: 187px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+
+    .card-img-top {
+      width: 100%;
+      max-width: 145px;
+      height: auto;
+      max-height: 163px;
+      object-fit: cover;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .card-body {
+      padding: 0.5rem;
+      text-align: center;
+
+      .card-text {
+        margin: 0;
+        font-size: 0.9rem;
+
+        .text-muted {
+          text-decoration: line-through;
+          color: gray;
+        }
+
+        .discounted-price-text {
+          color: #ff6600;
+          font-weight: bold;
+        }
+      }
+
+      .deal-type-text {
+        font-size: 0.8rem;
+        color: #dc3545;
+        margin: 0;
+      }
+    }
+
+    &.expanded {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      max-height: 515px;
+      margin: 0;
+      padding: 0;
+      z-index: 10;
+
+      .card-img-top,
+      .card-body {
+        display: none;
+      }
+    }
+  }
+
+  .expanded-content {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+
+    .product-frame {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0.8rem;
+      border-bottom: 1px solid #ddd;
+
+      .product-image-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        width: 40%;
+        min-width: 120px;
+
+        .card-img-top {
+          width: 100%;
+          max-width: 145px;
+          height: auto;
+          max-height: 163px;
+          object-fit: cover;
+        }
+
+        .deal-prices {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .text-muted {
+            text-decoration: line-through;
+            font-size: 0.8rem;
+            color: gray;
+          }
+
+          .discounted-price-text {
+            font-size: 1.3rem;
+            color: #ff6600;
+          }
+        }
+      }
+
+      .product-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 0.3rem;
+        width: 55%;
+        min-width: 150px;
+
+        .details {
+          .product-name {
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+          }
+
+          .expiry-date {
+            font-size: 0.75rem;
+            color: gray;
+            margin-bottom: 0.3rem;
+          }
+
+          p {
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+          }
+
+          .choosen_store_id {
+            height: 50px;
+            width: 50px;
+            object-fit: contain;
+            margin-top: 0.5rem;
+          }
+        }
+
+        .add-to-list {
+          align-self: flex-start;
+          padding: 0.3rem 0.6rem;
+          font-size: 0.75rem;
+        }
+      }
+    }
+
+    .other-stores {
+      display: flex;
+      justify-content: space-around;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      flex-wrap: wrap;
+
+      .small-store-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 0.5rem;
+        flex: 1 1 80px;
+        margin: 0.25rem;
+
+        .store-logo-small {
+          height: 35px;
+          width: 35px;
+          object-fit: contain;
+        }
+
+        .store-price {
+          margin-top: 0.4rem;
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 300px) {
+  .deal-column {
+    flex: 0 0 calc(50% - 0.5rem)
+  }
+}
+
+@media (min-width: 576px) {
+  .deal-column {
+    flex: 0 0 calc(33.33% - 0.5rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .deal-column {
+    flex: 0 0 calc(25% - 0.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .deal-column {
+    flex: 0 0 calc(20% - 0.5rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .deal-column {
+    flex: 0 0 calc(16.66% - 0.5rem);
+  }
+}
+
+.expanded-content .product-image-card .card-img-top {
+  display: block !important;
+  visibility: visible !important;
+}

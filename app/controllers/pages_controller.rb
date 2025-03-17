@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     end
 
     # Add pagination to the deals query
-    @deals = @deals.paginate(page: params[:page], per_page: 20)
+    @pagy, @deals = pagy(@deals)
   end
 
   def dashboard

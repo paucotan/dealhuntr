@@ -1,26 +1,27 @@
-<div class="row">
+<div class="row justify-content-space-evenly">
   <% @deals.each do |deal| %>
-    <div class="col-6 col-md-4 col-lg-3 deal-column">
+    <div class="deal-column">
       <div class="card shadow-sm"
            data-controller="deal"
            data-deal-id="<%= deal.id %>"
-           data-action="click->deal#expandDetails">
+           data-action="click->deal#expandDetails"
+           style="position: relative;">
 
         <%= image_tag deal.product.image_url, class: "card-img-top" %>
         <div class="card-body">
           <p class="card-text">
             <% if deal.discounted_price.present? %>
               <del class="text-muted">€<%= deal.price %></del>
-              <span class="discounted-price-text ml-1 font-weight-bold">€<%= deal.discounted_price %></span>
-            <% else %>
-              <span class="text-dark font-weight-bold">€<%= deal.price %></span>
+              <span class="discounted-price-text ml-1 font-weight-bold"><%= deal.discounted_price %></span>
+            <% end %>
+            <% if !deal.discounted_price.present? %>
+              <span class="text-dark font-weight-bold"><%= deal.price %></span>
             <% end %>
           </p>
           <% if deal.deal_type.present? %>
             <p class="deal-type-text text-danger font-weight-bold mb-0"><%= deal.deal_type %></p>
           <% end %>
         </div>
-        <div data-deal-target="details" class="expanded-deals-container"></div>
       </div>
     </div>
   <% end %>

@@ -5,22 +5,28 @@ export default class extends Controller {
 
   expandDetails(event) {
     event.stopPropagation();
-    const container = this.detailsTarget;
-    const column = this.element.closest(".deal-column");
+    const container = this.element;
+    const dealId = this.element.dataset.dealId;
+    const parentColumn = container.closest(".deal-column");
 
-    if (container.innerHTML.trim() !== '') {
-      container.innerHTML = '';
-      column.classList.remove("expanded");
+    if (container.classList.contains("expanded")) {
+      container.classList.remove("expanded");
+      parentColumn.style.width = "";
+      container.innerHTML = this.originalContent || "";
       return;
     }
 
-    const dealId = this.element.dataset.dealId;
+    this.originalContent = container.innerHTML;
+
+    if (window.innerWidth <= 576) {
+      parentColumn.style.width = "100%";
+    }
 
     fetch(`/deals/${dealId}/related`)
       .then(response => response.text())
       .then(html => {
         container.innerHTML = html;
-        column.classList.add("expanded");
+        container.classList.add("expanded");
       })
       .catch(err => console.error(err));
   }
