@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   has_many :favourites
 
   validates :name, presence: true
-  # validates :category, presence: true
+  validates :category, presence: true
 
   # private
 
