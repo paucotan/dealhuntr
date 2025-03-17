@@ -21,10 +21,9 @@ class PagesController < ApplicationController
     end
 
     # Add pagination to the deals query
-    @deals = @deals.includes(:product, :store).paginate(page: params[:page], per_page: 20)
-
     # Get unique categories for the filter bar
     @categories = Deal.distinct.pluck(:category).map { |c| c || "Uncategorized" }.uniq.sort
+    @pagy, @deals = pagy(@deals)
   end
 
   def dashboard
@@ -35,15 +34,33 @@ class PagesController < ApplicationController
   private
 
   def fetch_deals(query)
-    deals = Deal.where("expiry_date >= ?", Date.today)
-                .order(discounted_price: :asc)
+#     deals = Deal.where("expiry_date >= ?", Date.today)
+#                 .order(discounted_price: :asc)
+
+#     if query.present?
+#       @results = Product.search(params[:query])
+#       @products = @results.pluck(:id)
+#       deals = deals.where(product_id: @products)
+
+    # if query.present?
+    #   @results = Product.search(params[:query])
+    #   @products = @results.pluck(:id)
+    #   @deals = Deal.where(product_id: @products)
+    # else
+    #   Deal.where("expiry_date >= ?", Date.today)
+    #       .order(discounted_price: :asc)
+    #      # .limit(20)
+    # end
 
     if query.present?
-      @results = Product.search(params[:query])
-      @products = @results.pluck(:id)
-      deals = deals.where(product_id: @products)
+      product_ids = Product.search_by_name_and_category(query).pluck(:id)
+      Deal.where(product_id: product_ids)
+          .where("expiry_date >= ?", Date.today)
+          .order(discounted_price: :asc)
+    else
+      Deal.where("expiry_date >= ?", Date.today)
+          .order(discounted_price: :asc)
     end
-
     deals
   end
 end
