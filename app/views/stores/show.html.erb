@@ -1,0 +1,32 @@
+<div class="card mx-auto mt-4" style="width: 22rem;">
+  <% if @store.logo_url.present? %>
+    <%= image_tag @store.logo_url, class: "card-img-top", style: "height: 140px; object-fit: contain;", alt: "#{@store.name} logo" %>
+  <% end %>
+  <div class="card-body text-center">
+    <h5 class="card-title"><%= @store.name %></h5>
+
+    <% if @store.website_url.present? %>
+      <p class="card-text">
+        <strong>Website:</strong>
+        <%= link_to @store.website_url, @store.website_url, target: "_blank", rel: "noopener" %>
+      </p>
+    <% end %>
+
+    <% embed_links = {
+      "Albert Heijn" => "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d19502.722746805866!2d4.849663987622577!3d52.337042435447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sAlbert%20Heijn!5e0!3m2!1sen!2snl!4v1742210355684!5m2!1sen!2snl",
+      "Jumbo" => "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d19502.722746805866!2d4.849663987622577!3d52.337042435447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sJumbo!5e0!3m2!1sen!2snl!4v1742210370916!5m2!1sen!2snl",
+      "Vomar" => "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d19502.724326582367!2d4.849663981433854!3d52.33703885317033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sVomar!5e0!3m2!1sen!2snl!4v1742210382019!5m2!1sen!2snl",
+      "Lidl" => "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d78010.9510208173!2d4.787863774225612!3d52.33700840262878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sLidl!5e0!3m2!1sen!2snl!4v1742210411047!5m2!1sen!2snl"
+    } %>
+
+    <% embed_url = embed_links[@store.name] %>
+  </div>
+</div>
+
+<% if embed_url.present? %>
+  <div class="container mt-4">
+    <div class="ratio ratio-16x9">
+      <iframe src="<%= embed_url %>" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+<% end %>
