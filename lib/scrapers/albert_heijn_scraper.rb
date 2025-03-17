@@ -1,8 +1,10 @@
-# lib/scrapers/albert_heijn_scraper.rb
+# Load the Rails environment
+require File.expand_path('../../../config/environment', __FILE__)
+
 require 'selenium-webdriver'
 require 'nokogiri'
-require 'active_record'  # Add this
-require_relative '../../app/models/store'  # Add these to load models
+require 'active_record'
+require_relative '../../app/models/store'
 require_relative '../../app/models/product'
 require_relative '../../app/models/deal'
 
@@ -40,6 +42,10 @@ class AlbertHeijnScraper
         process_deal(deal, expiry_date, parsed_expiry_date, index)
       end
 
+      # deals.first(5).each_with_index do |deal, index|
+      #   process_deal(deal, expiry_date, parsed_expiry_date, index)
+      # end
+
       puts "Scraping done!"
     rescue Selenium::WebDriver::Error::WebDriverError => e
       puts "Website is down or inaccessible: #{e.message}. Skipping scrape."
@@ -53,6 +59,10 @@ class AlbertHeijnScraper
   private
 
   def process_deal(deal, expiry_date, parsed_expiry_date, index)
+    # Extract category from parent section's <h3> tag
+    section = deal.ancestors('section[id]').first
+    category = section&.at_css('h3.typography_heading-2__-bV1n')&.text&.strip || 'Uncategorized'
+
     # Extract fields
     name = deal.css('[data-testhook="card-title"]').text.strip
     description = deal.css('[data-testhook="card-description"]')&.text&.strip || 'No description'
@@ -99,7 +109,12 @@ class AlbertHeijnScraper
     end
 
     begin
-      product = Product.find_or_create_by!(name: name, image_url: image_url, source: 'scraped')
+      product = Product.find_or_create_by!(name: name) do |p|
+        p.image_url = image_url
+        p.category = category
+        p.source = 'scraped'
+      end
+      product.update!(description: description) if product.description.nil? || product.description.empty?
       puts "Product saved: #{product.inspect}"
     rescue ActiveRecord::RecordInvalid => e
       puts "Failed to save Product: #{e.message}"
@@ -113,7 +128,7 @@ class AlbertHeijnScraper
         price: regular_price_display == 'N/A' ? nil : regular_price,
         discounted_price: discounted_price,
         expiry_date: parsed_expiry_date,
-        deal_type: deal_type # Add deal_type to the attributes
+        deal_type: deal_type
       }
       puts "Deal attributes: #{deal_attributes.inspect}"
 
@@ -122,7 +137,7 @@ class AlbertHeijnScraper
         store_id: store.id,
         discounted_price: discounted_price,
         expiry_date: parsed_expiry_date,
-        deal_type: deal_type # Add to the find_by check
+        deal_type: deal_type
       )
 
       if existing_deal
@@ -146,6 +161,7 @@ class AlbertHeijnScraper
     puts "\nDeal ##{index + 1}:"
     puts "  Name: #{name}"
     puts "  Description: #{description}"
+    puts "  Category: #{category}"
     puts "  Regular Price: #{regular_price_display.is_a?(Numeric) ? '€' + regular_price_display.to_s : regular_price_display}"
     puts "  Discounted Price: €#{discounted_price}"
     puts "  Deal Type: #{deal_type}"
