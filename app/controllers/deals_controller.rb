@@ -7,12 +7,12 @@ class DealsController < ApplicationController
     authorize @deal  # Ensure authorization for related deals
     @related_deals = policy_scope(Deal).where(product_id: @deal.product_id)
                                        .where.not(id: @deal.id)
-                                       .where("expiry_date >= ?", Date.today)
 
 
 
     keywords = @deal.product.name.downcase.scan(/\w+/)
-    ignored_words = ["ah", "alle", "de", "het", "van", "en", "of", "met", "gram", "300", "250", "500", "AH"]
+    ignored_words = ["ah", "alle", "de", "het", "van", "en", "of", "met", "gram", "300", "250", "500", "in", "350",
+    "330", "ml", "s", "100"]
     keywords -= ignored_words
     keywords = [@deal.product.name.split(" ").last.downcase] if keywords.empty?
     conditions = keywords.map { |word| "products.name ILIKE ?" }.join(" OR ")
@@ -21,6 +21,7 @@ class DealsController < ApplicationController
     @similar_deals = policy_scope(Deal)
                       .joins(:product)
                       .where(conditions, *values)
+                      .where(category: @deal.category)
                       .where.not(id: @deal.id)
                       .limit(5)
 
