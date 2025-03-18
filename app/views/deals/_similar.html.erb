@@ -1,0 +1,9 @@
+<div class="similar-products">
+  <% similar_deals.each do |similar_deal| %>
+    <div class="small-store-card">
+      <%= image_tag similar_deal.store.logo_url, class: "store-logo-small" %>
+      <p class="store-name font-weight-bold"><%= similar_deal.product.name %></p>
+      <p class="store-price font-weight-bold">€<%= similar_deal.discounted_price || similar_deal.price %></p>
+    </div>
+  <% end %>
+</div>

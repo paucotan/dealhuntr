@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'favourites/destroy'
   get 'search', to: 'pages#search'
 
+
   devise_for :users
   root to: "pages#home"
   get 'dashboard', to: 'pages#dashboard' # dashboard route

@@ -9,7 +9,23 @@ class DealsController < ApplicationController
                                        .where.not(id: @deal.id)
                                        .where("expiry_date >= ?", Date.today)
 
-    render partial: "related", locals: { related_deals: @related_deals, deal: @deal }, layout: false
+
+
+    keywords = @deal.product.name.downcase.scan(/\w+/)
+    ignored_words = ["ah", "alle", "de", "het", "van", "en", "of", "met", "gram", "300", "250", "500", "AH"]
+    keywords -= ignored_words
+    keywords = [@deal.product.name.split(" ").last.downcase] if keywords.empty?
+    conditions = keywords.map { |word| "products.name ILIKE ?" }.join(" OR ")
+    values = keywords.map { |word| "%#{word}%" }
+
+    @similar_deals = policy_scope(Deal)
+                      .joins(:product)
+                      .where(conditions, *values)
+                      .where.not(id: @deal.id)
+                      .limit(5)
+
+    render partial: "related", locals: { related_deals: @related_deals, similar_deals: @similar_deals, deal: @deal }, layout: false
+
   end
 
   def show
