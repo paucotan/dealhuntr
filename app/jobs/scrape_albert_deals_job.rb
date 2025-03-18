@@ -1,6 +1,3 @@
-# app/jobs/scrape_albert_deals_job.rb
-require_relative '../../lib/scrapers/albert_heijn_scraper' # Adjust path if needed
-
 class ScrapeAlbertDealsJob < ApplicationJob
   queue_as :default
 
