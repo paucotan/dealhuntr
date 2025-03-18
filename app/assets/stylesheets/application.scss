@@ -7,4 +7,8 @@
 @import 'components/deal_card';
 @import 'components/dashboard';
 @import 'components/favourite_button';
-@import 'components/favourites_list'
+@import 'components/favourites_list';
+
+body {
+  font-family: 'Inria Sans', Arial, Helvetica, sans-serif;
+}
