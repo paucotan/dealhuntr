@@ -12,7 +12,7 @@
       <% end %>
 
       <div class="fav-icon-container">
-        <% if current_user.favourites.exists?(product_id: deal.product.id) %>
+        <% if current_user && current_user.favourites.exists?(product_id: deal.product.id) %>
           <% fav = current_user.favourites.find_by(product_id: deal.product.id) %>
           <%= button_to favourite_path(fav), method: :delete, remote: true, class: "fav-btn btn", data: { turbo_stream: true } do %>
             <i class="fa-solid fa-star"></i>
