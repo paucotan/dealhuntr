@@ -1,5 +1,4 @@
 require File.expand_path('config/environment', Dir.pwd)
-
 require 'selenium-webdriver'
 require 'nokogiri'
 require 'active_record'
@@ -12,7 +11,7 @@ class JumboScraper
   CATEGORY_SELECTOR = 'section.category-section'.freeze
   CATEGORY_NAME_SELECTOR = 'h4.jum-heading.h4.category-heading strong'.freeze
   DEAL_CARD_GRID_SELECTOR = 'div.jum-card-grid'.freeze
-  DEAL_CARD_SELECTOR = 'article.jum-card.card-promotion'.freeze
+  DEAL_CARD_SELECTOR = '.jum-card.card-promotion'.freeze
   EXPIRY_DATE_SELECTOR = 'p.subtitle'.freeze
   TARGET_IMAGE_SELECTOR = 'div.card-image img'.freeze
   TITLE_SELECTOR = 'h3.jum-heading.bold.h6.title'.freeze
@@ -20,41 +19,11 @@ class JumboScraper
   SUBTITLE_SELECTOR = 'p.subtitle'.freeze
 
   CATEGORY_MAPPING = {
-    # AH Categories
-    "Groente, aardappelen" => "Fruits & Vegetables",
-    "Fruit, verse sappen" => "Fruits & Vegetables",
-    "Maaltijden, salades" => "Ready Meals",
-    "Vlees" => "Meat & Fish",
-    "Vleeswaren" => "Meat & Fish",
-    "Kaas" => "Cheese",
-    "Zuivel, eieren" => "Dairy & Eggs",
-    "Bakkerij" => "Bakery",
-    "Borrel, chips, snacks" => "Snacks & Sweets",
-    "Pasta, rijst, wereldkeuken" => "Pasta, Rice & International",
-    "Soepen, sauzen, kruiden, olie" => "Canned Goods & Condiments",
-    "Snoep, chocolade, koek" => "Snacks & Sweets",
-    "Ontbijtgranen, beleg" => "Breakfast & Spreads",
-    "Diepvries" => "Frozen Foods",
-    "Koffie, thee" => "Coffee & Tea",
-    "Frisdrank, sappen, water" => "Beverages",
-    "Bier, wijn, aperitieven" => "Alcohol",
-    "Drogisterij" => "Drugstore",
-    "Huishouden" => "Household",
-    "Baby en kind" => "Baby Products",
-    "Koken, tafelen, vrije tijd" => "Non-Food",
-    "Pasen" => "Seasonal",
-    "Alleen online" => "Online Only",
-    "Online aanbiedingen" => "Online Only",
-    "Gall & Gall acties" => "Alcohol",
-    "Gall & Gall Premium" => "Alcohol",
-    "Etos acties" => "Drugstore",
-
-    # Jumbo Categories
     "Aardappelen, groente en fruit" => "Fruits & Vegetables",
     "Verse maaltijden en gemak" => "Ready Meals",
     "Vlees, vis en vega" => "Meat & Fish",
     "Brood en gebak" => "Bakery",
-    "Vleeswaren, kaas en tapas" => "Deli", # Default; will refine with product name logic
+    "Vleeswaren, kaas en tapas" => "Deli",
     "Zuivel, eieren, boter" => "Dairy & Eggs",
     "Conserven, soepen, sauzen, oliën" => "Canned Goods & Condiments",
     "Wereldkeukens, kruiden, pasta en rijst" => "Pasta, Rice & International",
@@ -63,9 +32,8 @@ class JumboScraper
     "Koffie en thee" => "Coffee & Tea",
     "Frisdrank en sappen" => "Beverages",
     "Bier en wijn" => "Alcohol",
-    # Removed duplicate "Diepvries" => "Frozen Foods"
-    "Drogisterij en baby" => "Drugstore", # Default; will refine with product name logic
-    "Huishouden en dieren" => "Household", # Default; will refine with product name logic
+    "Drogisterij en baby" => "Drugstore",
+    "Huishouden en dieren" => "Household",
     "Non-food en servicebalie" => "Non-Food"
   }.freeze
 
@@ -78,39 +46,36 @@ class JumboScraper
     begin
       puts "Opening #{JUMBO_DEALS_URL}..."
       @driver.get(JUMBO_DEALS_URL)
-      sleep 5
-      puts "Page loaded. Grabbing HTML..."
-
-      html = @driver.page_source
-      doc = Nokogiri::HTML(html)
-
-      categories = doc.css(CATEGORY_SELECTOR)
-      puts "Found #{categories.count} categories."
-
-      categories.each_with_index do |category, category_index|
-        category_name = category.at_css(CATEGORY_NAME_SELECTOR)&.text&.strip || "Unknown Category ##{category_index + 1}"
-        puts "\nProcessing Category ##{category_index + 1}: #{category_name}"
-
-        deal_grid = category.at_css(DEAL_CARD_GRID_SELECTOR)
-        unless deal_grid
-          puts "No deal grid found for category '#{category_name}'. Skipping..."
-          next
-        end
-
-        deals = deal_grid.css(DEAL_CARD_SELECTOR)
-        puts "Found #{deals.count} deals in category '#{category_name}'."
-
-        deals.each_with_index do |deal, deal_index|
-          expiry_date = deal.at_css(EXPIRY_DATE_SELECTOR)&.text&.strip&.match(/wo \d+ t\/m di (\d+ \w+)/)&.[](1)
-          process_deal(deal, expiry_date, deal_index, category_name)
-        end
+      puts "Scrolling to load all deals..."
+      10.times do |i|
+        @driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        sleep 3
       end
 
+      html = @driver.page_source
+      File.write("jumbo_debug.html", html) # For debugging
+      doc = Nokogiri::HTML(html)
+      page_expiry_text = doc.at_css('p.description')&.text
+      puts "Page expiry text: #{page_expiry_text.inspect}"
+      page_expiry = page_expiry_text&.match(/Tot en met \w+ (\d+ \w+)/)&.captures&.first
+      default_expiry = page_expiry ? parse_date(nil, "di #{page_expiry}") : Date.today + 7 # Fallback to 1 week if parsing fails
+
+      all_deals = doc.css(DEAL_CARD_SELECTOR)
+      puts "Total deal cards found: #{all_deals.count}"
+
+      processed = 0
+      skipped = 0
+      all_deals.each_with_index do |deal, deal_index|
+        expiry_date = deal.at_css(EXPIRY_DATE_SELECTOR)&.text&.strip
+        category_name = deal.ancestors('section.category-section').first&.at_css(CATEGORY_NAME_SELECTOR)&.text&.strip || "Uncategorized"
+        process_deal(deal, expiry_date, deal_index, category_name, default_expiry) ? processed += 1 : skipped += 1
+      end
+
+      puts "Processed: #{processed}, Skipped: #{skipped}"
       puts "Scraping done!"
-    rescue Selenium::WebDriver::Error::WebDriverError => e
-      puts "Website is down or inaccessible: #{e.message}. Skipping scrape."
     rescue StandardError => e
-      puts "An error occurred during scraping: #{e.message}. Consider checking the website status."
+      puts "Error: #{e.message}"
+      puts e.backtrace.join("\n")
     ensure
       @driver.quit
     end
@@ -118,20 +83,20 @@ class JumboScraper
 
   private
 
-  def process_deal(deal, expiry_date, index, category_name)
+  def process_deal(deal, expiry_date, index, category_name, default_expiry)
     deal_data = extract_deal_data(deal, index)
-    return if deal_data.nil?
+    return false if deal_data.nil?
 
     store = save_store
-    return unless store
+    return false unless store
 
     product = save_product(deal_data)
-    return unless product
+    return false unless product
 
-    parsed_expiry_date = parse_date(deal, expiry_date)
+    parsed_expiry_date = parse_date(deal, expiry_date) || default_expiry
     save_deal(deal_data, store, product, parsed_expiry_date, index, category_name)
-
     log_deal(deal_data, index, expiry_date, category_name)
+    true
   end
 
   def extract_deal_data(deal, index)
@@ -150,7 +115,7 @@ class JumboScraper
     deal_url = "https://www.jumbo.com#{deal_url}" if deal_url && !deal_url.start_with?('http')
 
     regular_price = nil
-    discounted_price = 0.0
+    discounted_price = nil
 
     if deal_type_text.present? && deal_type_text.match?(/(\d+)\s*(?:voor|for)\s*€?([\d,.]+)/i)
       match = deal_type_text.match(/(\d+)\s*(?:voor|for)\s*€?([\d,.]+)/i)
@@ -163,9 +128,6 @@ class JumboScraper
       when /2\+1 gratis/i
         discounted_price = nil
       when /([\d.]+)% korting/i
-        percentage = deal_type_text.match(/([\d.]+)% korting/i)[1].to_f
-        discounted_price = nil
-      else
         discounted_price = nil
       end
     end
@@ -236,45 +198,32 @@ class JumboScraper
   end
 
   def save_deal(deal_data, store, product, parsed_expiry_date, index, category_name)
-    # Normalize the category
     standardized_category = CATEGORY_MAPPING[category_name] || category_name
-
-    # Handle ambiguous categories with product name logic
     case category_name
     when "Vleeswaren, kaas en tapas"
       name = deal_data[:name].downcase
-      if name.include?("kaas")
-        standardized_category = "Cheese"
-      elsif name.match?(/vleeswaren|ham|spek|salami|worst/)
-        standardized_category = "Meat & Fish"
-      else
-        standardized_category = "Deli" # Default for tapas or ambiguous items
-      end
+      standardized_category = "Cheese" if name.include?("kaas")
+      standardized_category = "Meat & Fish" if name.match?(/vleeswaren|ham|spek|salami|worst/)
+      standardized_category ||= "Deli"
     when "Drogisterij en baby"
       name = deal_data[:name].downcase
-      if name.match?(/luier|babyvoeding|speen|fles/)
-        standardized_category = "Baby Products"
-      else
-        standardized_category = "Drugstore"
-      end
+      standardized_category = "Baby Products" if name.match?(/luier|babyvoeding|speen|fles/)
+      standardized_category ||= "Drugstore"
     when "Huishouden en dieren"
       name = deal_data[:name].downcase
-      if name.match?(/hondenvoer|kattenvoer|kattenbak|dieren/)
-        standardized_category = "Pet Products"
-      else
-        standardized_category = "Household"
-      end
+      standardized_category = "Pet Products" if name.match?(/hondenvoer|kattenvoer|kattenbak|dieren/)
+      standardized_category ||= "Household"
     end
 
     deal_attributes = {
       product_id: product.id,
       store_id: store.id,
-      price: deal_data[:regular_price_display] == 'N/A' ? nil : deal_data[:regular_price],
+      price: deal_data[:regular_price],
       discounted_price: deal_data[:discounted_price],
       expiry_date: parsed_expiry_date,
       deal_type: deal_data[:deal_type],
       deal_url: deal_data[:deal_url],
-      category: standardized_category # Use the standardized category
+      category: standardized_category
     }
     puts "Deal attributes: #{deal_attributes.inspect}"
 
@@ -286,63 +235,42 @@ class JumboScraper
       deal_type: deal_data[:deal_type]
     )
 
-    if existing_deal
-      puts "Deal ##{index + 1} already exists (ID: #{existing_deal.id}), skipping..."
-      return
-    end
+    return if existing_deal
 
     deal_record = Deal.create!(deal_attributes)
-    puts "Deal record: #{deal_record.inspect}"
-    if deal_record.persisted?
-      puts "Successfully saved Deal ##{index + 1} (ID: #{deal_record.id})"
-    else
-      puts "Failed to persist Deal ##{index + 1}: #{deal_record.errors.full_messages.join(', ')}"
-    end
+    puts "Successfully saved Deal ##{index + 1} (ID: #{deal_record.id})"
   rescue ActiveRecord::RecordInvalid => e
     puts "Failed to save Deal ##{index + 1}: #{e.message}"
-  rescue StandardError => e
-    puts "Error saving Deal ##{index + 1}: #{e.message}"
+    nil
   end
 
   def log_deal(deal_data, index, expiry_date, category_name)
     standardized_category = CATEGORY_MAPPING[category_name] || category_name
-
-    # Apply the same product name logic as in save_deal to ensure consistency
     case category_name
     when "Vleeswaren, kaas en tapas"
       name = deal_data[:name].downcase
-      if name.include?("kaas")
-        standardized_category = "Cheese"
-      elsif name.match?(/vleeswaren|ham|spek|salami|worst/)
-        standardized_category = "Meat & Fish"
-      else
-        standardized_category = "Deli"
-      end
+      standardized_category = "Cheese" if name.include?("kaas")
+      standardized_category = "Meat & Fish" if name.match?(/vleeswaren|ham|spek|salami|worst/)
+      standardized_category ||= "Deli"
     when "Drogisterij en baby"
       name = deal_data[:name].downcase
-      if name.match?(/luier|babyvoeding|speen|fles/)
-        standardized_category = "Baby Products"
-      else
-        standardized_category = "Drugstore"
-      end
+      standardized_category = "Baby Products" if name.match?(/luier|babyvoeding|speen|fles/)
+      standardized_category ||= "Drugstore"
     when "Huishouden en dieren"
       name = deal_data[:name].downcase
-      if name.match?(/hondenvoer|kattenvoer|kattenbak|dieren/)
-        standardized_category = "Pet Products"
-      else
-        standardized_category = "Household"
-      end
+      standardized_category = "Pet Products" if name.match?(/hondenvoer|kattenvoer|kattenbak|dieren/)
+      standardized_category ||= "Household"
     end
 
     puts "\nDeal ##{index + 1}:"
     puts "  Name: #{deal_data[:name]}"
     puts "  Description: #{deal_data[:description]}"
-    puts "  Regular Price: #{deal_data[:regular_price_display].is_a?(Numeric) ? '€' + deal_data[:regular_price_display].to_s : deal_data[:regular_price_display]}"
-    puts "  Discounted Price: €#{deal_data[:discounted_price]}"
+    puts "  Regular Price: #{deal_data[:regular_price] ? '€' + deal_data[:regular_price].to_s : 'N/A'}"
+    puts "  Discounted Price: #{deal_data[:discounted_price] ? '€' + deal_data[:discounted_price].to_s : 'N/A'}"
     puts "  Deal Type: #{deal_data[:deal_type]}"
     puts "  Image URL: #{deal_data[:image_url]}"
     puts "  Deal URL: #{deal_data[:deal_url]}" if deal_data[:deal_url]
-    puts "  Expiry Date: #{expiry_date}"
+    puts "  Expiry Date: #{parse_date(nil, expiry_date) || 'Using default'}"
     puts "  Original Category: #{category_name}"
     puts "  Standardized Category: #{standardized_category}"
   end
@@ -350,28 +278,40 @@ class JumboScraper
   def parse_date(deal, date_str)
     return nil unless date_str
 
-    expiration_date = deal['expiration-date']
-    if expiration_date
-      begin
-        return Date.parse(expiration_date)
-      rescue ArgumentError
-        # Fallback to parsing the date string
-      end
-    end
-
     dutch_to_english = {
       'jan' => 'Jan', 'feb' => 'Feb', 'mrt' => 'Mar', 'apr' => 'Apr',
       'mei' => 'May', 'jun' => 'Jun', 'jul' => 'Jul', 'aug' => 'Aug',
       'sep' => 'Sep', 'okt' => 'Oct', 'nov' => 'Nov', 'dec' => 'Dec'
     }
 
-    begin
-      day, month = date_str.split.last(2)
-      english_date = "#{day} #{dutch_to_english[month.downcase]} #{Time.now.year}"
-      Date.strptime(english_date, '%d %b %Y')
-    rescue ArgumentError
-      nil
+    # Try HTML attribute first
+    if deal && (expiration_date = deal['expiration-date'])
+      begin
+        return Date.parse(expiration_date)
+      rescue ArgumentError
+        # Fallback to string parsing
+      end
     end
+
+    # Match various date formats
+    if match = date_str.match(/di (\d+ \w+)/) # e.g., "di 18 mrt"
+      day, month = match[1].split
+      english_date = "#{day} #{dutch_to_english[month.downcase]} #{Time.now.year}"
+      return Date.strptime(english_date, '%d %b %Y')
+    elsif match = date_str.match(/wo \d+ t\/m di (\d+ \w+)/) # e.g., "wo 12 t/m di 18 mrt"
+      day, month = match[1].split
+      english_date = "#{day} #{dutch_to_english[month.downcase]} #{Time.now.year}"
+      return Date.strptime(english_date, '%d %b %Y')
+    elsif match = date_str.match(/(\d+ \w+) t\/m (\d+ \w+)/) # e.g., "26 feb t/m 25 mrt"
+      end_day, end_month = match[2].split
+      english_date = "#{end_day} #{dutch_to_english[end_month.downcase]} #{Time.now.year}"
+      return Date.strptime(english_date, '%d %b %Y')
+    end
+
+    nil # Explicit return if no match
+  rescue ArgumentError => e
+    puts "Date parsing error for '#{date_str}': #{e.message}"
+    nil
   end
 end
 

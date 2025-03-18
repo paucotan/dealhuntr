@@ -33,7 +33,7 @@
 
 <div id="search-results" class="container-fluid">
   <%= render "search_results", deals: @deals %>
-  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+  <%= pagy_nav(@pagy, params: request.query_parameters) if @pagy.pages > 1 %>
 </div>
 
 <%# <%= will_paginate @deals, class: "d-flex justify-content-center" %>
