@@ -16,7 +16,7 @@
         <h5 class="product-name"><%= deal.product.name %></h5>
         <p class="expiry-date">Exp.: <%= deal.expiry_date.strftime("%d/%m/%Y") %></p>
         <% if deal.deal_type.present? %>
-          <p class="deal-type-text text-danger font-weight-bold mb-0"><%= deal.deal_type %></p>
+
         <% end %>
         <p class="category-text text-muted mb-0">
           <%= deal.category || " " %>
@@ -27,7 +27,7 @@
       <div class="d-flex align-items-center gap-2 mt-2">
         <%= button_to "Add To List", shopping_lists_path(deal_id: deal.id), method: :post, class: "btn btn-warning btn-sm add-to-list", data: { action: "click->deal#preventExpand" } %>
 
-        <% if current_user.favourites.exists?(product_id: deal.product.id) %>
+        <% if current_user && current_user.favourites.exists?(product_id: deal.product.id) %>
           <% fav = current_user.favourites.find_by(product_id: deal.product.id) %>
           <%= button_to favourite_path(fav), method: :delete, remote: true, class: "fav-btn btn p-0", data: { turbo_stream: true } do %>
             <i class="fa-solid fa-star"></i>
