@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     get :related, on: :member
   end
 
-  resources :favourites, only: [:index, :destroy]
+  resources :favourites, only: [:create, :destroy, :index]
   resources :shopping_lists, only: [:index, :create, :update, :destroy] do
     collection do
       delete :reset  # Route to clear the shopping list

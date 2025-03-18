@@ -1,27 +1,46 @@
 <div class="expanded-content">
   <div class="product-frame">
-    <div class="product-image-card">
+    <div class="product-image-card" id="deal-<%= deal.id %>">
       <% if deal.product.image_url.present? %>
         <%= image_tag deal.product.image_url, class: "card-img-top" %>
-      <% else %>
-        <p>Ürün görseli bulunamadı!</p>
       <% end %>
+
       <div class="deal-prices">
         <p class="text-muted">€<%= deal.price %></p>
         <p class="discounted-price-text font-weight-bold">€<%= deal.discounted_price %></p>
       </div>
     </div>
+
     <div class="product-info">
       <div class="details">
         <h5 class="product-name"><%= deal.product.name %></h5>
         <p class="expiry-date">Exp.: <%= deal.expiry_date.strftime("%d/%m/%Y") %></p>
-        <p>Quantity</p>
-        <p>Deal discount type</p>
+        <% if deal.deal_type.present? %>
+          <p class="deal-type-text text-danger font-weight-bold mb-0"><%= deal.deal_type %></p>
+        <% end %>
+        <p class="category-text text-muted mb-0">
+          <%= deal.category || " " %>
+        </p>
         <%= image_tag deal.store.logo_url, class: "choosen_store_id" %>
       </div>
-      <%= button_to "Add To List", shopping_lists_path(deal_id: deal.id), method: :post, class: "btn btn-warning btn-sm add-to-list", data: { action: "click->deal#preventExpand" } %>
+
+      <div class="d-flex align-items-center gap-2 mt-2">
+        <%= button_to "Add To List", shopping_lists_path(deal_id: deal.id), method: :post, class: "btn btn-warning btn-sm add-to-list", data: { action: "click->deal#preventExpand" } %>
+
+        <% if current_user.favourites.exists?(product_id: deal.product.id) %>
+          <% fav = current_user.favourites.find_by(product_id: deal.product.id) %>
+          <%= button_to favourite_path(fav), method: :delete, remote: true, class: "fav-btn btn p-0", data: { turbo_stream: true } do %>
+            <i class="fa-solid fa-star"></i>
+          <% end %>
+        <% else %>
+          <%= button_to favourites_path(product_id: deal.product.id), method: :post, remote: true, class: "fav-btn btn p-0", data: { turbo_stream: true } do %>
+            <i class="fa-regular fa-star"></i>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
+
   <div class="other-stores">
     <% related_deals.each do |related_deal| %>
       <div class="small-store-card">

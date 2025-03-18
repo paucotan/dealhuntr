@@ -1,0 +1,5 @@
+<turbo-stream target="deal-<%= @product.deals.first.id %>" action="replace">
+  <template>
+    <%= render partial: "pages/deal", formats: [:html], locals: { deal: @product.deals.first } %>
+  </template>
+</turbo-stream>
