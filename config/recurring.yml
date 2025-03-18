@@ -1,0 +1,22 @@
+# production:
+#   periodic_cleanup:
+#     class: CleanSoftDeletedRecordsJob
+#     queue: background
+#     args: [ 1000, { batch_size: 500 } ]
+#     schedule: every hour
+#   periodic_command:
+#     command: "SoftDeletedRecord.due.delete_all"
+#     priority: 2
+#     schedule: at 5am every day
+
+development:
+  periodic_jumbo_scrape:
+    class: ScrapeJumboDealsJob
+    queue: background
+    schedule: every day at 10:55
+    command: "ScrapeJumboDealsJob.perform_later"
+  periodic_albert_scrape:
+    class: ScrapeAlbertDealsJob
+    queue: background
+    schedule: every day at 10:55
+    command: "ScrapeAlbertDealsJob.perform_later"
