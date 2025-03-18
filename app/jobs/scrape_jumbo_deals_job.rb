@@ -1,6 +1,3 @@
-# app/jobs/scrape_jumbo_deals_job.rb
-require_relative '../../lib/scrapers/jumbo_scraper' # Adjust path if needed
-
 class ScrapeJumboDealsJob < ApplicationJob
   queue_as :default
 
