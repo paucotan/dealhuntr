@@ -20,7 +20,6 @@
 <!-- Category filter bar -->
 <div class="category-filter-bar">
   <%= form_with url: root_path, method: :get, local: true, class: "filter-form" do %>
-    <label for="category">Filter by Category:</label>
     <%= select_tag :category,
                    options_for_select([["All Categories", nil]] + @categories.map { |c| [c, c] }, params[:category]),
                    onchange: "this.form.submit()" %>

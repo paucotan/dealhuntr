@@ -1,39 +1,8 @@
 <div class="row justify-content-space-evenly">
-  <% @deals.each do |deal| %>
-    <div class="deal-column">
-      <div class="card shadow-sm"
-           data-controller="deal"
-           data-deal-id="<%= deal.id %>"
-           data-action="click->deal#expandDetails"
-           style="position: relative;">
-
-
-        <% unless deal.product.image_url == "No image" || deal.product.image_url.blank? %>
-          <%= image_tag deal.product.image_url, class: "card-img-top" %>
-        <% end %>
-
-        <div class="card-body">
-          <p class="card-text">
-            <% if deal.discounted_price.present? %>
-              <del class="text-muted">€<%= deal.price %></del>
-              <span class="discounted-price-text ml-1 font-weight-bold"><%= deal.discounted_price %></span>
-            <% end %>
-            <% if !deal.discounted_price.present? %>
-              <span class="text-dark font-weight-bold"><%= deal.price %></span>
-            <% end %>
-          </p>
-          <% if deal.deal_type.present? %>
-            <p class="deal-type-text text-danger font-weight-bold mb-0"><%= deal.deal_type %></p>
-          <% end %>
-          <p class="category-text text-muted mb-0">
-            Category: <%= deal.category || "Uncategorized" %>
-          </p>
-        </div>
-      </div>
-    </div>
+  <% deals.each do |deal| %>
+    <%= render partial: "pages/deal", locals: { deal: deal } %>
   <% end %>
 </div>
-
 <style>
   .category-text {
     font-size: 0.9rem;

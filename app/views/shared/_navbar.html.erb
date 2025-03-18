@@ -4,17 +4,17 @@
 
     <!-- Home Icon (Orange when active) -->
     <%= link_to root_path, class: "nav-link #{'active-icon' if current_page?(root_path)}" do %>
-      <i class="fa-solid fa-house fa-2x"></i>
+      <i class="fa-solid fa-house fa"></i>
     <% end %>
 
     <!-- Shopping List Icon (Orange when active) -->
     <%= link_to shopping_lists_path, class: "nav-link #{'active-icon' if current_page?(shopping_lists_path)}" do %>
-      <i class="fa-solid fa-list-check fa-2x"></i>
+      <i class="fa-solid fa-list-check fa"></i>
     <% end %>
 
     <!-- User Dashboard Icon (Orange when active) -->
     <%= link_to (user_signed_in? ? dashboard_path : new_user_session_path), class: "nav-link #{'active-icon' if current_page?(dashboard_path)}" do %>
-      <i class="fa-solid fa-user fa-2x"></i>
+      <i class="fa-solid fa-user fa"></i>
     <% end %>
 
   </div>
@@ -27,7 +27,6 @@
     <%= link_to root_path, class: "navbar-brand #{'active-icon' if current_page?(root_path)}" do %>
       <i class="fa-solid fa-house fa-lg"></i>
     <% end %>
-
     <div class="ms-auto d-flex gap-3">
       <!-- Shopping List Icon (Orange when active) -->
       <%= link_to shopping_lists_path, class: "nav-link #{'active-icon' if current_page?(shopping_lists_path)}" do %>
