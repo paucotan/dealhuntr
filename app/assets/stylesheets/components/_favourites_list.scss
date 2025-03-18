@@ -1,0 +1,151 @@
+.favourites-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.fav-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.fav-card-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+
+  .fav-product-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .fav-product-name {
+    font-size: 0.9rem;
+    max-width: 150px;
+  }
+
+  .fav-category {
+    font-size: 0.75rem;
+  }
+}
+
+.fav-card-middle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 130px;
+
+  .fav-store-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .fav-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.85rem;
+
+    del {
+      color: #6c757d;
+      font-size: 0.8rem;
+    }
+    .discounted-price-text {
+      color: #F99417;
+      font-size: 19px;
+    }
+  }
+}
+
+.fav-card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  .add-to-list {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    background-color: #F99417;
+    color: white;
+  }
+
+  .remove-fav-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #dc3545;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .favourites-list {
+    grid-template-columns: 1fr;
+  }
+
+  .fav-card {
+    padding: 8px;
+  }
+
+  .fav-card-left {
+    gap: 6px;
+
+    .fav-product-img {
+      width: 45px;
+      height: 45px;
+    }
+
+    .fav-product-name {
+      max-width: 120px;
+      font-size: 0.85rem;
+    }
+  }
+
+  .fav-card-middle {
+    gap: 4px;
+
+    .fav-store-logo {
+      width: 24px;
+      height: 24px;
+    }
+
+    .fav-price {
+      font-size: 0.75rem;
+    }
+  }
+
+  .fav-card-actions {
+    .add-to-list {
+      font-size: 0.7rem;
+      padding: 3px 6px;
+    }
+  }
+
+  .remove-fav-btn {
+    font-size: 1.1rem;
+  }
+}
+
+.favourites-text {
+  text-align: center;
+}
