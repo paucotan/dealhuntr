@@ -7,6 +7,17 @@ class PagesController < ApplicationController
     authorize :page, :home?
     @stores = Store.all
     @deals = fetch_deals(params[:query])
+    # how we can filter out irrelevant/broken deals:
+    #   # Fetch deals for Jumbo (store_id: 2), excluding "No name"
+    #   @deals = Deal.where(store_id: 2)
+    #                .joins(:product)
+    #                .where.not(products: { name: "No name" })
+    #                .order(created_at: :desc)
+    #                .page(params[:page]) # Assuming pagination like Kaminari
+
+    #   # Optionally, filter out deals with no meaningful price data if desired
+    #   @deals = @deals.where.not(discounted_price: nil).or(@deals.where.not(deal_type: ["No deal type", ""]))
+    # end
 
     # Apply store filter if store_id is present
     if params[:store_id].present?

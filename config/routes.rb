@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :stores, only: [:index, :show]
   resources :products, only: [:index]
 
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+
   resources :deals, only: [:show] do
     get :related, on: :member
   end
