@@ -39,6 +39,7 @@ class JumboScraper
 
   def initialize
     # Create a Selenium::WebDriver::Chrome::Options object
+    # Set the path to the ChromeDriver executable
     chrome_options = Selenium::WebDriver::Chrome::Options.new
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
