@@ -24,12 +24,12 @@ class DealsController < ApplicationController
                     .where(conditions, *values)
                     .where(category: @deal.category)
                     .where.not(id: @deal.id)
-                    .limit(5)
+                    .limit(2)
 
     @not_so_similar_deals = policy_scope(Deal)
                             .joins(:product)
                             .where(category: @deal.category)
-                            .limit(5)
+                            .limit(2)
 
     if @similar_deals.first
       render partial: "related", locals: { related_deals: @similar_deals, deal: @deal }, layout: false
