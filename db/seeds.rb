@@ -44,12 +44,12 @@ vomar, lidl = stores.select { |store| ["Vomar", "Lidl"].include?(store.name) }
 product_definitions = {
   "Fruits & Vegetables" => [
     { name: "Verse Appels", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-    { name: "Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }, # "Broccoli" is the same in Dutch
-    { name: "Wortelen", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+    { name: "Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+    { name: "Wortelen", image_url: "https://ictagrisindh.gov.pk/assets/uploads/crops/a2237670547780096024583f333bcefd.jpeg" }
   ],
   "Ready Meals" => [
     { name: "Kip Curry", image_url: "https://digitalcontent.api.tesco.com/v2/media/ghs/0fd054c5-5ef9-4f50-9d3e-9b73de7eb276/fd8657b2-eb3b-4c6a-b071-1d8f83790e5c.jpeg?h=960&w=960" },
-    { name: "Groente Lasagne", image_url: "https://images.unsplash.com/photo-1586197122509-651125c9605a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+    { name: "Groente Lasagne", image_url: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQYsSUsi1PpwOiTtr5jRCjnXqhJTF9CimtXYQZgEW--XRyqgkXLswb5RTEI_zb-HAqc5zYWRdndDvBKbL_N5ciAaChya2s28TmpTJPLvKrKqZb45F4&usqp=CAc" }
   ],
   "Meat & Fish" => [
     { name: "Kipfilet", image_url: "https://plus.unsplash.com/premium_photo-1723579413852-d71dbd8641d2?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
@@ -82,7 +82,7 @@ product_definitions = {
   ],
   "Snacks" => [
     { name: "Aardappelchips", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/g-woon-Naturel-Tortilla-Chips-165-g-8710624266455-1-637957254507948590.png" },
-    { name: "Chocoladereep", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/30012025_1738251167484_1738251174264_4014400400007_1.png" },
+    { name: "Chocoladereep", image_url: "https://www.compliment.nl/wp-content/uploads/2020/05/Toffifee-15x-125gr-3_jpg.webp" },
     { name: "Gemengde Noten", image_url: "https://imgproxy-retcat.assets.schwarz/bGLE90pseaBNalZ_G2tD1KpiaSmV8ZxniugY4Um3ZHA/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50L0I5N0NBQTJDNkI3Q0YwODY4Q0MzNzI0M0/JBM0M1NkNENUU1MENEQTQyNkE0NDAzMTZEQjNENjYwQjlEQkRCNDAucG5n.png" }
   ],
   "Frozen Foods" => [
@@ -132,7 +132,7 @@ product_definitions = {
   ],
   "Drugstore" => [
     { name: "Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-    { name: "Pleisters", image_url: "https://cdn.dsmcdn.com/mnresize/600/-/ty1573/prod/QC/20240928/14/8cc2cb19-65f5-317d-af84-8d298f73ee3f/1_org_zoom.jpg" }
+    { name: "Pleisters", image_url: "https://img.fruugo.com/product/8/49/924529498_max.jpg" }
   ],
   "Household" => [
     { name: "Keukenpapier", image_url: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSAXIJJPV4q8awSE_El-m9tM9wSlkjyNq7DjWa6ued1l2YQLExEkqarCuO6wazw853PQ6iVRamlRoWn_FRbo1DGWNGNTc5s6qQQ3kvLI-2XMYZ4FZyunZnJ" },
@@ -140,14 +140,14 @@ product_definitions = {
   ],
   "Non-Food" => [
     { name: "Batterijen", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Varta-Longlife-Power-Alkaline-9V-4008496559862-1-638044488453107957.png" },
-    { name: "Lampen", image_url: "https://images.unsplash.com/photo-1529310399831-ed472b81d589?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+    { name: "Lampen", image_url: "https://m.media-amazon.com/images/I/71eCn2-T1hL.__AC_SX300_SY300_QL70_ML2_.jpg" }
   ],
   "Seasonal" => [
     { name: "Paaschocolade-eieren", image_url: "https://img.discountoffice.cloud/W1qNtI-529uvUF3m2MckDEhr8JGjv6fF_xEO0S0ldz0/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1E5NjA4NzMtMS5qcGc.webp" },
-    { name: "Halloween Snoep", image_url: "https://images.unsplash.com/photo-1625414502495-0c35143e32d3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+    { name: "Halloween Snoep", image_url: "https://cdn.sneltoner.nl/Additional/300x300/uploaded_66ac1f41-59fa-493b-9bdb-0cad9ec4f57c_cel58132.jpg" }
   ],
   "Online Only" => [
-    { name: "Speciale Olijfolie", image_url: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?q=80&w=1918&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+    { name: "Speciale Olijfolie", image_url: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5KZARLZiKXM9PwwKZLGwdmf4cdSBnnQ1Hni4s6gERUlh7MDw7qFPenuFT37EE0CX7Uio9t0hSq0wHQrNd3gC7-oKcPcMWLfnpbpaZMef2KneaIOq7NrQtAbl7bGT1wHQdlA&usqp=CAc" },
     { name: "Gourmet Kruidenset", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp" }
   ]
 }
