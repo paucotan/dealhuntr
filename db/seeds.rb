@@ -22,7 +22,6 @@ stores_data = [
 stores = stores_data.map { |store| Store.create!(store) }
 puts "✅ Created #{stores.count} stores"
 
-# Seed One User
 user1 = User.create!(
   name: Faker::Name.name,
   email: "user1@example.com",
@@ -30,7 +29,6 @@ user1 = User.create!(
 )
 puts "✅ Created 1 user"
 
-# Define categories to match the scraper
 categories = [
   "Fruits & Vegetables", "Ready Meals", "Meat & Fish", "Cheese", "Dairy & Eggs", "Bakery",
   "Snacks & Sweets", "Pasta, Rice & International", "Canned Goods & Condiments",
@@ -38,13 +36,11 @@ categories = [
   "Drugstore", "Household", "Baby Products", "Non-Food", "Seasonal", "Online Only"
 ]
 
-# Seed Products for Vomar and Lidl with manual image URLs
 products = []
 puts "Seeding Products..."
 
 vomar, lidl = stores.select { |store| ["Vomar", "Lidl"].include?(store.name) }
 
-# Manually defined products (including your categories)
 product_definitions = {
   "Fruits & Vegetables" => [
     { name: "Verse Appels", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
@@ -156,7 +152,6 @@ product_definitions = {
   ]
 }
 
-# Create products for Vomar
 product_definitions.each do |category, items|
   items.each do |item|
     product = Product.create!(
@@ -169,7 +164,6 @@ product_definitions.each do |category, items|
   end
 end
 
-# Create identical products for Lidl
 product_definitions.each do |category, items|
   items.each do |item|
     product = Product.create!(
@@ -183,7 +177,6 @@ product_definitions.each do |category, items|
 end
 puts "✅ Created #{products.count} products"
 
-# Seed Deals for Vomar and Lidl products with linked deal_type and pricing
 deals = []
 puts "Seeding Deals..."
 
@@ -196,26 +189,25 @@ deal_types = [
 ]
 
 products.each_with_index do |product, index|
-  store = index < products.size / 2 ? vomar : lidl # First half to Vomar, second half to Lidl
-  deal_type = deal_types.sample # Pick a random deal_type
+  store = index < products.size / 2 ? vomar : lidl
+  deal_type = deal_types.sample
 
-  # Set price and discounted_price based on deal_type
   case deal_type
   when "1 voor 9.99"
-    price = rand(12.0..15.0).round(2) # Original price higher than 9.99
+    price = rand(11.0..14.0).round(2)
     discounted_price = 9.99
   when "1+1 gratis", "2+2 gratis"
-    price = rand(5.0..20.0).round(2) # Reasonable range for buy-one-get-one
-    discounted_price = (price / 2.0).round(2) # 50% off for "free" item
+    price = rand(3.0..8.0).round(2)
+    discounted_price = (price / 2.0).round(2)
   when "30% korting"
-    price = rand(5.0..50.0).round(2)
-    discounted_price = (price * 0.7).round(2) # 30% off
+    price = rand(3.0..12.0).round(2)
+    discounted_price = (price * 0.7).round(2)
   when "20% korting"
-    price = rand(5.0..50.0).round(2)
-    discounted_price = (price * 0.8).round(2) # 20% off
+    price = rand(3.0..12.0).round(2)
+    discounted_price = (price * 0.8).round(2)
   else
-    price = rand(5.0..50.0).round(2) # Fallback (shouldn’t happen)
-    discounted_price = (price - rand(1..5)).round(2)
+    price = rand(3.0..12.0).round(2)
+    discounted_price = (price - rand(0.5..2.0)).round(2)
   end
 
   deal = Deal.create!(
