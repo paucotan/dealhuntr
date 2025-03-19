@@ -1,4 +1,3 @@
-<!-- Search bar -->
 <%= form_with url: root_path, method: :get, local: true do |form| %>
   <div class="search-bar d-flex justify-content-center">
     <%= form.text_field :query, placeholder: "Find products...", value: params[:query] %>
@@ -6,18 +5,20 @@
   </div>
 <% end %>
 
-<!-- Combined Store and Category filter -->
-<div class="stores-card shadow-sm">
-  <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap">
-    <!-- Store logos -->
-    <% @stores.each do |store| %>
-      <%= link_to root_path(store_id: store.id), class: "store-link" do %>
-        <%= image_tag "stores/#{store.name.downcase.gsub(' ', '_')}.png", alt: store.name, class: "banner-logo #{'active-logo' if params[:store_id].to_i == store.id} shadow-sm" %>
-      <% end %>
-    <% end %>
 
-    <!-- Category filter -->
-    <div class="filter-wrapper">
+<div class="stores-card shadow-sm">
+  <div class="filter-bar d-flex flex-column flex-md-row justify-content-center align-items-center">
+
+
+    <div class="store-logos d-flex flex-wrap justify-content-center gap-md-3 gap-1">
+      <% @stores.each do |store| %>
+        <%= link_to root_path(store_id: store.id), class: "store-link" do %>
+          <%= image_tag "stores/#{store.name.downcase.gsub(' ', '_')}.png", alt: store.name, class: "banner-logo #{'active-logo' if params[:store_id].to_i == store.id} shadow-sm" %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="filter-wrapper mt-2 mt-md-0 ms-md-3">
       <%= form_with url: root_path, method: :get, local: true, class: "filter-form" do %>
         <%= select_tag :category,
                        options_for_select([["All Categories", nil]] + @categories.map { |c| [c, c] }, params[:category]),
@@ -27,10 +28,12 @@
         <%= hidden_field_tag :store_id, params[:store_id] %>
       <% end %>
     </div>
+
   </div>
 </div>
 
-<!-- Deals list -->
+
+
 <div id="search-results" class="container-fluid">
   <%= render "search_results", deals: @deals %>
   <%== pagy_nav(@pagy, params: request.query_parameters) if @pagy.pages > 1 %>
