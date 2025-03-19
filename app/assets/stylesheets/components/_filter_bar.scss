@@ -1,20 +1,42 @@
 .filter-wrapper {
-  width: 200px; /* Slightly smaller width to fit alongside store logos */
+  width: 200px;
 }
 
 .filter-form {
-  width: 100%; /* Ensure the form takes the full width of the wrapper */
+  width: 100%;
 }
 
 .category-filter {
-  font-family: 'Inria Sans', sans-serif; /* Match your app’s font */
-  font-size: 14px; /* Slightly smaller to match the scale of the logos */
-  padding: 5px 10px; /* Adjust padding for a compact look */
-  border-radius: 5px; /* Match the rounded corners of the logos */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Match the shadow of the logos */
+  font-family: 'Inria Sans', sans-serif;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Optional: Adjust store logos for consistency */
+
 .banner-logo {
-  max-height: 40px; /* Ensure logos aren’t too large compared to the dropdown */
+  max-height: 40px;
+}
+.filter-bar {
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0;
+  }
+}
+
+.store-logos {
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .store-logos {
+    gap: 0.3rem;
+  }
+
+  .filter-wrapper {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
 }
