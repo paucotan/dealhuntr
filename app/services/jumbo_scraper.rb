@@ -1,5 +1,5 @@
 require File.expand_path('config/environment', Dir.pwd)
-require 'selenium-webdriver'
+require 'watir'
 require 'nokogiri'
 require 'active_record'
 require_relative '../../app/models/store'
@@ -38,41 +38,39 @@ class JumboScraper
   }.freeze
 
   def initialize
-# Set up a unique temporary directory for user data
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument('--headless') # Run in headless mode (required for Heroku)
-  options.add_argument('--no-sandbox') # Required for Heroku
-  options.add_argument('--disable-dev-shm-usage') # Prevent crashes on Heroku
-  options.add_argument('--window-size=1920,1080') # Set a reasonable window size
-  options.add_argument('--disable-gpu') # Disable GPU (optional, often needed in headless mode)
-  options.add_argument('--disable-extensions') # Disable extensions for stability
+    # Create a Selenium::WebDriver::Chrome::Options object
+    chrome_options = Selenium::WebDriver::Chrome::Options.new
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--remote-debugging-port=9222')
 
-  # Initialize the driver with options
-  @driver = Selenium::WebDriver.for(:chrome, options: options)
-  @driver.manage.timeouts.implicit_wait = 10
-  Rails.logger.info "Selenium WebDriver session created successfully"
+    # Initialize Watir with the options
+    @browser = Watir::Browser.new(:chrome, options: chrome_options)
+    Rails.logger.info "Watir browser session created successfully"
   end
 
   def scrape
     begin
-      puts "Opening #{JUMBO_DEALS_URL}..."
-      @driver.get(JUMBO_DEALS_URL)
-      puts "Scrolling to load all deals..."
+      Rails.logger.info "Opening #{JUMBO_DEALS_URL}..."
+      @browser.goto(JUMBO_DEALS_URL)
+      Rails.logger.info "Scrolling to load all deals..."
       10.times do |i|
-        @driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        @browser.scroll.to :bottom
         sleep 3
+        Rails.logger.info "Scroll iteration #{i + 1}/10"
       end
 
-      html = @driver.page_source
-      # File.write("jumbo_debug.html", html) # For debugging
-      doc = Nokogiri::HTML(html)
+      # Parse the page source with Nokogiri
+      doc = Nokogiri::HTML(@browser.html)
       page_expiry_text = doc.at_css('p.description')&.text
-      puts "Page expiry text: #{page_expiry_text.inspect}"
+      Rails.logger.info "Page expiry text: #{page_expiry_text.inspect}"
       page_expiry = page_expiry_text&.match(/Tot en met \w+ (\d+ \w+)/)&.captures&.first
-      default_expiry = page_expiry ? parse_date(nil, "di #{page_expiry}") : Date.today + 7 # Fallback to 1 week if parsing fails
+      default_expiry = page_expiry ? parse_date(nil, "di #{page_expiry}") : Date.today + 7.days
 
       all_deals = doc.css(DEAL_CARD_SELECTOR)
-      puts "Total deal cards found: #{all_deals.count}"
+      Rails.logger.info "Total deal cards found: #{all_deals.count}"
 
       processed = 0
       skipped = 0
@@ -89,8 +87,8 @@ class JumboScraper
       Rails.logger.error e.backtrace.join("\n")
       raise e # Re-raise to mark the job as failed in Mission Control
     ensure
-      @driver&.quit
-      Rails.logger.info "Selenium WebDriver session closed"
+      @browser&.close
+      Rails.logger.info "Watir browser session closed"
     end
   end
 
@@ -98,13 +96,22 @@ class JumboScraper
 
   def process_deal(deal, expiry_date, index, category_name, default_expiry)
     deal_data = extract_deal_data(deal, index)
-    return false if deal_data.nil?
+    unless deal_data
+      Rails.logger.warn "Skipping deal ##{index + 1}: No deal data extracted"
+      return false
+    end
 
     store = save_store
-    return false unless store
+    unless store
+      Rails.logger.warn "Skipping deal ##{index + 1}: Failed to save store"
+      return false
+    end
 
     product = save_product(deal_data)
-    return false unless product
+    unless product
+      Rails.logger.warn "Skipping deal ##{index + 1}: Failed to save product"
+      return false
+    end
 
     parsed_expiry_date = parse_date(deal, expiry_date) || default_expiry
     save_deal(deal_data, store, product, parsed_expiry_date, index, category_name)
@@ -114,14 +121,14 @@ class JumboScraper
 
   def extract_deal_data(deal, index)
     name = deal.at_css(TITLE_SELECTOR)&.text&.strip || 'No name'
-    puts "Extracted name: #{name} from deal ##{index + 1}"
+    Rails.logger.info "Extracted name: #{name} from deal ##{index + 1}"
     subtitle = deal.at_css(SUBTITLE_SELECTOR)&.text&.strip || 'No subtitle'
 
     deal_type_element = deal.at_css('.jum-tag .lower') || deal.at_css('.jum-tag') || deal.at_css('.tag')
     deal_type_text = deal_type_element&.text&.strip || 'No deal type'
-    puts "Extracted deal type text: #{deal_type_text} from deal ##{index + 1}"
+    Rails.logger.info "Extracted deal type text: #{deal_type_text} from deal ##{index + 1}"
     if deal_type_text == 'No deal type'
-      puts "Debug: Raw HTML for deal ##{index + 1}: #{deal.to_html}"
+      Rails.logger.debug "Debug: Raw HTML for deal ##{index + 1}: #{deal.to_html}"
     end
 
     deal_url = deal.at_css('h3.title a')&.[]('href')
@@ -163,22 +170,24 @@ class JumboScraper
 
   def extract_image_url(deal, index)
     image_element = deal.at_css(TARGET_IMAGE_SELECTOR)
-    return 'No image' unless image_element
+    unless image_element
+      Rails.logger.warn "No image found for deal ##{index + 1}"
+      return 'No image'
+    end
 
     temp_image_url = image_element['src']
     unless temp_image_url.match?(/data:image\/gif;base64/)
       return temp_image_url
     end
 
+    # Use Watir to wait for the image to load
     begin
-      @driver.execute_script("arguments[0].scrollIntoView(true);", @driver.find_element(:css, "#{DEAL_CARD_SELECTOR}:nth-child(#{index + 1}) #{TARGET_IMAGE_SELECTOR}"))
-      wait = Selenium::WebDriver::Wait.new(timeout: 5)
-      wait.until do
-        src = @driver.find_element(:css, "#{DEAL_CARD_SELECTOR}:nth-child(#{index + 1}) #{TARGET_IMAGE_SELECTOR}")['src']
-        src unless src.match?(/data:image\/gif;base64/)
-      end || 'No image'
-    rescue Selenium::WebDriver::Error::TimeoutError
-      puts "Timeout waiting for image to load for Deal ##{index + 1}, using placeholder: #{temp_image_url}"
+      image = @browser.element(css: "#{DEAL_CARD_SELECTOR}:nth-child(#{index + 1}) #{TARGET_IMAGE_SELECTOR}")
+      image.scroll.to
+      image.wait_until(timeout: 5) { |img| img.src !~ /data:image\/gif;base64/ }
+      image.src || 'No image'
+    rescue Watir::Wait::TimeoutError
+      Rails.logger.warn "Timeout waiting for image to load for Deal ##{index + 1}, using placeholder: #{temp_image_url}"
       'No image'
     end
   end
@@ -190,23 +199,25 @@ class JumboScraper
     if store.website_url != JUMBO_DEALS_URL
       store.update!(website_url: JUMBO_DEALS_URL)
     end
-    puts "Store saved: #{store.inspect}"
+    Rails.logger.info "Store saved: #{store.inspect}"
     store
   rescue ActiveRecord::RecordInvalid => e
-    puts "Failed to save Store: #{e.message}"
+    Rails.logger.error "Failed to save Store: #{e.message}"
     nil
   end
 
   def save_product(deal_data)
+    return nil if deal_data[:name] == 'No name' # Skip products with invalid names
+
     product = Product.find_or_create_by!(
       name: deal_data[:name],
       image_url: deal_data[:image_url],
       source: 'scraped'
     )
-    puts "Saved or found product: #{product.inspect} for name: #{deal_data[:name]}"
+    Rails.logger.info "Saved or found product: #{product.inspect} for name: #{deal_data[:name]}"
     product
   rescue ActiveRecord::RecordInvalid => e
-    puts "Failed to save Product: #{e.message}"
+    Rails.logger.error "Failed to save Product: #{e.message}"
     nil
   end
 
@@ -238,7 +249,7 @@ class JumboScraper
       deal_url: deal_data[:deal_url],
       category: standardized_category
     }
-    puts "Deal attributes: #{deal_attributes.inspect}"
+    Rails.logger.info "Deal attributes: #{deal_attributes.inspect}"
 
     existing_deal = Deal.find_by(
       product_id: product.id,
@@ -251,9 +262,9 @@ class JumboScraper
     return if existing_deal
 
     deal_record = Deal.create!(deal_attributes)
-    puts "Successfully saved Deal ##{index + 1} (ID: #{deal_record.id})"
+    Rails.logger.info "Successfully saved Deal ##{index + 1} (ID: #{deal_record.id})"
   rescue ActiveRecord::RecordInvalid => e
-    puts "Failed to save Deal ##{index + 1}: #{e.message}"
+    Rails.logger.error "Failed to save Deal ##{index + 1}: #{e.message}"
     nil
   end
 
@@ -275,17 +286,17 @@ class JumboScraper
       standardized_category ||= "Household"
     end
 
-    puts "\nDeal ##{index + 1}:"
-    puts "  Name: #{deal_data[:name]}"
-    puts "  Description: #{deal_data[:description]}"
-    puts "  Regular Price: #{deal_data[:regular_price] ? '€' + deal_data[:regular_price].to_s : 'N/A'}"
-    puts "  Discounted Price: #{deal_data[:discounted_price] ? '€' + deal_data[:discounted_price].to_s : 'N/A'}"
-    puts "  Deal Type: #{deal_data[:deal_type]}"
-    puts "  Image URL: #{deal_data[:image_url]}"
-    puts "  Deal URL: #{deal_data[:deal_url]}" if deal_data[:deal_url]
-    puts "  Expiry Date: #{parse_date(nil, expiry_date) || 'Using default'}"
-    puts "  Original Category: #{category_name}"
-    puts "  Standardized Category: #{standardized_category}"
+    Rails.logger.info "\nDeal ##{index + 1}:"
+    Rails.logger.info "  Name: #{deal_data[:name]}"
+    Rails.logger.info "  Description: #{deal_data[:description]}"
+    Rails.logger.info "  Regular Price: #{deal_data[:regular_price] ? '€' + deal_data[:regular_price].to_s : 'N/A'}"
+    Rails.logger.info "  Discounted Price: #{deal_data[:discounted_price] ? '€' + deal_data[:discounted_price].to_s : 'N/A'}"
+    Rails.logger.info "  Deal Type: #{deal_data[:deal_type]}"
+    Rails.logger.info "  Image URL: #{deal_data[:image_url]}"
+    Rails.logger.info "  Deal URL: #{deal_data[:deal_url]}" if deal_data[:deal_url]
+    Rails.logger.info "  Expiry Date: #{parse_date(nil, expiry_date) || 'Using default'}"
+    Rails.logger.info "  Original Category: #{category_name}"
+    Rails.logger.info "  Standardized Category: #{standardized_category}"
   end
 
   def parse_date(deal, date_str)
@@ -323,7 +334,7 @@ class JumboScraper
 
     nil # Explicit return if no match
   rescue ArgumentError => e
-    puts "Date parsing error for '#{date_str}': #{e.message}"
+    Rails.logger.error "Date parsing error for '#{date_str}': #{e.message}"
     nil
   end
 end

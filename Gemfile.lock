@@ -349,6 +349,9 @@ GEM
     uri (1.0.3)
     warden (1.2.9)
       rack (>= 2.0.9)
+    watir (7.3.0)
+      regexp_parser (>= 1.2, < 3)
+      selenium-webdriver (~> 4.2)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -402,13 +405,13 @@ DEPENDENCIES
   rails (~> 7.1.5, >= 7.1.5.1)
   sassc-rails
   searchkick
-  selenium-webdriver
   simple_form!
   solid_queue
   sprockets-rails
   stimulus-rails
   turbo-rails
   tzinfo-data
+  watir
   web-console
   whenever
   will_paginate
