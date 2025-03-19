@@ -1,44 +1,44 @@
 <h1 class="favourites-text mb-4">My Favourites</h1>
 
-<%= if @favourites  %>
-<div class="favourites-list">
-  <% @favourites.each do |fav| %>
-    <div class="fav-card">
+<% if @favourites  %>
+  <div class="favourites-list">
+    <% @favourites.each do |fav| %>
+      <div class="fav-card">
 
-      <div class="fav-card-left">
-        <%= image_tag fav.product.image_url, class: "fav-product-img" if fav.product.image_url.present? %>
-        <div>
-          <p class="fav-product-name mb-1"><%= fav.product.name %></p>
-          <p class="fav-category text-muted"><%= fav.product.category %></p>
+        <div class="fav-card-left">
+          <%= image_tag fav.product.image_url, class: "fav-product-img" if fav.product.image_url.present? %>
+          <div>
+            <p class="fav-product-name mb-1"><%= fav.product.name %></p>
+            <p class="fav-category text-muted"><%= fav.product.category %></p>
+          </div>
         </div>
-      </div>
 
-      <% deal = fav.product.deals.first %>
-      <div class="fav-card-middle">
-        <%= image_tag deal.store.logo_url, class: "fav-store-logo" %>
-        <div class="fav-price">
-          <% if deal.discounted_price.present? %>
-            <del>€<%= deal.price %></del>
-            <span class="discounted-price-text">€<%= deal.discounted_price %></span>
-          <% else %>
-            <span class="discounted">€<%= deal.price %></span>
+        <% deal = fav.product.deals.first %>
+        <div class="fav-card-middle">
+          <%= image_tag deal.store.logo_url, class: "fav-store-logo" %>
+          <div class="fav-price">
+            <% if deal.discounted_price.present? %>
+              <del>€<%= deal.price %></del>
+              <span class="discounted-price-text">€<%= deal.discounted_price %></span>
+            <% else %>
+              <span class="discounted">€<%= deal.price %></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="fav-card-actions">
+          <%= button_to shopping_lists_path(deal_id: deal.id), method: :post, class: "btn btn-sm btn-warning add-to-list" do %>
+            Add to List
+          <% end %>
+
+          <%= button_to favourite_path(fav), method: :delete, remote: true, class: "remove-fav-btn", data: { turbo_stream: true } do %>
+            <i class="fa-solid fa-trash"></i>
           <% end %>
         </div>
+
       </div>
-
-      <div class="fav-card-actions">
-        <%= button_to shopping_lists_path(deal_id: deal.id), method: :post, class: "btn btn-sm btn-warning add-to-list" do %>
-          Add to List
-        <% end %>
-
-        <%= button_to favourite_path(fav), method: :delete, remote: true, class: "remove-fav-btn", data: { turbo_stream: true } do %>
-          <i class="fa-solid fa-trash"></i>
-        <% end %>
-      </div>
-
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 <% else %>
   <p>You have no favourites yet.</p>
 <% end %>
