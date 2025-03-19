@@ -1,5 +1,6 @@
 <h1 class="favourites-text mb-4">My Favourites</h1>
 
+<%= if @favourites  %>
 <div class="favourites-list">
   <% @favourites.each do |fav| %>
     <div class="fav-card">
@@ -38,3 +39,6 @@
     </div>
   <% end %>
 </div>
+<% else %>
+  <p>You have no favourites yet.</p>
+<% end %>

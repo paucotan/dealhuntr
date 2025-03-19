@@ -26,5 +26,4 @@ class FavouritesController < ApplicationController
   def index
     @favourites = policy_scope(current_user.favourites.includes(:product))
   end
-
 end

@@ -16,7 +16,7 @@
         <h5 class="product-name"><%= deal.product.name %></h5>
         <p class="expiry-date">Exp.: <%= deal.expiry_date.strftime("%d/%m/%Y") %></p>
         <% if deal.deal_type.present? %>
-          <p class="deal-type-text text-danger font-weight-bold mb-0"><%= deal.deal_type %></p>
+
         <% end %>
         <p class="category-text text-muted mb-0">
           <%= deal.category || " " %>
