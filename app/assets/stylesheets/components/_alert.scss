@@ -1,8 +1,7 @@
-.alert {
+.alert, .notice {
   color: white;
   background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
   position: fixed;
-  /* Removed top property for responsive design */
   left: 50%;
   transform: translateX(-50%);
   z-index: 1050;
@@ -12,22 +11,47 @@
   padding: 10px 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeOut 5s ease-in-out forwards; /* Fade out after 5 seconds */
+
+  /* Differentiate alert and notice visually */
+  &.alert {
+    background: rgba(255, 99, 71, 0.8); /* Tomato red for alerts */
+  }
+
+  &.notice {
+    background: rgba(60, 179, 113, 0.8); /* Medium sea green for success */
+  }
+
+  /* Empty elements are hidden */
+  &:empty {
+    display: none;
+  }
 }
 
 /* Default for larger screens (Desktop) */
 @media (min-width: 991px) {
-  .alert {
+  .alert, .notice {
     top: 20px; /* Show at the top */
   }
 }
 
 /* For mobile screens (width < 991px) */
 @media (max-width: 990px) {
-  .alert {
+  .alert, .notice {
     bottom: 20px; /* Show at the bottom */
     top: auto; /* Reset top */
   }
 }
-.alert:empty {
-  display: none;
+
+/* Fade-out animation (opacity only) */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1; /* Stays fully visible for 4 seconds */
+  }
+  100% {
+    opacity: 0; /* Fades to invisible */
+  }
 }

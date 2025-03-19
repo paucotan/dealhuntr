@@ -1,0 +1,20 @@
+.filter-wrapper {
+  width: 200px; /* Slightly smaller width to fit alongside store logos */
+}
+
+.filter-form {
+  width: 100%; /* Ensure the form takes the full width of the wrapper */
+}
+
+.category-filter {
+  font-family: 'Inria Sans', sans-serif; /* Match your app’s font */
+  font-size: 14px; /* Slightly smaller to match the scale of the logos */
+  padding: 5px 10px; /* Adjust padding for a compact look */
+  border-radius: 5px; /* Match the rounded corners of the logos */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Match the shadow of the logos */
+}
+
+/* Optional: Adjust store logos for consistency */
+.banner-logo {
+  max-height: 40px; /* Ensure logos aren’t too large compared to the dropdown */
+}
