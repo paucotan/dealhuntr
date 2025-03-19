@@ -10,7 +10,7 @@ User.destroy_all
 puts "Database cleaned!"
 
 puts "Seeding database..."
-# Seed Stores (unchanged)
+# Seed Stores with real addresses
 puts "Seeding Stores with logos..."
 stores_data = [
   { name: "Albert Heijn", location: "Provincialeweg 11, 1506 MA Zaandam, Netherlands", website_url: "https://www.ah.nl", logo_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Albert_Heijn_Logo.svg/1956px-Albert_Heijn_Logo.svg.png" },
@@ -22,7 +22,7 @@ stores_data = [
 stores = stores_data.map { |store| Store.create!(store) }
 puts "✅ Created #{stores.count} stores"
 
-# Seed One User (unchanged)
+# Seed One User
 user1 = User.create!(
   name: Faker::Name.name,
   email: "user1@example.com",
@@ -42,10 +42,9 @@ categories = [
 products = []
 puts "Seeding Products..."
 
-# Fix applied here
 vomar, lidl = stores.select { |store| ["Vomar", "Lidl"].include?(store.name) }
 
-# Manually defined products
+# Manually defined products (including your categories)
 product_definitions = {
   "Fruits & Vegetables" => [
     { name: "Fresh Apples", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
@@ -162,42 +161,75 @@ product_definitions = {
 # Create products for Vomar
 product_definitions.each do |category, items|
   items.each do |item|
-    products << Product.create!(
+    product = Product.create!(
       name: item[:name],
       category: category,
       image_url: item[:image_url]
     )
+    products << product
+    puts "Created product: #{product.name} in category: #{product.category}"
   end
 end
 
-# Create identical products for Lidl (same items, different instances)
+# Create identical products for Lidl
 product_definitions.each do |category, items|
   items.each do |item|
-    products << Product.create!(
+    product = Product.create!(
       name: item[:name],
       category: category,
       image_url: item[:image_url]
     )
+    products << product
+    puts "Created product: #{product.name} in category: #{product.category}"
   end
 end
 puts "✅ Created #{products.count} products"
 
-# Seed Deals for Vomar and Lidl products
+# Seed Deals for Vomar and Lidl products with linked deal_type and pricing
 deals = []
 puts "Seeding Deals..."
 
+deal_types = [
+  "1 voor 9.99",
+  "1+1 gratis",
+  "30% korting",
+  "2+2 gratis",
+  "20% korting"
+]
+
 products.each_with_index do |product, index|
   store = index < products.size / 2 ? vomar : lidl # First half to Vomar, second half to Lidl
-  price = rand(5..50)
-  discounted_price = price - rand(1..5)
+  deal_type = deal_types.sample # Pick a random deal_type
 
-  deals << Deal.create!(
+  # Set price and discounted_price based on deal_type
+  case deal_type
+  when "1 voor 9.99"
+    price = rand(12.0..15.0).round(2) # Original price higher than 9.99
+    discounted_price = 9.99
+  when "1+1 gratis", "2+2 gratis"
+    price = rand(5.0..20.0).round(2) # Reasonable range for buy-one-get-one
+    discounted_price = (price / 2.0).round(2) # 50% off for "free" item
+  when "30% korting"
+    price = rand(5.0..50.0).round(2)
+    discounted_price = (price * 0.7).round(2) # 30% off
+  when "20% korting"
+    price = rand(5.0..50.0).round(2)
+    discounted_price = (price * 0.8).round(2) # 20% off
+  else
+    price = rand(5.0..50.0).round(2) # Fallback (shouldn’t happen)
+    discounted_price = (price - rand(1..5)).round(2)
+  end
+
+  deal = Deal.create!(
     price: price,
     discounted_price: discounted_price,
     expiry_date: Faker::Date.forward(days: 30),
     product: product,
-    store: store
+    store: store,
+    deal_type: deal_type
   )
+  deals << deal
+  puts "Created deal for #{product.name} with deal_type: #{deal.deal_type}, price: #{deal.price}€, discounted: #{deal.discounted_price}€"
 end
 puts "✅ Created #{deals.count} deals"
 
