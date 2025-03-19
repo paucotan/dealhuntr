@@ -52,7 +52,7 @@
   </div>
 
   <div class="totals">
-    <p><strong>Total Savings This Trip:</strong> <span class="savings">€<%= number_with_precision(
+    <p><strong>Total Savings This Trip:</strong> <span class="savings" style="color: #975BEB; font-size: larger; font-weight: bold;">€<%= number_with_precision(
       @shopping_list.sum { |item| (item[:price] || item.deal.price).to_f - (item[:discounted_price] || item.deal.discounted_price).to_f },
       precision: 2
     ) %></span></p>
@@ -60,6 +60,6 @@
   </div>
 
   <div class="action-buttons">
-    <%= button_to "Reset Shopping List", reset_shopping_lists_path, method: :delete, class: "btn btn-warning" %>
+    <%= button_to "Reset Shopping List", reset_shopping_lists_path, method: :delete, class: "btn reset-shopping-list" %>
   </div>
 <% end %>

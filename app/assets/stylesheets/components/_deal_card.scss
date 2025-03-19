@@ -40,16 +40,19 @@
         }
 
         .discounted-price-text {
-          color: #ff6600;
+          color: #F99417;
           font-weight: bold;
+          font-size: x-large;
         }
       }
 
       .deal-type-text {
         font-size: 0.8rem;
-        color: #dc3545;
+        color: #975BEB;
         margin: 0;
       }
+
+
     }
 
     &.expanded {
@@ -75,6 +78,13 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     background: #fff;
+
+    .deal-type-text {
+      font-size: 0.8rem;
+      color: #975BEB;
+      margin: 0;
+    }
+
 
     .product-frame {
       display: flex;
@@ -113,7 +123,7 @@
 
           .discounted-price-text {
             font-size: 1.3rem;
-            color: #ff6600;
+            color: #F99417;
           }
         }
       }
@@ -152,11 +162,7 @@
           }
         }
 
-        .add-to-list {
-          align-self: flex-start;
-          padding: 0.3rem 0.6rem;
-          font-size: 0.75rem;
-        }
+
       }
     }
 
@@ -190,6 +196,14 @@
         }
       }
     }
+  }
+  .expanded-content .product-info .add-to-list {
+    margin-top: auto;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    background-color: #F99417;
+    color: #fff;
+    align-self: flex-start;
   }
 }
 @media (min-width: 300px) {
@@ -225,4 +239,12 @@
 .expanded-content .product-image-card .card-img-top {
   display: block !important;
   visibility: visible !important;
+}
+.expanded-content .product-info .add-to-list {
+  margin-top: auto;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  background-color: #F99417;
+  color: #fff;
+  align-self: flex-start;
 }
