@@ -7,17 +7,6 @@ class PagesController < ApplicationController
     authorize :page, :home?
     @stores = Store.all
     @deals = fetch_deals(params[:query])
-    # how we can filter out irrelevant/broken deals:
-    #   # Fetch deals for Jumbo (store_id: 2), excluding "No name"
-    #   @deals = Deal.where(store_id: 2)
-    #                .joins(:product)
-    #                .where.not(products: { name: "No name" })
-    #                .order(created_at: :desc)
-    #                .page(params[:page]) # Assuming pagination like Kaminari
-
-    #   # Optionally, filter out deals with no meaningful price data if desired
-    #   @deals = @deals.where.not(discounted_price: nil).or(@deals.where.not(deal_type: ["No deal type", ""]))
-    # end
 
     # Apply store filter if store_id is present
     if params[:store_id].present?
@@ -27,16 +16,16 @@ class PagesController < ApplicationController
     # Apply category filter if category is present
     if params[:category].present?
       if params[:category] == "Uncategorized"
-        @deals = @deals.where(category: [nil, "Uncategorized"])
+        @deals = @deals.joins(:product).where(products: { category: [nil, "Uncategorized"] })
       else
-        @deals = @deals.where(category: params[:category])
+        @deals = @deals.joins(:product).where(products: { category: params[:category] })
       end
     end
 
     # Add pagination to the deals query
-    # Get unique categories for the filter bar
-    @categories = Deal.distinct.pluck(:category).map { |c| c || "Uncategorized" }.uniq.sort
     @pagy, @deals = pagy(@deals)
+    # Get unique categories for the filter bar from products linked to deals
+    @categories = Product.joins(:deals).distinct.pluck(:category).compact.reject { |c| c == "Uncategorized" }.uniq.sort
   end
 
   def dashboard
@@ -47,31 +36,18 @@ class PagesController < ApplicationController
   private
 
   def fetch_deals(query)
-#     if query.present?
-#       @results = Product.search(params[:query])
-#       @products = @results.pluck(:id)
-#       deals = deals.where(product_id: @products)
-
-    # if query.present?
-    #   @results = Product.search(params[:query])
-    #   @products = @results.pluck(:id)
-    #   @deals = Deal.where(product_id: @products)
-    # else
-    #   Deal.where("expiry_date >= ?", Date.today)
-    #       .order(discounted_price: :asc)
-    #      # .limit(20)
-    # end
+    base_query = Deal.joins(:product)
+                     .where("expiry_date >= ?", Date.today)
+                     .where.not(products: { name: "No name" }) # Filter out "No name" products
+                     .where.not(products: { category: [nil, "Uncategorized"] }) # Filter out Uncategorized products
 
     if query.present?
-      translated_query = DeepL.translate(query, 'EN', 'NL', auth_key: DEEPL_AUTH_KEY,
-      host: HOST ).text
+      translated_query = DeepL.translate(query, 'EN', 'NL', auth_key: DEEPL_AUTH_KEY, host: HOST).text
       product_ids = Product.search_by_name_and_category(translated_query).pluck(:id)
-      Deal.where(product_id: product_ids)
-          .where("expiry_date >= ?", Date.today)
-          .order(discounted_price: :asc)
+      base_query.where(product_id: product_ids)
+                .order(discounted_price: :asc)
     else
-      Deal.where("expiry_date >= ?", Date.today)
-          .order(discounted_price: :asc)
+      base_query.order(discounted_price: :asc)
     end
   end
 end

@@ -16,8 +16,7 @@ class ShoppingListsController < ApplicationController
     authorize shopping_list
 
     flash[:alert] = "Deal added to your shopping list!"
-    redirect_to shopping_lists_path
-  end
+    redirect_back(fallback_location: root_path)  end
 
   def destroy
     item = current_user.shopping_lists.find_by(deal_id: params[:id])
