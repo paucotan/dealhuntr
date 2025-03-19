@@ -22,7 +22,6 @@ stores_data = [
 stores = stores_data.map { |store| Store.create!(store) }
 puts "✅ Created #{stores.count} stores"
 
-# Seed One User
 user1 = User.create!(
   name: Faker::Name.name,
   email: "user1@example.com",
@@ -30,7 +29,6 @@ user1 = User.create!(
 )
 puts "✅ Created 1 user"
 
-# Define categories to match the scraper
 categories = [
   "Fruits & Vegetables", "Ready Meals", "Meat & Fish", "Cheese", "Dairy & Eggs", "Bakery",
   "Snacks & Sweets", "Pasta, Rice & International", "Canned Goods & Condiments",
@@ -38,13 +36,11 @@ categories = [
   "Drugstore", "Household", "Baby Products", "Non-Food", "Seasonal", "Online Only"
 ]
 
-# Seed Products for Vomar and Lidl with manual image URLs
 products = []
 puts "Seeding Products..."
 
 vomar, lidl = stores.select { |store| ["Vomar", "Lidl"].include?(store.name) }
 
-# Manually defined products (including your categories)
 product_definitions = {
   "Fruits & Vegetables" => [
     { name: "Fresh Apples", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
@@ -52,8 +48,8 @@ product_definitions = {
     { name: "Carrots", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
   ],
   "Ready Meals" => [
-    { name: "Chicken Curry", image_url: "https://images.unsplash.com/photo-1631292784640-2b24be784d5d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-    { name: "Vegetable Lasagna", image_url: "https://images.unsplash.com/photo-1586197122509-651125c9605a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+    { name: "Chicken Curry", image_url: "https://digitalcontent.api.tesco.com/v2/media/ghs/0fd054c5-5ef9-4f50-9d3e-9b73de7eb276/fd8657b2-eb3b-4c6a-b071-1d8f83790e5c.jpeg?h=960&w=960" },
+    { name: "Vegetable Lasagna", image_url: "https://assets.sainsburys-groceries.co.uk/gol/7856820/1/640x640.jpg" }
   ],
   "Meat & Fish" => [
     { name: "Chicken Breast", image_url: "https://plus.unsplash.com/premium_photo-1723579413852-d71dbd8641d2?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
@@ -86,11 +82,10 @@ product_definitions = {
   ],
   "Snacks" => [
     { name: "Potato Chips", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/g-woon-Naturel-Tortilla-Chips-165-g-8710624266455-1-637957254507948590.png" },
-    { name: "Chocolate Bar", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/TOFFIFEE-125GR-4014400934496-0-638270945460231909.jpg" },
-    { name: "Mixed Nuts", image_url: "https://imgproxy-retcat.assets.schwarz/bGLE90pseaBNalZ_G2tD1KpiaSmV8ZxniugY4Um3ZHA/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50L0I5N0NBQTJDNkI3Q0YwODY4Q0MzNzI0M0/JBM0M1NkNENUU1MENEQTQyNkE0NDAzMTZEQjNENjYwQjlEQkRCNDAucG5n.png" }
+    { name: "Chocolate Bar", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/30012025_1738251167484_1738251174264_4014400400007_1.png" }
   ],
   "Frozen Foods" => [
-    { name: "Frozen Pizza", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Vomar-Verse-Pizza-5-Kazen-440-g-8717973559337-1-637957250229937334.png" },
+    { name: "Frozen Pizza", image_url: "https://images.migrosone.com/sanalmarket/product/17555667/17555667-c03827-1650x1650.jpg" },
     { name: "Ice Cream", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Ben-Jerry-s-IJs-Cookie-Dough-100-ml-8711200564149-1-638217504147197387.png" },
     { name: "Frozen Vegetables", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/810258.png" }
   ],
@@ -137,19 +132,19 @@ product_definitions = {
   ],
   "Drugstore" => [
     { name: "Pain Relievers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-    { name: "Band-Aids", image_url: "https://images.unsplash.com/photo-1531054601929-f1ccb3ef57f7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+    { name: "Band-Aids", image_url: "https://cdn.dsmcdn.com/mnresize/600/-/ty1573/prod/QC/20240928/14/8cc2cb19-65f5-317d-af84-8d298f73ee3f/1_org_zoom.jpg" }
   ],
   "Household" => [
-    { name: "Paper Towels", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/G-WOON-TOILETPAPIER-3-LGS-4ROL-8710624360887-0-638273396238532657.jpg" },
-    { name: "Trash Bags", image_url: "https://images.unsplash.com/photo-1546082373-472b0bedd449?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+    { name: "Paper Towels", image_url: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSAXIJJPV4q8awSE_El-m9tM9wSlkjyNq7DjWa6ued1l2YQLExEkqarCuO6wazw853PQ6iVRamlRoWn_FRbo1DGWNGNTc5s6qQQ3kvLI-2XMYZ4FZyunZnJ" },
+    { name: "Trash Bags", image_url: "https://takeaware.nl/cdn/shop/files/9925020-komo-huisvuilzakken-met-sluitstrip-60x80cm-grijs-1129163810.png?v=1739239902&width=1200" }
   ],
   "Non-Food" => [
     { name: "Batteries", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Varta-Longlife-Power-Alkaline-9V-4008496559862-1-638044488453107957.png" },
     { name: "Light Bulbs", image_url: "https://images.unsplash.com/photo-1529310399831-ed472b81d589?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
   ],
   "Seasonal" => [
-    { name: "Easter Chocolate Eggs", image_url: "https://images.unsplash.com/photo-1583320975624-d099f8c042f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-    { name: "Halloween Candy", image_url: "https://images.unsplash.com/photo-1625414502495-0c35143e32d3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+    { name: "Easter Chocolate Eggs", image_url: "https://img.discountoffice.cloud/W1qNtI-529uvUF3m2MckDEhr8JGjv6fF_xEO0S0ldz0/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1E5NjA4NzMtMS5qcGc.webp" },
+    { name: "Halloween Candy", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp" }
   ],
   "Online Only" => [
     { name: "Specialty Olive Oil", image_url: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?q=80&w=1918&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
@@ -158,7 +153,6 @@ product_definitions = {
 
 }
 
-# Create products for Vomar
 product_definitions.each do |category, items|
   items.each do |item|
     product = Product.create!(
@@ -171,7 +165,6 @@ product_definitions.each do |category, items|
   end
 end
 
-# Create identical products for Lidl
 product_definitions.each do |category, items|
   items.each do |item|
     product = Product.create!(
@@ -185,7 +178,6 @@ product_definitions.each do |category, items|
 end
 puts "✅ Created #{products.count} products"
 
-# Seed Deals for Vomar and Lidl products with linked deal_type and pricing
 deals = []
 puts "Seeding Deals..."
 
@@ -198,26 +190,25 @@ deal_types = [
 ]
 
 products.each_with_index do |product, index|
-  store = index < products.size / 2 ? vomar : lidl # First half to Vomar, second half to Lidl
-  deal_type = deal_types.sample # Pick a random deal_type
+  store = index < products.size / 2 ? vomar : lidl
+  deal_type = deal_types.sample
 
-  # Set price and discounted_price based on deal_type
   case deal_type
   when "1 voor 9.99"
-    price = rand(12.0..15.0).round(2) # Original price higher than 9.99
+    price = rand(11.0..14.0).round(2)
     discounted_price = 9.99
   when "1+1 gratis", "2+2 gratis"
-    price = rand(5.0..20.0).round(2) # Reasonable range for buy-one-get-one
-    discounted_price = (price / 2.0).round(2) # 50% off for "free" item
+    price = rand(3.0..8.0).round(2)
+    discounted_price = (price / 2.0).round(2)
   when "30% korting"
-    price = rand(5.0..50.0).round(2)
-    discounted_price = (price * 0.7).round(2) # 30% off
+    price = rand(3.0..12.0).round(2)
+    discounted_price = (price * 0.7).round(2)
   when "20% korting"
-    price = rand(5.0..50.0).round(2)
-    discounted_price = (price * 0.8).round(2) # 20% off
+    price = rand(3.0..12.0).round(2)
+    discounted_price = (price * 0.8).round(2)
   else
-    price = rand(5.0..50.0).round(2) # Fallback (shouldn’t happen)
-    discounted_price = (price - rand(1..5)).round(2)
+    price = rand(3.0..12.0).round(2)
+    discounted_price = (price - rand(0.5..2.0)).round(2)
   end
 
   deal = Deal.create!(
