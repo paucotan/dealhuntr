@@ -20,3 +20,15 @@ development:
     queue: background
     schedule: every day at 10:55
     command: "ScrapeAlbertDealsJob.perform_later"
+
+production:
+  periodic_jumbo_scrape:
+    class: ScrapeJumboDealsJob
+    queue: background
+    schedule: every day at 10:55
+    command: "ScrapeJumboDealsJob.perform_later"
+  periodic_albert_scrape:
+    class: ScrapeAlbertDealsJob
+    queue: background
+    schedule: every day at 10:55
+    command: "ScrapeAlbertDealsJob.perform_later"
