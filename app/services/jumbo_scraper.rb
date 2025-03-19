@@ -38,8 +38,24 @@ class JumboScraper
   }.freeze
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+# Set up a unique temporary directory for user data
+    @user_data_dir = Dir.mktmpdir("jumbo-scraper-#{SecureRandom.uuid}")
+    Rails.logger.info "Using user data directory: #{@user_data_dir}"
+
+    # Configure Chrome options
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless') # Run in headless mode (required for Heroku)
+    options.add_argument('--no-sandbox') # Required for Heroku
+    options.add_argument('--disable-dev-shm-usage') # Prevent crashes on Heroku
+    options.add_argument("--user-data-dir=#{@user_data_dir}") # Unique user data directory
+    options.add_argument('--window-size=1920,1080') # Set a reasonable window size
+    options.add_argument('--disable-gpu') # Disable GPU (optional, often needed in headless mode)
+    options.add_argument('--disable-extensions') # Disable extensions for stability
+
+    # Initialize the driver with options
+    @driver = Selenium::WebDriver.for(:chrome, options: options)
     @driver.manage.timeouts.implicit_wait = 10
+    Rails.logger.info "Selenium WebDriver session created successfully"
   end
 
   def scrape
@@ -53,7 +69,7 @@ class JumboScraper
       end
 
       html = @driver.page_source
-      File.write("jumbo_debug.html", html) # For debugging
+      # File.write("jumbo_debug.html", html) # For debugging
       doc = Nokogiri::HTML(html)
       page_expiry_text = doc.at_css('p.description')&.text
       puts "Page expiry text: #{page_expiry_text.inspect}"

@@ -62,8 +62,17 @@ class AlbertHeijnScraper
   }.freeze
 
   def initialize
-    @driver = Selenium::WebDriver.for :chrome
+    @user_data_dir = Dir.mktmpdir("albert-heijn-scraper-#{SecureRandom.uuid}")
+    Rails.logger.info "Using user data directory: #{@user_data_dir}"
+
+    # Configure Chrome options
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument("--user-data-dir=#{@user_data_dir}") # Unique user data directory
+
+    # Initialize the driver with options
+    @driver = Selenium::WebDriver.for(:chrome, options: options)
     @driver.manage.timeouts.implicit_wait = 10
+    Rails.logger.info "Selenium WebDriver session created successfully"
   end
 
   def scrape
