@@ -1,47 +1,56 @@
-<h1>🛒 My Shopping List</h1>
+<h1 class="shopping-title">My Shopping List</h1>
 
 <% if @shopping_list.empty? %>
-  <p>Your shopping list is empty.</p>
+  <p class="empty-list">Your shopping list is empty.</p>
 <% else %>
-  <div class="shopping-list">
-    <% @shopping_list.group_by { |item| item[:store] || item.deal.store.name }.each do |store, items| %>
-      <div class="store-section">
-        <% store_obj = Store.find_by(name: store) %>
-        <% if store_obj %>
-          <%= link_to store_path(store_obj), class: "store-link d-flex align-items-center" do %>
-            <%= image_tag(store_obj.logo_url, style: "width: 80px; height: 40px;", alt: "#{store_obj.name} logo") if store_obj.logo_url.present? %>
-            <h2 class="ms-2"><%= store_obj.name %></h2>
-          <% end %>
-        <% else %>
-          <h2><%= store %></h2>
-        <% end %>
-        <% items.each do |item| %>
-          <div class="shopping-item">
-            <div class="product-details">
-              <%= image_tag "https://images.unsplash.com/photo-1609842947419-ba4f04d5d60f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9vZCUyMGJhc2tldHxlbnwwfHwwfHx8MA%3D%3D", class: "product-image" %>
-              <div class="product-info">
-                <h3><%= item[:name] || item.deal.product.name rescue "Unknown Product" %></h3>
-                <p><strong>Original Price:</strong> €<%= item[:price] || item.deal.price rescue "N/A" %></p>
-                <p><strong>Deal Price:</strong> €<%= item[:discounted_price] || item.deal.discounted_price rescue "N/A" %></p>
-                <p><strong>Expires:</strong> <%= item[:expiry_date] || item.deal.expiry_date.strftime("%d/%m/%Y") rescue "N/A" %></p>
-              </div>
-            </div>
-
-            <div class="actions">
-              <!-- Removed Check Button -->
-
-              <!-- Trash icon to remove item -->
-              <%= button_to shopping_list_path(Deal.find(item[:deal_id])), method: :delete, class: "btn btn-danger" do %>
-                <i class="fa-solid fa-trash"></i>
-              <% end %>
-            </div>
+  <div class="store-sections">
+    <% @shopping_list.group_by { |item| item.deal.store }.each do |store, items| %>
+      <div class="store-section-wrapper">
+        <div class="store-section">
+          <div class="store-header">
+            <%= image_tag store.logo_url, class: "store-logo-large" %>
+            <h2 class="ms-2"><%= store.name %></h2>
           </div>
-        <% end %>
+          <div class="shopping-grid">
+            <% items.each do |item| %>
+              <% deal = item.deal %>
+              <div class="shopping-card">
+
+                <div class="shopping-card-left">
+                  <%= image_tag deal.product.image_url, class: "product-img" if deal.product.image_url.present? %>
+                  <div>
+                    <p class="product-name mb-1"><%= deal.product.name %></p>
+                    <p class="product-category text-muted"><%= deal.product.category %></p>
+                  </div>
+                </div>
+
+                <div class="shopping-card-middle">
+                  <div class="price-and-action">
+                    <div class="price-block">
+                      <% if deal.discounted_price.present? %>
+                        <del>€<%= deal.price %></del>
+                        <span class="discounted-price">€<%= deal.discounted_price %></span>
+                      <% else %>
+                        <span class="discounted-price">€<%= deal.price %></span>
+                      <% end %>
+                    </div>
+
+                    <div class="shopping-card-actions">
+                      <%= button_to shopping_list_path(deal), method: :delete, class: "remove-btn", data: { turbo_stream: true } do %>
+                        <i class="fa-solid fa-trash"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
 
-  <!-- Total Price & Savings -->
   <div class="totals">
     <p><strong>Total Savings This Trip:</strong> <span class="savings">€<%= number_with_precision(
       @shopping_list.sum { |item| (item[:price] || item.deal.price).to_f - (item[:discounted_price] || item.deal.discounted_price).to_f },
@@ -50,8 +59,8 @@
     <p class="savings-message"><i>Nice! You saved some money on this trip. Keep hunting for great deals! 🛍️</i></p>
   </div>
 
-  <!-- Reset Button -->
-  <%= button_to "Reset Shopping List", reset_shopping_lists_path, method: :delete, class: "btn btn-warning m-2" %>
-  <!-- Back to Homepage Button -->
-  <%= button_to "Back to Homepage", root_path, class: "btn btn-primary m-2" %>
+  <div class="action-buttons">
+    <%= button_to "Reset Shopping List", reset_shopping_lists_path, method: :delete, class: "btn btn-warning" %>
+    <%= button_to "Back to Homepage", root_path, class: "btn btn-primary" %>
+  </div>
 <% end %>
