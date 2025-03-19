@@ -1,38 +1,37 @@
 <!-- Search bar -->
 <%= form_with url: root_path, method: :get, local: true do |form| %>
-  <div class="search-bar d-flex justify-content-center ">
+  <div class="search-bar d-flex justify-content-center">
     <%= form.text_field :query, placeholder: "Find products...", value: params[:query] %>
     <%= form.submit "Search" %>
   </div>
 <% end %>
 
-<!-- Store filter -->
+<!-- Combined Store and Category filter -->
 <div class="stores-card shadow-sm">
-  <div class="d-flex justify-content-center gap-3">
+  <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap">
+    <!-- Store logos -->
     <% @stores.each do |store| %>
       <%= link_to root_path(store_id: store.id), class: "store-link" do %>
         <%= image_tag "stores/#{store.name.downcase.gsub(' ', '_')}.png", alt: store.name, class: "banner-logo #{'active-logo' if params[:store_id].to_i == store.id} shadow-sm" %>
       <% end %>
     <% end %>
+
+    <!-- Category filter -->
+    <div class="filter-wrapper">
+      <%= form_with url: root_path, method: :get, local: true, class: "filter-form" do %>
+        <%= select_tag :category,
+                       options_for_select([["All Categories", nil]] + @categories.map { |c| [c, c] }, params[:category]),
+                       class: "form-select category-filter",
+                       onchange: "this.form.submit()" %>
+        <%= hidden_field_tag :query, params[:query] %>
+        <%= hidden_field_tag :store_id, params[:store_id] %>
+      <% end %>
+    </div>
   </div>
 </div>
 
-<!-- Category filter bar -->
-<div class="category-filter-bar">
-  <%= form_with url: root_path, method: :get, local: true, class: "filter-form" do %>
-    <%= select_tag :category,
-                   options_for_select([["All Categories", nil]] + @categories.map { |c| [c, c] }, params[:category]),
-                   onchange: "this.form.submit()" %>
-    <%= hidden_field_tag :query, params[:query] %>
-    <%= hidden_field_tag :store_id, params[:store_id] %>
-  <% end %>
-</div>
-
 <!-- Deals list -->
-
 <div id="search-results" class="container-fluid">
   <%= render "search_results", deals: @deals %>
   <%== pagy_nav(@pagy, params: request.query_parameters) if @pagy.pages > 1 %>
 </div>
-
-<%# <%= will_paginate @deals, class: "d-flex justify-content-center" %>
