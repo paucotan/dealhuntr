@@ -21,14 +21,14 @@ body {
 
   input[type="submit"] {
     padding: 0.5rem 1rem;
-    background-color: #ff6600;
+    background-color: #F99417;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 
     &:hover {
-      background-color: #e65c00;
+      background-color: #F99417;
     }
   }
 }
@@ -45,10 +45,12 @@ body {
     transition: transform 0.3s ease;
     margin: 5px;
     border-radius: 7px;
+    padding: 2px;
 
     &.active-logo,
     &:hover {
       transform: scale(1.1);
+      border: solid 2px #975BEB;
     }
   }
 }

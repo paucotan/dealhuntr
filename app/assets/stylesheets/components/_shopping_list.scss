@@ -154,7 +154,29 @@
   margin: 100px 0;
 }
 
+.reset-shopping-list {
+  background-color: #F99417;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  min-width: 120px;
+  max-width: 160px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
 
+  &:hover {
+    background-color: #F99417;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
 
 @media (max-width: 768px) {
   .shopping-grid {
