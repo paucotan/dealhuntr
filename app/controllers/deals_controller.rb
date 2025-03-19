@@ -7,9 +7,35 @@ class DealsController < ApplicationController
     authorize @deal  # Ensure authorization for related deals
     @related_deals = policy_scope(Deal).where(product_id: @deal.product_id)
                                        .where.not(id: @deal.id)
-                                       .where("expiry_date >= ?", Date.today)
 
-    render partial: "related", locals: { related_deals: @related_deals, deal: @deal }, layout: false
+    keywords = @deal.product.name.downcase.scan(/\w+/)
+    ignored_words = ["ah", "alle", "de", "het", "van", "en", "of", "met", "gram", "300", "250", "500", "in", "350",
+                    "330", "ml", "s", "100"]
+    keywords -= ignored_words
+    keywords = [@deal.product.name.split(" ").last.downcase] if keywords.empty?
+    # Rails.logger.info("Keywords: #{keywords}")
+
+    # Build conditions for similar deals based on category and name
+    conditions = keywords.map { |_word| "products.name ILIKE ?" }.join(" OR ")
+    values = keywords.map { |word| "%#{word}%" }
+
+    @similar_deals = policy_scope(Deal)
+                    .joins(:product)
+                    .where(conditions, *values)
+                    .where(category: @deal.category)
+                    .where.not(id: @deal.id)
+                    .limit(5)
+
+    @not_so_similar_deals = policy_scope(Deal)
+                            .joins(:product)
+                            .where(category: @deal.category)
+                            .limit(5)
+
+    if @similar_deals.first
+      render partial: "related", locals: { related_deals: @similar_deals, deal: @deal }, layout: false
+    else
+      render partial: "related", locals: { related_deals: @not_so_similar_deals, deal: @deal }, layout: false
+    end
   end
 
   def show
