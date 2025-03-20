@@ -18,7 +18,7 @@ class ShoppingListsController < ApplicationController
     shopping_list = current_user.shopping_lists.create(deal: deal)
     authorize shopping_list
 
-    flash[:alert] = "Deal added to your shopping list!"
+    flash[:notice] = "Deal added to your shopping list!"
     redirect_back(fallback_location: root_path)  end
 
   def destroy
