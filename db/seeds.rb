@@ -178,14 +178,14 @@ product_definitions = {
     { name: "Lidl Groene Theezakjes", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/G-woon-Groene-Thee-Citroen-20-x-1-5-g-8710624324261-1-637957261429111159.png", store: lidl }
   ],
   "Alcohol" => [
-    { name: "AH Rode Wijn", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah }, # New image for red wine
-    { name: "Jumbo Rode Wijn", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
-    { name: "Vomar Rode Wijn", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
-    { name: "Lidl Rode Wijn", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl },
-    { name: "AH Lager Bier", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah }, # Reuse red wine image (close enough for demo)
-    { name: "Jumbo Lager Bier", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
-    { name: "Vomar Lager Bier", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
-    { name: "Lidl Lager Bier", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl }
+    { name: "AH Rode Wijn", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Just-0-Red-Wine-Alcoholfree-0-75-L-4003301069048-1-637957247344440393.png", store: ah }, # New image for red wine
+    { name: "Jumbo Rode Wijn", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Just-0-Red-Wine-Alcoholfree-0-75-L-4003301069048-1-637957247344440393.png", store: jumbo },
+    { name: "Vomar Rode Wijn", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Just-0-Red-Wine-Alcoholfree-0-75-L-4003301069048-1-637957247344440393.png", store: vomar },
+    { name: "Lidl Rode Wijn", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Just-0-Red-Wine-Alcoholfree-0-75-L-4003301069048-1-637957247344440393.png", store: lidl },
+    { name: "AH Lager Bier", image_url: "https://imgproxy-retcat.assets.schwarz/Wj4LTSJXn75DmU-7_S3SFjkQY2iLeEbTRrEjMuIp-og/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS82QzYwQkE0MjcxNUFEODNFMzM1MURCNDE/5OUZGODdCNTZGNDA4MUIxNDBEMDJDNDFGOEZENzc4NjdDNzNFNzM3LmpwZw.jpg", store: ah }, # Reuse red wine image (close enough for demo)
+    { name: "Jumbo Lager Bier", image_url: "https://imgproxy-retcat.assets.schwarz/Wj4LTSJXn75DmU-7_S3SFjkQY2iLeEbTRrEjMuIp-og/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS82QzYwQkE0MjcxNUFEODNFMzM1MURCNDE/5OUZGODdCNTZGNDA4MUIxNDBEMDJDNDFGOEZENzc4NjdDNzNFNzM3LmpwZw.jpg", store: jumbo },
+    { name: "Vomar Lager Bier", image_url: "https://imgproxy-retcat.assets.schwarz/Wj4LTSJXn75DmU-7_S3SFjkQY2iLeEbTRrEjMuIp-og/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS82QzYwQkE0MjcxNUFEODNFMzM1MURCNDE/5OUZGODdCNTZGNDA4MUIxNDBEMDJDNDFGOEZENzc4NjdDNzNFNzM3LmpwZw.jpg", store: vomar },
+    { name: "Lidl Lager Bier", image_url: "https://imgproxy-retcat.assets.schwarz/Wj4LTSJXn75DmU-7_S3SFjkQY2iLeEbTRrEjMuIp-og/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS82QzYwQkE0MjcxNUFEODNFMzM1MURCNDE/5OUZGODdCNTZGNDA4MUIxNDBEMDJDNDFGOEZENzc4NjdDNzNFNzM3LmpwZw.jpg", store: lidl }
   ],
   "Drugstore" => [
     { name: "AH Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah }, # No direct match, leave empty
