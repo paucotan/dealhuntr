@@ -128,54 +128,54 @@ product_definitions = {
     { name: "Lidl Cheddar Blok", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: lidl }
   ],
   "Pasta, Rice & International" => [
-    { name: "AH Spaghetti", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Spaghetti", image_url: "", store: jumbo },
-    { name: "Vomar Spaghetti", image_url: "", store: vomar },
-    { name: "Lidl Spaghetti", image_url: "", store: lidl },
-    { name: "AH Jasmijnrijst", image_url: "", store: ah },
-    { name: "Jumbo Jasmijnrijst", image_url: "", store: jumbo },
-    { name: "Vomar Jasmijnrijst", image_url: "", store: vomar },
-    { name: "Lidl Jasmijnrijst", image_url: "", store: lidl }
+    { name: "AH Spaghetti", image_url: "https://static.ah.nl/dam/product/AHI_4354523130303830363437?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Spaghetti", image_url: "https://static.ah.nl/dam/product/AHI_4354523130303830363437?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: jumbo },
+    { name: "Vomar Spaghetti", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Casa-Italiana-Spaghetti-1000-g-8710624178628-1-637957238105285747.png", store: vomar },
+    { name: "Lidl Spaghetti", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Casa-Italiana-Spaghetti-1000-g-8710624178628-1-637957238105285747.png", store: lidl },
+    { name: "AH Jasmijnrijst", image_url: "https://static.ah.nl/dam/product/AHI_43545239363239373931?revLabel=2&rendition=800x800_JPG_Q90&fileType=binary", store: ah },
+    { name: "Jumbo Jasmijnrijst", image_url: "https://static.ah.nl/dam/product/AHI_43545239363239373931?revLabel=2&rendition=800x800_JPG_Q90&fileType=binary", store: jumbo },
+    { name: "Vomar Jasmijnrijst", image_url: "https://imgproxy-retcat.assets.schwarz/575BPgXBxriTYYx26fzzhoE3LQJdxU_wIEEydDAf43g/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9ENkIwRDg3MzI2N0E2RTJENDFFRUNDMUQ/4NDA1NjQ2QTNFOTlCQUIzNDlCM0JCMEE0NjU5QkM3NkFDMENBQ0Q1LmpwZw.jpg", store: vomar },
+    { name: "Lidl Jasmijnrijst", image_url: "https://imgproxy-retcat.assets.schwarz/575BPgXBxriTYYx26fzzhoE3LQJdxU_wIEEydDAf43g/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9ENkIwRDg3MzI2N0E2RTJENDFFRUNDMUQ/4NDA1NjQ2QTNFOTlCQUIzNDlCM0JCMEE0NjU5QkM3NkFDMENBQ0Q1LmpwZw.jpg", store: lidl }
   ],
   "Canned Goods & Condiments" => [
-    { name: "AH Tonijn in Blik", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Tonijn in Blik", image_url: "", store: jumbo },
-    { name: "Vomar Tonijn in Blik", image_url: "", store: vomar },
-    { name: "Lidl Tonijn in Blik", image_url: "", store: lidl },
-    { name: "AH Ketchup", image_url: "", store: ah },
-    { name: "Jumbo Ketchup", image_url: "", store: jumbo },
-    { name: "Vomar Ketchup", image_url: "", store: vomar },
-    { name: "Lidl Ketchup", image_url: "", store: lidl }
+    { name: "AH Tonijn in Blik", image_url: "https://imgproxy-retcat.assets.schwarz/S6P3JYgmVmRrIhcDmwjr_sxx8IBvBmkoK2z_PuX2HnY/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50Lzc5M0JEOUU3MTAyQUVFNzE2QzUyQzc4Qz/EyNDY5MEM5MTdDMUM5OTkyRjU0RDIwOTc2MjExMDRFMDQwNkI1NUQucG5n.png", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Tonijn in Blik", image_url: "https://imgproxy-retcat.assets.schwarz/S6P3JYgmVmRrIhcDmwjr_sxx8IBvBmkoK2z_PuX2HnY/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50Lzc5M0JEOUU3MTAyQUVFNzE2QzUyQzc4Qz/EyNDY5MEM5MTdDMUM5OTkyRjU0RDIwOTc2MjExMDRFMDQwNkI1NUQucG5n.png", store: jumbo },
+    { name: "Vomar Tonijn in Blik", image_url: "https://imgproxy-retcat.assets.schwarz/S6P3JYgmVmRrIhcDmwjr_sxx8IBvBmkoK2z_PuX2HnY/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50Lzc5M0JEOUU3MTAyQUVFNzE2QzUyQzc4Qz/EyNDY5MEM5MTdDMUM5OTkyRjU0RDIwOTc2MjExMDRFMDQwNkI1NUQucG5n.png", store: vomar },
+    { name: "Lidl Tonijn in Blik", image_url: "https://imgproxy-retcat.assets.schwarz/S6P3JYgmVmRrIhcDmwjr_sxx8IBvBmkoK2z_PuX2HnY/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50Lzc5M0JEOUU3MTAyQUVFNzE2QzUyQzc4Qz/EyNDY5MEM5MTdDMUM5OTkyRjU0RDIwOTc2MjExMDRFMDQwNkI1NUQucG5n.png", store: lidl },
+    { name: "AH Ketchup", image_url: "https://imgproxy-retcat.assets.schwarz/YKaWrqb6UZl3iDhBdu5w_RPzwY_vRUcaCnJsAQp95LE/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9BQThCN0VFNTE5NTcyOTZDMTRFQkQzNUJ/EMzA5NDVEMDg3NUY0QTMzRENEOUE5MjFCMTE4QkZFM0JCOUIzQkU2LmpwZw.jpg", store: ah },
+    { name: "Jumbo Ketchup", image_url: "https://imgproxy-retcat.assets.schwarz/YKaWrqb6UZl3iDhBdu5w_RPzwY_vRUcaCnJsAQp95LE/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9BQThCN0VFNTE5NTcyOTZDMTRFQkQzNUJ/EMzA5NDVEMDg3NUY0QTMzRENEOUE5MjFCMTE4QkZFM0JCOUIzQkU2LmpwZw.jpg", store: jumbo },
+    { name: "Vomar Ketchup", image_url: "https://imgproxy-retcat.assets.schwarz/YKaWrqb6UZl3iDhBdu5w_RPzwY_vRUcaCnJsAQp95LE/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9BQThCN0VFNTE5NTcyOTZDMTRFQkQzNUJ/EMzA5NDVEMDg3NUY0QTMzRENEOUE5MjFCMTE4QkZFM0JCOUIzQkU2LmpwZw.jpg", store: vomar },
+    { name: "Lidl Ketchup", image_url: "https://imgproxy-retcat.assets.schwarz/YKaWrqb6UZl3iDhBdu5w_RPzwY_vRUcaCnJsAQp95LE/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9BQThCN0VFNTE5NTcyOTZDMTRFQkQzNUJ/EMzA5NDVEMDg3NUY0QTMzRENEOUE5MjFCMTE4QkZFM0JCOUIzQkU2LmpwZw.jpg", store: lidl }
   ],
   "Breakfast & Spreads" => [
-    { name: "AH Cornflakes", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Cornflakes", image_url: "", store: jumbo },
-    { name: "Vomar Cornflakes", image_url: "", store: vomar },
-    { name: "Lidl Cornflakes", image_url: "", store: lidl },
-    { name: "AH Pindakaas", image_url: "", store: ah },
-    { name: "Jumbo Pindakaas", image_url: "", store: jumbo },
-    { name: "Vomar Pindakaas", image_url: "", store: vomar },
-    { name: "Lidl Pindakaas", image_url: "", store: lidl }
+    { name: "AH Cornflakes", image_url: "https://imgproxy-retcat.assets.schwarz/Lm0A_743B3Bg5vzTaKPoAItc49WtdTYmSQ7xLg8Kt-w/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS83MjAyNzdCNUNDOTJCNjYzREU5N0FBOUN/FMjhENDAwMUZBQTI0N0Q4NkJFOEIwMjlFQTU3REQwRkMzMTFCQUEwLmpwZw.jpg", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Cornflakes", image_url: "https://imgproxy-retcat.assets.schwarz/Lm0A_743B3Bg5vzTaKPoAItc49WtdTYmSQ7xLg8Kt-w/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS83MjAyNzdCNUNDOTJCNjYzREU5N0FBOUN/FMjhENDAwMUZBQTI0N0Q4NkJFOEIwMjlFQTU3REQwRkMzMTFCQUEwLmpwZw.jpg", store: jumbo },
+    { name: "Vomar Cornflakes", image_url: "https://imgproxy-retcat.assets.schwarz/Lm0A_743B3Bg5vzTaKPoAItc49WtdTYmSQ7xLg8Kt-w/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS83MjAyNzdCNUNDOTJCNjYzREU5N0FBOUN/FMjhENDAwMUZBQTI0N0Q4NkJFOEIwMjlFQTU3REQwRkMzMTFCQUEwLmpwZw.jpg", store: vomar },
+    { name: "Lidl Cornflakes", image_url: "https://imgproxy-retcat.assets.schwarz/Lm0A_743B3Bg5vzTaKPoAItc49WtdTYmSQ7xLg8Kt-w/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS83MjAyNzdCNUNDOTJCNjYzREU5N0FBOUN/FMjhENDAwMUZBQTI0N0Q4NkJFOEIwMjlFQTU3REQwRkMzMTFCQUEwLmpwZw.jpg", store: lidl },
+    { name: "AH Pindakaas", image_url: "https://static.ah.nl/dam/product/AHI_43545239393838353430?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: ah },
+    { name: "Jumbo Pindakaas", image_url: "https://static.ah.nl/dam/product/AHI_43545239393838353430?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: jumbo },
+    { name: "Vomar Pindakaas", image_url: "https://imgproxy-retcat.assets.schwarz/Nu7d2AtgQYrVtHhj_8PyDXk5xQ5P0yXbM4gVFJGRVsw/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50L0FDRDgwNzI3MDAzMjdGMDU5NTE5Nzg0N0/JFNTAxQkFCOTE2RkYyRjA5RjYxRkJCRDUwRUFDMjU4NUZGMkZERTMucG5n.png", store: vomar },
+    { name: "Lidl Pindakaas", image_url: "https://imgproxy-retcat.assets.schwarz/Nu7d2AtgQYrVtHhj_8PyDXk5xQ5P0yXbM4gVFJGRVsw/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50L0FDRDgwNzI3MDAzMjdGMDU5NTE5Nzg0N0/JFNTAxQkFCOTE2RkYyRjA5RjYxRkJCRDUwRUFDMjU4NUZGMkZERTMucG5n.png", store: lidl }
   ],
   "Frozen Foods" => [
-    { name: "AH Diepvriespizza", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Diepvriespizza", image_url: "", store: jumbo },
-    { name: "Vomar Diepvriespizza", image_url: "", store: vomar },
-    { name: "Lidl Diepvriespizza", image_url: "", store: lidl },
-    { name: "AH Roomijs", image_url: "", store: ah },
-    { name: "Jumbo Roomijs", image_url: "", store: jumbo },
-    { name: "Vomar Roomijs", image_url: "", store: vomar },
-    { name: "Lidl Roomijs", image_url: "", store: lidl }
+    { name: "AH Diepvriespizza", image_url: "https://static.ah.nl/dam/product/AHI_43545239383436303038?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Diepvriespizza", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/26042024_1714127650071_1714127684048_8718452777020_596.png", store: jumbo },
+    { name: "Vomar Diepvriespizza", image_url: "https://images.migrosone.com/sanalmarket/product/17555667/17555667-c03827-1650x1650.jpg", store: vomar },
+    { name: "Lidl Diepvriespizza", image_url: "https://images.migrosone.com/sanalmarket/product/17555667/17555667-c03827-1650x1650.jpg", store: lidl },
+    { name: "AH Roomijs", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Ben-Jerry-s-IJs-Cookie-Dough-100-ml-8711200564149-1-638217504147197387.png", store: ah },
+    { name: "Jumbo Roomijs", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Ben-Jerry-s-IJs-Cookie-Dough-100-ml-8711200564149-1-638217504147197387.png", store: jumbo },
+    { name: "Vomar Roomijs", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Ben-Jerry-s-IJs-Cookie-Dough-100-ml-8711200564149-1-638217504147197387.png", store: vomar },
+    { name: "Lidl Roomijs", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Ben-Jerry-s-IJs-Cookie-Dough-100-ml-8711200564149-1-638217504147197387.png", store: lidl }
   ],
   "Coffee & Tea" => [
-    { name: "AH Gemalen Koffie", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Gemalen Koffie", image_url: "", store: jumbo },
-    { name: "Vomar Gemalen Koffie", image_url: "", store: vomar },
-    { name: "Lidl Gemalen Koffie", image_url: "", store: lidl },
-    { name: "AH Groene Theezakjes", image_url: "", store: ah },
-    { name: "Jumbo Groene Theezakjes", image_url: "", store: jumbo },
-    { name: "Vomar Groene Theezakjes", image_url: "", store: vomar },
-    { name: "Lidl Groene Theezakjes", image_url: "", store: lidl }
+    { name: "AH Gemalen Koffie", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Douwe-Egberts-Aroma-Rood-Filterkoffie-250-g-8711000003145-1-637957263472727579.png", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Gemalen Koffie", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Douwe-Egberts-Aroma-Rood-Filterkoffie-250-g-8711000003145-1-637957263472727579.png", store: jumbo },
+    { name: "Vomar Gemalen Koffie", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Douwe-Egberts-Aroma-Rood-Filterkoffie-250-g-8711000003145-1-637957263472727579.png", store: vomar },
+    { name: "Lidl Gemalen Koffie", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Douwe-Egberts-Aroma-Rood-Filterkoffie-250-g-8711000003145-1-637957263472727579.png", store: lidl },
+    { name: "AH Groene Theezakjes", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/G-woon-Groene-Thee-Citroen-20-x-1-5-g-8710624324261-1-637957261429111159.png", store: ah },
+    { name: "Jumbo Groene Theezakjes", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/G-woon-Groene-Thee-Citroen-20-x-1-5-g-8710624324261-1-637957261429111159.png", store: jumbo },
+    { name: "Vomar Groene Theezakjes", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/G-woon-Groene-Thee-Citroen-20-x-1-5-g-8710624324261-1-637957261429111159.png", store: vomar },
+    { name: "Lidl Groene Theezakjes", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/G-woon-Groene-Thee-Citroen-20-x-1-5-g-8710624324261-1-637957261429111159.png", store: lidl }
   ],
   "Alcohol" => [
     { name: "AH Rode Wijn", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah }, # New image for red wine
@@ -188,44 +188,44 @@ product_definitions = {
     { name: "Lidl Lager Bier", image_url: "https://images.unsplash.com/photo-1597907036939-8edaf7d0d0c7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl }
   ],
   "Drugstore" => [
-    { name: "AH Pijnstillers", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Pijnstillers", image_url: "", store: jumbo },
-    { name: "Vomar Pijnstillers", image_url: "", store: vomar },
-    { name: "Lidl Pijnstillers", image_url: "", store: lidl },
-    { name: "AH Pleisters", image_url: "", store: ah },
-    { name: "Jumbo Pleisters", image_url: "", store: jumbo },
-    { name: "Vomar Pleisters", image_url: "", store: vomar },
-    { name: "Lidl Pleisters", image_url: "", store: lidl }
+    { name: "AH Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
+    { name: "Vomar Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
+    { name: "Lidl Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl },
+    { name: "AH Pleisters", image_url: "https://img.fruugo.com/product/8/49/924529498_max.jpg", store: ah },
+    { name: "Jumbo Pleisters", image_url: "https://img.fruugo.com/product/8/49/924529498_max.jpg", store: jumbo },
+    { name: "Vomar Pleisters", image_url: "https://img.fruugo.com/product/8/49/924529498_max.jpg", store: vomar },
+    { name: "Lidl Pleisters", image_url: "https://img.fruugo.com/product/8/49/924529498_max.jpg", store: lidl }
   ],
   "Household" => [
-    { name: "AH Keukenpapier", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Keukenpapier", image_url: "", store: jumbo },
-    { name: "Vomar Keukenpapier", image_url: "", store: vomar },
-    { name: "Lidl Keukenpapier", image_url: "", store: lidl },
-    { name: "AH Vuilniszakken", image_url: "", store: ah },
-    { name: "Jumbo Vuilniszakken", image_url: "", store: jumbo },
-    { name: "Vomar Vuilniszakken", image_url: "", store: vomar },
-    { name: "Lidl Vuilniszakken", image_url: "", store: lidl }
+    { name: "AH Keukenpapier", image_url: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSAXIJJPV4q8awSE_El-m9tM9wSlkjyNq7DjWa6ued1l2YQLExEkqarCuO6wazw853PQ6iVRamlRoWn_FRbo1DGWNGNTc5s6qQQ3kvLI-2XMYZ4FZyunZnJ", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Keukenpapier", image_url: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSAXIJJPV4q8awSE_El-m9tM9wSlkjyNq7DjWa6ued1l2YQLExEkqarCuO6wazw853PQ6iVRamlRoWn_FRbo1DGWNGNTc5s6qQQ3kvLI-2XMYZ4FZyunZnJ", store: jumbo },
+    { name: "Vomar Keukenpapier", image_url: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSAXIJJPV4q8awSE_El-m9tM9wSlkjyNq7DjWa6ued1l2YQLExEkqarCuO6wazw853PQ6iVRamlRoWn_FRbo1DGWNGNTc5s6qQQ3kvLI-2XMYZ4FZyunZnJ", store: vomar },
+    { name: "Lidl Keukenpapier", image_url: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSAXIJJPV4q8awSE_El-m9tM9wSlkjyNq7DjWa6ued1l2YQLExEkqarCuO6wazw853PQ6iVRamlRoWn_FRbo1DGWNGNTc5s6qQQ3kvLI-2XMYZ4FZyunZnJ", store: lidl },
+    { name: "AH Vuilniszakken", image_url: "https://takeaware.nl/cdn/shop/files/9925020-komo-huisvuilzakken-met-sluitstrip-60x80cm-grijs-1129163810.png?v=1739239902&width=1200", store: ah },
+    { name: "Jumbo Vuilniszakken", image_url: "https://takeaware.nl/cdn/shop/files/9925020-komo-huisvuilzakken-met-sluitstrip-60x80cm-grijs-1129163810.png?v=1739239902&width=1200", store: jumbo },
+    { name: "Vomar Vuilniszakken", image_url: "https://takeaware.nl/cdn/shop/files/9925020-komo-huisvuilzakken-met-sluitstrip-60x80cm-grijs-1129163810.png?v=1739239902&width=1200", store: vomar },
+    { name: "Lidl Vuilniszakken", image_url: "https://takeaware.nl/cdn/shop/files/9925020-komo-huisvuilzakken-met-sluitstrip-60x80cm-grijs-1129163810.png?v=1739239902&width=1200", store: lidl }
   ],
   "Baby Products" => [
-    { name: "AH Luiers", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Luiers", image_url: "", store: jumbo },
-    { name: "Vomar Luiers", image_url: "", store: vomar },
-    { name: "Lidl Luiers", image_url: "", store: lidl },
-    { name: "AH Babydoekjes", image_url: "", store: ah },
-    { name: "Jumbo Babydoekjes", image_url: "", store: jumbo },
-    { name: "Vomar Babydoekjes", image_url: "", store: vomar },
-    { name: "Lidl Babydoekjes", image_url: "", store: lidl }
+    { name: "AH Luiers", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Bonb-b-Ultra-Zachte-Luiers-Maxi-4-8-16-kg-40-Stuks-8710624280314-1-637957252959183165.png", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Luiers", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Bonb-b-Ultra-Zachte-Luiers-Maxi-4-8-16-kg-40-Stuks-8710624280314-1-637957252959183165.png", store: jumbo },
+    { name: "Vomar Luiers", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Bonb-b-Ultra-Zachte-Luiers-Maxi-4-8-16-kg-40-Stuks-8710624280314-1-637957252959183165.png", store: vomar },
+    { name: "Lidl Luiers", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Bonb-b-Ultra-Zachte-Luiers-Maxi-4-8-16-kg-40-Stuks-8710624280314-1-637957252959183165.png", store: lidl },
+    { name: "AH Babydoekjes", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Huggies-Baby-Cleansing-Wipes-Pure-56-Stuks-5029053550039-1-637957269810293118.png", store: ah },
+    { name: "Jumbo Babydoekjes", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Huggies-Baby-Cleansing-Wipes-Pure-56-Stuks-5029053550039-1-637957269810293118.png", store: jumbo },
+    { name: "Vomar Babydoekjes", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Huggies-Baby-Cleansing-Wipes-Pure-56-Stuks-5029053550039-1-637957269810293118.png", store: vomar },
+    { name: "Lidl Babydoekjes", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Huggies-Baby-Cleansing-Wipes-Pure-56-Stuks-5029053550039-1-637957269810293118.png", store: lidl }
   ],
   "Non-Food" => [
-    { name: "AH Batterijen", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Batterijen", image_url: "", store: jumbo },
-    { name: "Vomar Batterijen", image_url: "", store: vomar },
-    { name: "Lidl Batterijen", image_url: "", store: lidl },
-    { name: "AH Lampen", image_url: "", store: ah },
-    { name: "Jumbo Lampen", image_url: "", store: jumbo },
-    { name: "Vomar Lampen", image_url: "", store: vomar },
-    { name: "Lidl Lampen", image_url: "", store: lidl }
+    { name: "AH Batterijen", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Varta-Longlife-Power-Alkaline-9V-4008496559862-1-638044488453107957.png", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Batterijen", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Varta-Longlife-Power-Alkaline-9V-4008496559862-1-638044488453107957.png", store: jumbo },
+    { name: "Vomar Batterijen", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Varta-Longlife-Power-Alkaline-9V-4008496559862-1-638044488453107957.png", store: vomar },
+    { name: "Lidl Batterijen", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Varta-Longlife-Power-Alkaline-9V-4008496559862-1-638044488453107957.png", store: lidl },
+    { name: "AH Lampen", image_url: "https://m.media-amazon.com/images/I/71eCn2-T1hL.__AC_SX300_SY300_QL70_ML2_.jpg", store: ah },
+    { name: "Jumbo Lampen", image_url: "https://m.media-amazon.com/images/I/71eCn2-T1hL.__AC_SX300_SY300_QL70_ML2_.jpg", store: jumbo },
+    { name: "Vomar Lampen", image_url: "https://m.media-amazon.com/images/I/71eCn2-T1hL.__AC_SX300_SY300_QL70_ML2_.jpg", store: vomar },
+    { name: "Lidl Lampen", image_url: "https://m.media-amazon.com/images/I/71eCn2-T1hL.__AC_SX300_SY300_QL70_ML2_.jpg", store: lidl }
   ],
   "Seasonal" => [
     { name: "AH Paaschocolade-eieren", image_url: "https://www.compliment.nl/wp-content/uploads/2020/05/Toffifee-15x-125gr-3_jpg.webp", store: ah }, # Reuse Chocoladereep image
@@ -238,14 +238,14 @@ product_definitions = {
     { name: "Lidl Halloween Snoep", image_url: "https://www.compliment.nl/wp-content/uploads/2020/05/Toffifee-15x-125gr-3_jpg.webp", store: lidl }
   ],
   "Online Only" => [
-    { name: "AH Speciale Olijfolie", image_url: "", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Speciale Olijfolie", image_url: "", store: jumbo },
-    { name: "Vomar Speciale Olijfolie", image_url: "", store: vomar },
-    { name: "Lidl Speciale Olijfolie", image_url: "", store: lidl },
-    { name: "AH Gourmet Kruidenset", image_url: "", store: ah },
-    { name: "Jumbo Gourmet Kruidenset", image_url: "", store: jumbo },
-    { name: "Vomar Gourmet Kruidenset", image_url: "", store: vomar },
-    { name: "Lidl Gourmet Kruidenset", image_url: "", store: lidl }
+    { name: "AH Speciale Olijfolie", image_url: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5KZARLZiKXM9PwwKZLGwdmf4cdSBnnQ1Hni4s6gERUlh7MDw7qFPenuFT37EE0CX7Uio9t0hSq0wHQrNd3gC7-oKcPcMWLfnpbpaZMef2KneaIOq7NrQtAbl7bGT1wHQdlA&usqp=CAc", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Speciale Olijfolie", image_url: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5KZARLZiKXM9PwwKZLGwdmf4cdSBnnQ1Hni4s6gERUlh7MDw7qFPenuFT37EE0CX7Uio9t0hSq0wHQrNd3gC7-oKcPcMWLfnpbpaZMef2KneaIOq7NrQtAbl7bGT1wHQdlA&usqp=CAc", store: jumbo },
+    { name: "Vomar Speciale Olijfolie", image_url: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5KZARLZiKXM9PwwKZLGwdmf4cdSBnnQ1Hni4s6gERUlh7MDw7qFPenuFT37EE0CX7Uio9t0hSq0wHQrNd3gC7-oKcPcMWLfnpbpaZMef2KneaIOq7NrQtAbl7bGT1wHQdlA&usqp=CAc", store: vomar },
+    { name: "Lidl Speciale Olijfolie", image_url: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5KZARLZiKXM9PwwKZLGwdmf4cdSBnnQ1Hni4s6gERUlh7MDw7qFPenuFT37EE0CX7Uio9t0hSq0wHQrNd3gC7-oKcPcMWLfnpbpaZMef2KneaIOq7NrQtAbl7bGT1wHQdlA&usqp=CAc", store: lidl },
+    { name: "AH Gourmet Kruidenset", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp", store: ah },
+    { name: "Jumbo Gourmet Kruidenset", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp", store: jumbo },
+    { name: "Vomar Gourmet Kruidenset", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp", store: vomar },
+    { name: "Lidl Gourmet Kruidenset", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp", store: lidl }
   ]
 }
 
