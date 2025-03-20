@@ -9,7 +9,7 @@ class DealsController < ApplicationController
                                        .where.not(id: @deal.id)
 
     keywords = @deal.product.name.downcase.scan(/\w+/)
-    ignored_words = ["ah", "alle", "de", "het", "van", "en", "of", "met", "gram", "300", "250", "500", "in", "350",
+    ignored_words = ["ah", "jumbo", "vomar", "lidl", "alle", "de", "het", "van", "en", "of", "met", "gram", "300", "250", "500", "in", "350",
                     "330", "ml", "s", "100"]
     keywords -= ignored_words
     keywords = [@deal.product.name.split(" ").last.downcase] if keywords.empty?
