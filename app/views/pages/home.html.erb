@@ -19,7 +19,7 @@
     </div>
 
     <div class="filter-wrapper mt-2 mt-md-0 ms-md-3">
-      <%= form_with url: root_path, method: :get, local: true, class: "filter-form" do %>
+      <%= form_with url: root_path, method: :get, local: true, class: "filter-form bg-white" do %>
         <%= select_tag :category,
                        options_for_select([["All Categories", nil]] + @categories.map { |c| [c, c] }, params[:category]),
                        class: "form-select category-filter",

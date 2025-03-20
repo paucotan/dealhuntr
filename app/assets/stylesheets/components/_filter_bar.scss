@@ -13,7 +13,17 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+/* Style the select element itself */
+.form-select.category-filter {
+  background-color: white !important; /* Ensure the select box background is white */
+  color: black !important; /* Ensure text is readable */
+}
 
+/* Style the dropdown options */
+.form-select.category-filter option {
+  background-color: white !important; /* Set the background of the dropdown options to white */
+  color: black !important; /* Ensure text is readable */
+}
 
 .banner-logo {
   max-height: 40px;
