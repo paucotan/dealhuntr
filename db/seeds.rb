@@ -43,7 +43,7 @@ deals = []
 puts "Seeding Products and Deals..."
 
 ah, jumbo, vomar, lidl = stores
-deal_types = ["1 voor 9.99", "1+1 gratis", "30% korting", "2+2 gratis", "20% korting"]
+deal_types = ["1+1 gratis", "30% korting", "2+2 gratis", "20% korting", "40% korting"]
 
 # Define all categories (2 products per store, 8 products per category)
 product_definitions = {
@@ -149,7 +149,15 @@ product_definitions = {
     { name: "AH Ketchup", image_url: "https://imgproxy-retcat.assets.schwarz/YKaWrqb6UZl3iDhBdu5w_RPzwY_vRUcaCnJsAQp95LE/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9BQThCN0VFNTE5NTcyOTZDMTRFQkQzNUJ/EMzA5NDVEMDg3NUY0QTMzRENEOUE5MjFCMTE4QkZFM0JCOUIzQkU2LmpwZw.jpg", store: ah },
     { name: "Jumbo Ketchup", image_url: "https://imgproxy-retcat.assets.schwarz/YKaWrqb6UZl3iDhBdu5w_RPzwY_vRUcaCnJsAQp95LE/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9BQThCN0VFNTE5NTcyOTZDMTRFQkQzNUJ/EMzA5NDVEMDg3NUY0QTMzRENEOUE5MjFCMTE4QkZFM0JCOUIzQkU2LmpwZw.jpg", store: jumbo },
     { name: "Vomar Ketchup", image_url: "https://imgproxy-retcat.assets.schwarz/YKaWrqb6UZl3iDhBdu5w_RPzwY_vRUcaCnJsAQp95LE/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9BQThCN0VFNTE5NTcyOTZDMTRFQkQzNUJ/EMzA5NDVEMDg3NUY0QTMzRENEOUE5MjFCMTE4QkZFM0JCOUIzQkU2LmpwZw.jpg", store: vomar },
-    { name: "Lidl Ketchup", image_url: "https://imgproxy-retcat.assets.schwarz/YKaWrqb6UZl3iDhBdu5w_RPzwY_vRUcaCnJsAQp95LE/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9BQThCN0VFNTE5NTcyOTZDMTRFQkQzNUJ/EMzA5NDVEMDg3NUY0QTMzRENEOUE5MjFCMTE4QkZFM0JCOUIzQkU2LmpwZw.jpg", store: lidl }
+    { name: "Lidl Ketchup", image_url: "https://imgproxy-retcat.assets.schwarz/YKaWrqb6UZl3iDhBdu5w_RPzwY_vRUcaCnJsAQp95LE/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS9BQThCN0VFNTE5NTcyOTZDMTRFQkQzNUJ/EMzA5NDVEMDg3NUY0QTMzRENEOUE5MjFCMTE4QkZFM0JCOUIzQkU2LmpwZw.jpg", store: lidl },
+    { name: "AH Tomatensaus", image_url: "https://static.ah.nl/dam/product/AHI_4354523130303739373637?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: ah },
+    { name: "Jumbo Tomatensaus", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/12122024_1734003203681_1734003210539_8718452870158_1.png", store: jumbo },
+    { name: "Vomar Tomatensaus", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Heinz-Spagheroni-Tradizionale-Pastasaus-520-g-8715700415987-1-638007337195283708.png", store: vomar },
+    { name: "Lidl Tomatensaus", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Heinz-Spagheroni-Tradizionale-Pastasaus-520-g-8715700415987-1-638007337195283708.png", store: lidl },
+    { name: "AH Pesto Saus", image_url: "https://static.ah.nl/dam/product/AHI_4354523130313032333636?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: ah },
+    { name: "Jumbo Pesto Saus", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/20032025_1742488408778_1742488415107_8718452888481_1.png", store: jumbo },
+    { name: "Vomar Pesto Saus", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Bertolli-Pesto-Alla-Genovese-185-g-8712247232053-1-638575848328751393.png", store: vomar },
+    { name: "Lidl Pesto Saus", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Bertolli-Pesto-Alla-Genovese-185-g-8712247232053-1-638575848328751393.png", store: lidl }
   ],
   "Breakfast & Spreads" => [
     { name: "AH Cornflakes", image_url: "https://imgproxy-retcat.assets.schwarz/Lm0A_743B3Bg5vzTaKPoAItc49WtdTYmSQ7xLg8Kt-w/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS83MjAyNzdCNUNDOTJCNjYzREU5N0FBOUN/FMjhENDAwMUZBQTI0N0Q4NkJFOEIwMjlFQTU3REQwRkMzMTFCQUEwLmpwZw.jpg", store: ah }, # No direct match, leave empty
