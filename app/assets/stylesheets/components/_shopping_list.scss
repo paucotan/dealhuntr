@@ -33,6 +33,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: -5px;
 
   .store-logo-large {
     width: 70px;
@@ -47,12 +48,26 @@
   }
 }
 
+.store-savings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: -5px;
+  margin-bottom: -23px;
+}
+
+.store-savings i {
+  font-size: 1.4rem;
+  color: #FFD700;
+}
+
 .shopping-grid {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 5px;
 }
-
 
 .shopping-card {
   width: 100%;

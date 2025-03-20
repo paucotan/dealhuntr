@@ -14,7 +14,7 @@
             <h2 class="ms-2"><strong><%= store.name %></strong></h2>
           </div>
           <div class="store-savings" style="text-align: center;">
-            <p><strong>Your Savings:</strong> <span class="savings" style="color: #975BEB; font-size: larger; font-weight: bold;">€<%= number_with_precision(store_savings, precision: 2) %></span></p>
+            <p><i class="fa-solid fa-coins"></i> <strong>Your Savings:</strong> <span class="savings" style="color: #975BEB; font-size: larger; font-weight: bold;">€<%= number_with_precision(store_savings, precision: 2) %></span></p>
           </div>
           <div class="shopping-grid">
             <% items.each do |item| %>
