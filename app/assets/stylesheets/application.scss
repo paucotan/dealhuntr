@@ -3,15 +3,27 @@
 
 @import "components/index";
 @import "pages/index";
-@import "components/navbar";
-@import 'components/deal_card';
-@import 'components/dashboard';
-@import 'components/favourite_button';
-@import 'components/favourites_list';
-@import "components/filter_bar";
-@import "components/pagination";
+
 
 body {
   font-family: 'Inria Sans', Arial, Helvetica, sans-serif;
   color: #5C5A5A;
 };
+
+// I want to add media queries to the end of this file
+
+@media (max-width: 768px) {
+  .favourites-list {
+    grid-template-columns: 1fr;
+  }
+
+  .fav-card {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 992px ) {
+  body {
+    padding-top: 40px;
+  }
+}
