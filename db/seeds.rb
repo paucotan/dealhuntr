@@ -48,28 +48,28 @@ deal_types = ["1 voor 9.99", "1+1 gratis", "30% korting", "2+2 gratis", "20% kor
 # Define all categories (2 products per store, 8 products per category)
 product_definitions = {
   "Fruits & Vegetables" => [
-    { name: "AH Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah },
-    { name: "Jumbo Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
-    { name: "Vomar Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
-    { name: "Lidl Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",  store: lidl },
-    { name: "AH Verse Appels", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah },
-    { name: "Jumbo Verse Appels", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
-    { name: "Vomar Verse Appels", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
-    { name: "Lidl Verse Appels", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl },
-    { name: "AH Wortelen", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah },
-    { name: "Jumbo Wortelen", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
-    { name: "Vomar Wortelen", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
-    { name: "Lidl Wortelen", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl }
+    { name: "AH Broccoli", image_url: "https://www.jumbo.com/dam-images/fit-in/720x720/Products/10082023_1691674928494_1691674957745_8718452107506_1.png", store: ah },
+    { name: "Jumbo Broccoli", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/29072024_1722270916948_1722270926052_8718452789733_1.png", store: jumbo },
+    { name: "Vomar Broccoli", image_url: "https://www.jumbo.com/dam-images/fit-in/720x720/Products/10082023_1691674928494_1691674957745_8718452107506_1.png", store: vomar },
+    { name: "Lidl Broccoli", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCB8oETpoCQU4K1pIi2OjecboeDYyzprdu_w&s",  store: lidl },
+    { name: "AH Verse Appels", image_url: "https://static.ah.nl/dam/product/AHI_43545239383933333036?revLabel=1&rendition=400x400_JPG_Q85&fileType=binary", store: ah },
+    { name: "Jumbo Verse Appels", image_url: "https://dyyv8eonpc8dv.cloudfront.net/media/cache/c5/4e/c54e8f1c308bcc0accdf0e1358168d39.jpg", store: jumbo },
+    { name: "Vomar Verse Appels", image_url: "https://static.libertyprim.com/files/varietes/pomme-pink-lady-large.jpg?1569321939", store: vomar },
+    { name: "Lidl Verse Appels", image_url: "https://dyyv8eonpc8dv.cloudfront.net/media/cache/c5/4e/c54e8f1c308bcc0accdf0e1358168d39.jpg", store: lidl },
+    { name: "AH Wortelen", image_url: "https://centrumsupermarket.com/cdn/shop/products/jumbocarrots_1024x1024_09df94c0-cfa2-47c8-921d-386ea43cd51d_960x.jpg?v=1623886599", store: ah },
+    { name: "Jumbo Wortelen", image_url: "https://centrumsupermarket.com/cdn/shop/products/jumbocarrots_1024x1024_09df94c0-cfa2-47c8-921d-386ea43cd51d_960x.jpg?v=1623886599", store: jumbo },
+    { name: "Vomar Wortelen", image_url: "https://images.freshop.ncrcloud.com/112150/851951bba003827272830485a6b84d4d_large.png", store: vomar },
+    { name: "Lidl Wortelen", image_url: "https://images.freshop.ncrcloud.com/112150/851951bba003827272830485a6b84d4d_large.png", store: lidl }
   ],
   "Meat & Fish" => [
     { name: "AH Kipfilet", image_url: "https://static.ah.nl/dam/product/AHI_4354523130303937373135?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: ah },
     { name: "Jumbo Kipfilet", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/12122024_1734017700588_1734017707185_2378607000000_1.png", store: jumbo },
     { name: "Vomar Kipfilet", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/SCHARRELKIPFILET-2-O-S-2394040000000-0-638368473858399987.jpg", store: vomar },
     { name: "Lidl Kipfilet", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/SCHARRELKIPFILET-2-O-S-2394040000000-0-638368473858399987.jpg", store: lidl },
-    { name: "AH Zalmfilet", image_url: "https://images.unsplash.com/photo-1499125562588-29fb8a56b5d5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah },
-    { name: "Jumbo Zalmfilet", image_url: "https://images.unsplash.com/photo-1499125562588-29fb8a56b5d5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
-    { name: "Vomar Zalmfilet", image_url: "https://images.unsplash.com/photo-1499125562588-29fb8a56b5d5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
-    { name: "Lidl Zalmfilet", image_url: "https://images.unsplash.com/photo-1499125562588-29fb8a56b5d5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl }
+    { name: "AH Zalmfilet", image_url: "https://costi.com.au/cdn/shop/files/Atlanticsalmonfillet.jpg?v=1700794449&width=1650", store: ah },
+    { name: "Jumbo Zalmfilet", image_url: "https://www.jumbo.com/dam-images/fit-in/720x720/Products/14022025_1739543567028_1739543570845_8718452813728_1.png", store: jumbo },
+    { name: "Vomar Zalmfilet", image_url: "https://costi.com.au/cdn/shop/files/Atlanticsalmonfillet.jpg?v=1700794449&width=1650", store: vomar },
+    { name: "Lidl Zalmfilet", image_url: "https://costi.com.au/cdn/shop/files/Atlanticsalmonfillet.jpg?v=1700794449&width=1650", store: lidl }
   ],
   "Dairy & Eggs" => [
     { name: "AH Volle Melk", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: ah },
@@ -192,10 +192,10 @@ product_definitions = {
     { name: "Lidl Lager Bier", image_url: "https://imgproxy-retcat.assets.schwarz/Wj4LTSJXn75DmU-7_S3SFjkQY2iLeEbTRrEjMuIp-og/sm:1/w:1278/h:959/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS82QzYwQkE0MjcxNUFEODNFMzM1MURCNDE/5OUZGODdCNTZGNDA4MUIxNDBEMDJDNDFGOEZENzc4NjdDNzNFNzM3LmpwZw.jpg", store: lidl }
   ],
   "Drugstore" => [
-    { name: "AH Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
-    { name: "Vomar Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
-    { name: "Lidl Pijnstillers", image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl },
+    { name: "AH Pijnstillers", image_url: "https://image.made-in-china.com/2f0j00HAhiMobSLUcV/Paracetamol-Acetaminophen-Tablets-650-Mg-Pain-Reliever-Socomol-Tablets.webp", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Pijnstillers", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZDvDD6PAdm-TYC2nARLPwIZOhouLwHNhUA9YViccr2FnKUlbAtB0cWIZ9asbR1Cg4HeE&usqp=CAU", store: jumbo },
+    { name: "Vomar Pijnstillers", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZDvDD6PAdm-TYC2nARLPwIZOhouLwHNhUA9YViccr2FnKUlbAtB0cWIZ9asbR1Cg4HeE&usqp=CAU", store: vomar },
+    { name: "Lidl Pijnstillers", image_url: "https://imgproxy-retcat.assets.schwarz/WZDcIyrQaiSHR5oqnJg1oOFylGa8ybmZo4sGBxpuy9M/sm:1/w:1500/h:1125/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvbmwvMS84MkQ1RDMzNDBCOUE0MDYyQjFBMEU1MUI/1MkUzNDA1NjJDMjY2OTEzMkNCOTBDODQxRjZCMTUyREI2MDBFMkFGLmpwZw.jpg", store: lidl },
     { name: "AH Pleisters", image_url: "https://img.fruugo.com/product/8/49/924529498_max.jpg", store: ah },
     { name: "Jumbo Pleisters", image_url: "https://img.fruugo.com/product/8/49/924529498_max.jpg", store: jumbo },
     { name: "Vomar Pleisters", image_url: "https://img.fruugo.com/product/8/49/924529498_max.jpg", store: vomar },
@@ -226,10 +226,10 @@ product_definitions = {
     { name: "Jumbo Batterijen", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Varta-Longlife-Power-Alkaline-9V-4008496559862-1-638044488453107957.png", store: jumbo },
     { name: "Vomar Batterijen", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Varta-Longlife-Power-Alkaline-9V-4008496559862-1-638044488453107957.png", store: vomar },
     { name: "Lidl Batterijen", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Varta-Longlife-Power-Alkaline-9V-4008496559862-1-638044488453107957.png", store: lidl },
-    { name: "AH Lampen", image_url: "https://m.media-amazon.com/images/I/71eCn2-T1hL.__AC_SX300_SY300_QL70_ML2_.jpg", store: ah },
-    { name: "Jumbo Lampen", image_url: "https://m.media-amazon.com/images/I/71eCn2-T1hL.__AC_SX300_SY300_QL70_ML2_.jpg", store: jumbo },
-    { name: "Vomar Lampen", image_url: "https://m.media-amazon.com/images/I/71eCn2-T1hL.__AC_SX300_SY300_QL70_ML2_.jpg", store: vomar },
-    { name: "Lidl Lampen", image_url: "https://m.media-amazon.com/images/I/71eCn2-T1hL.__AC_SX300_SY300_QL70_ML2_.jpg", store: lidl }
+    { name: "AH Lampen", image_url: "https://www.assets.signify.com/is/image/Signify/Essential-SmartBright-LED-bulb-CLP", store: ah },
+    { name: "Jumbo Lampen", image_url: "https://www.assets.signify.com/is/image/Signify/Essential-SmartBright-LED-bulb-CLP", store: jumbo },
+    { name: "Vomar Lampen", image_url: "https://www.assets.signify.com/is/image/Signify/Essential-SmartBright-LED-bulb-CLP", store: vomar },
+    { name: "Lidl Lampen", image_url: "https://www.assets.signify.com/is/image/Signify/Essential-SmartBright-LED-bulb-CLP", store: lidl }
   ],
   "Seasonal" => [
     { name: "AH Paaschocolade-eieren", image_url: "https://www.compliment.nl/wp-content/uploads/2020/05/Toffifee-15x-125gr-3_jpg.webp", store: ah }, # Reuse Chocoladereep image
@@ -242,14 +242,14 @@ product_definitions = {
     { name: "Lidl Halloween Snoep", image_url: "https://www.compliment.nl/wp-content/uploads/2020/05/Toffifee-15x-125gr-3_jpg.webp", store: lidl }
   ],
   "Online Only" => [
-    { name: "AH Speciale Olijfolie", image_url: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5KZARLZiKXM9PwwKZLGwdmf4cdSBnnQ1Hni4s6gERUlh7MDw7qFPenuFT37EE0CX7Uio9t0hSq0wHQrNd3gC7-oKcPcMWLfnpbpaZMef2KneaIOq7NrQtAbl7bGT1wHQdlA&usqp=CAc", store: ah }, # No direct match, leave empty
-    { name: "Jumbo Speciale Olijfolie", image_url: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5KZARLZiKXM9PwwKZLGwdmf4cdSBnnQ1Hni4s6gERUlh7MDw7qFPenuFT37EE0CX7Uio9t0hSq0wHQrNd3gC7-oKcPcMWLfnpbpaZMef2KneaIOq7NrQtAbl7bGT1wHQdlA&usqp=CAc", store: jumbo },
-    { name: "Vomar Speciale Olijfolie", image_url: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5KZARLZiKXM9PwwKZLGwdmf4cdSBnnQ1Hni4s6gERUlh7MDw7qFPenuFT37EE0CX7Uio9t0hSq0wHQrNd3gC7-oKcPcMWLfnpbpaZMef2KneaIOq7NrQtAbl7bGT1wHQdlA&usqp=CAc", store: vomar },
-    { name: "Lidl Speciale Olijfolie", image_url: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5KZARLZiKXM9PwwKZLGwdmf4cdSBnnQ1Hni4s6gERUlh7MDw7qFPenuFT37EE0CX7Uio9t0hSq0wHQrNd3gC7-oKcPcMWLfnpbpaZMef2KneaIOq7NrQtAbl7bGT1wHQdlA&usqp=CAc", store: lidl },
-    { name: "AH Gourmet Kruidenset", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp", store: ah },
-    { name: "Jumbo Gourmet Kruidenset", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp", store: jumbo },
-    { name: "Vomar Gourmet Kruidenset", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp", store: vomar },
-    { name: "Lidl Gourmet Kruidenset", image_url: "https://img.discountoffice.cloud/ZV-1FCRHSFrGvsGJpGxbcfWK4LzhMU35RzgbZll45HU/bg:ffffff/rs:fit:640:480:1:1/g:ce/bG9jYWw6Ly8vZGlzY291bnQtd2Vic2l0ZS9wcm9kdWN0SW1hZ2VzLzgvb3JnL1ExNDI5NzY3LTEuanBn.webp", store: lidl }
+    { name: "AH Speciale Olijfolie", image_url: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSyqfozHakXuXB0qg72b4AaDXUxyLc6Qi1gXevEotmshKtFN0vvRufjb7fSFZHaRaX6Rzo5efgCfTlyksSqPFQGBvSqmEcqxRhz4uAuwEqAsYuwgcWeZf3HbA", store: ah }, # No direct match, leave empty
+    { name: "Jumbo Speciale Olijfolie", image_url: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSyqfozHakXuXB0qg72b4AaDXUxyLc6Qi1gXevEotmshKtFN0vvRufjb7fSFZHaRaX6Rzo5efgCfTlyksSqPFQGBvSqmEcqxRhz4uAuwEqAsYuwgcWeZf3HbA", store: jumbo },
+    { name: "Vomar Speciale Olijfolie", image_url: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTLsJwJAycGiXn_srEgR9uwIAAK8phl6v0s1IxAU2maGDgV1UIaMOutF1MDL3tbQ10BoFy0vT_CSHaIi17JGmbN_L9fNtml72BzeeIZjlub94ISY7eqS0YC", store: vomar },
+    { name: "Lidl Speciale Olijfolie", image_url: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTLsJwJAycGiXn_srEgR9uwIAAK8phl6v0s1IxAU2maGDgV1UIaMOutF1MDL3tbQ10BoFy0vT_CSHaIi17JGmbN_L9fNtml72BzeeIZjlub94ISY7eqS0YC", store: lidl },
+    { name: "AH Gourmet Kruidenset", image_url: "https://soulfood.nl/wp-content/uploads/2022/02/baking-website.jpg", store: ah },
+    { name: "Jumbo Gourmet Kruidenset", image_url: "https://soulfood.nl/wp-content/uploads/2022/02/baking-website.jpg", store: jumbo },
+    { name: "Vomar Gourmet Kruidenset", image_url: "https://soulfood.nl/wp-content/uploads/2022/02/baking-website.jpg", store: vomar },
+    { name: "Lidl Gourmet Kruidenset", image_url: "https://soulfood.nl/wp-content/uploads/2022/02/baking-website.jpg", store: lidl }
   ]
 }
 
