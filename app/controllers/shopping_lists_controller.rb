@@ -8,6 +8,9 @@ class ShoppingListsController < ApplicationController
     @shopping_list = policy_scope(ShoppingList) # ✅ Correct Pundit scoping
     @total_price = @shopping_list.sum { |item| item[:price].to_f }
     @total_savings = @shopping_list.sum { |item| item[:price].to_f - item[:price].to_f }
+    @store_savings = @shopping_list.group_by { |item| item.deal.store }.transform_values do |items|
+      items.sum { |item| (item[:price] || item.deal.price).to_f - (item[:discounted_price] || item.deal.discounted_price).to_f }
+    end
   end
 
   def create
