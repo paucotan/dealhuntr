@@ -1,24 +1,20 @@
 .deal-column {
-  padding: 0 0.25rem;
+  padding: 0;
+  flex: 0 0 calc(50% - 0.5rem);
   margin-bottom: 0.5rem;
 
   .card {
     width: 100%;
-    max-width: 187px;
     cursor: pointer;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
 
     .card-img-top {
       width: 100%;
-      max-width: 145px;
       height: auto;
       max-height: 163px;
       object-fit: cover;
-      margin: 0 auto;
-      display: block;
       aspect-ratio: 1 / 1;
     }
 
@@ -32,7 +28,7 @@
 
       .card-text {
         margin: 0;
-        font-size: 0.9rem;
+        font-size: 1.2rem;
 
         .text-muted {
           text-decoration: line-through;
@@ -42,204 +38,159 @@
         .discounted-price-text {
           color: #F99417;
           font-weight: bold;
-          font-size: x-large;
+          font-size:xx-large;
         }
       }
 
       .deal-type-text {
-        font-size: 0.8rem;
+        font-size: 1.2rem;
+        color: #975BEB;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.expanded-content {
+  width: 100vw;
+  padding: 0;
+  grid-column: span 2;
+
+  .product-frame {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.8rem 10px;
+    border-bottom: 1px solid #ddd;
+
+    .product-image-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 40%;
+
+      .card-img-top {
+        width: 100%;
+        max-width: 145px;
+        height: auto;
+        object-fit: cover;
+      }
+      .deal-prices {
+        margin: 0;
+        font-size: 1.2rem;
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+        align-items: baseline;
+
+        .text-muted {
+          text-decoration: line-through;
+          color: gray;
+        }
+
+        .discounted-price-text {
+          color: #F99417;
+          font-weight: bold;
+          font-size: xx-large;
+        }
+
+      }
+    }
+
+    .product-info {
+      height: 24vh;
+      justify-content: space-between;
+      width: 55%;
+      display: flex;
+      flex-direction: column;
+
+      .deal-type-text {
+        font-size: 1.2rem;
         color: #975BEB;
         margin: 0;
       }
 
+      .details {
+        .product-name {
+          font-size: 0.95rem;
+          font-weight: bold;
+          color: #5C5A5A;
+        }
 
-    }
+        .expiry-date {
+          font-size: 0.75rem;
+          color: gray;
+        }
 
-    &.expanded {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      max-height: 515px;
-      margin: 0;
-      padding: 0;
-      z-index: 10;
+        p {
+          font-size: 1.2rem;
+        }
 
-      .card-img-top,
-      .card-body {
-        display: none;
+        .choosen_store_id {
+          height: 50px;
+          width: 50px;
+          object-fit: contain;
+          margin-top: 0.5rem;
+        }
       }
     }
   }
 
-  .expanded-content {
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background: #fff;
+  .other-stores {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 4px 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    width: 90%;
 
-    .deal-type-text {
-      font-size: 0.8rem;
-      color: #975BEB;
-      margin: 0;
-    }
-
-
-    .product-frame {
+    .small-store-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 6px;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 0.8rem;
-      border-bottom: 1px solid #ddd;
+      align-items: center;
+      justify-content: flex-start;
+      height: 140px;
+      position: relative;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 
-      .product-image-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.3rem;
-        width: 40%;
-        min-width: 120px;
-
-        .card-img-top {
-          width: 100%;
-          max-width: 145px;
-          height: auto;
-          max-height: 163px;
-          object-fit: cover;
-        }
-
-        .deal-prices {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          .text-muted {
-            text-decoration: line-through;
-            font-size: 0.8rem;
-            color: gray;
-          }
-
-          .discounted-price-text {
-            font-size: 1.3rem;
-            color: #F99417;
-          }
-        }
+      .product-image-wrapper img.product-image-small {
+        width: 90px;
+        height: 100px;
+        object-fit: cover;
       }
 
-      .product-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 0.3rem;
-        width: 55%;
-        min-width: 150px;
+      .store-logo-wrapper {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+      }
 
-        .details {
-          .product-name {
-            font-size: 0.95rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-          }
+      .store-logo-wrapper img.store-logo-small {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+      }
 
-          .expiry-date {
-            font-size: 0.75rem;
-            color: gray;
-            margin-bottom: 0.3rem;
-          }
+      .price-wrapper {
+        margin-top: 4px;
+      }
 
-          p {
-            font-size: 0.85rem;
-            margin-bottom: 0.3rem;
-          }
-
-          .choosen_store_id {
-            height: 50px;
-            width: 50px;
-            object-fit: contain;
-            margin-top: 0.5rem;
-          }
-        }
-
-
+      .store-price {
+        color: #F99417;
+        font-weight: bold;
+        font-size: x-large;
       }
     }
 
-    .other-stores {
-      display: flex;
-      justify-content: space-around;
-      gap: 0.5rem;
-      padding: 0.5rem;
-      flex-wrap: wrap;
-
-      .small-store-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 0.5rem;
-        flex: 1 1 80px;
-        margin: 0.25rem;
-
-        .store-logo-small {
-          height: 35px;
-          width: 35px;
-          object-fit: contain;
-        }
-
-        .store-price {
-          margin-top: 0.4rem;
-          font-size: 0.85rem;
-        }
-      }
-    }
   }
-  .expanded-content .product-info .add-to-list {
-    margin-top: auto;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.75rem;
-    background-color: #F99417;
-    color: #fff;
-    align-self: flex-start;
-  }
-}
-@media (min-width: 300px) {
-  .deal-column {
-    flex: 0 0 calc(50% - 0.5rem)
-  }
+
 }
 
-@media (min-width: 576px) {
-  .deal-column {
-    flex: 0 0 calc(33.33% - 0.5rem);
-  }
-}
-
-@media (min-width: 768px) {
-  .deal-column {
-    flex: 0 0 calc(25% - 0.5rem);
-  }
-}
-
-@media (min-width: 1024px) {
-  .deal-column {
-    flex: 0 0 calc(20% - 0.5rem);
-  }
-}
-
-@media (min-width: 1280px) {
-  .deal-column {
-    flex: 0 0 calc(16.66% - 0.5rem);
-  }
-}
-
-.expanded-content .product-image-card .card-img-top {
-  display: block !important;
-  visibility: visible !important;
-}
 .expanded-content .product-info .add-to-list {
   margin-top: auto;
   padding: 0.3rem 0.6rem;
