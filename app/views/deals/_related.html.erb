@@ -43,15 +43,27 @@
 
   <div class="other-stores">
     <% related_deals.each do |related_deal| %>
-      <div class="small-store-card">
-        <%= image_tag related_deal.store.logo_url, class: "store-logo-small" %>
-        <p class="product-name">
-          <%= truncate(related_deal.product.name, length: 40, omission: "...") %>
-        </p>
-        <p class="store-price font-weight-bold">
-          €<%= related_deal.discounted_price || related_deal.price %>
-        </p>
+      <div class="small-store-card" style="position: relative;">
+
+        <div class="product-image-wrapper">
+          <% if related_deal.product.image_url.present? %>
+            <%= image_tag related_deal.product.image_url, class: "product-image-small" %>
+          <% end %>
+        </div>
+
+        <div class="store-logo-wrapper" style="position: absolute; top: 8px; right: 8px;">
+          <%= image_tag related_deal.store.logo_url, class: "store-logo-small" %>
+        </div>
+
+        <div class="price-wrapper mt-1">
+          <p class="store-price">
+            €<%= related_deal.discounted_price || related_deal.price %>
+          </p>
+        </div>
+
       </div>
     <% end %>
-  </div>
+</div>
+
+
 </div>

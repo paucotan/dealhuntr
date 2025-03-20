@@ -1,16 +1,19 @@
 body {
-  padding: 10px 10px 0 10px;
+  padding: 0;
+  margin: 0;
+  max-width: 430px;
+  margin: 0 auto;
 }
-
-
 
 #search-results {
   overflow: scroll;
   height: 65vh;
+  padding: 0 10px;
 }
 
 .search-bar {
   margin-bottom: 1rem;
+  padding: 0 10px;
 
   input[type="text"] {
     width: 70%;
@@ -26,7 +29,6 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-
     &:hover {
       background-color: #F99417;
     }
@@ -37,6 +39,7 @@ body {
   border-radius: 10px;
   margin-bottom: 1rem;
   width: 100%;
+  padding: 0 10px;
 
   .banner-logo {
     height: 65px;
@@ -59,4 +62,5 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  padding: 0 10px;
 }
