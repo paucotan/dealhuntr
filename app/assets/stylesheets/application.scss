@@ -10,18 +10,6 @@ body {
   color: #5C5A5A;
 };
 
-// I want to add media queries to the end of this file
-
-@media (max-width: 768px) {
-  .favourites-list {
-    grid-template-columns: 1fr;
-  }
-
-  .fav-card {
-    padding: 8px;
-  }
-}
-
 @media (max-width: 992px ) {
   body {
     padding-top: 40px;
