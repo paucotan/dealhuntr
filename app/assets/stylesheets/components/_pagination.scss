@@ -3,6 +3,7 @@
   cursor: default;
   justify-content: center;
   margin-top: 10px;
+  padding-bottom: 70px;
 
   /* Self-clearing method: */
   &:after {
@@ -59,10 +60,10 @@
     }
   }
 
-  /* IE6/7 fixes */
-  * html & {
-    height: 1%;
-  }
+  // /* IE6/7 fixes */
+  // * html & {
+  //   height: 1%;
+  // }
 
   *:first-child + html & {
     overflow: hidden;
