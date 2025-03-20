@@ -48,6 +48,10 @@ deal_types = ["1 voor 9.99", "1+1 gratis", "30% korting", "2+2 gratis", "20% kor
 # Define all categories (2 products per store, 8 products per category)
 product_definitions = {
   "Fruits & Vegetables" => [
+    { name: "AH Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah },
+    { name: "Jumbo Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
+    { name: "Vomar Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
+    { name: "Lidl Broccoli", image_url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",  store: lidl },
     { name: "AH Verse Appels", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah },
     { name: "Jumbo Verse Appels", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
     { name: "Vomar Verse Appels", image_url: "https://images.unsplash.com/photo-1623815242959-fb20354f9b8d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
@@ -58,10 +62,10 @@ product_definitions = {
     { name: "Lidl Wortelen", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl }
   ],
   "Meat & Fish" => [
-    { name: "AH Kipfilet", image_url: "https://plus.unsplash.com/premium_photo-1723579413852-d71dbd8641d2?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah },
-    { name: "Jumbo Kipfilet", image_url: "https://plus.unsplash.com/premium_photo-1723579413852-d71dbd8641d2?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
-    { name: "Vomar Kipfilet", image_url: "https://plus.unsplash.com/premium_photo-1723579413852-d71dbd8641d2?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
-    { name: "Lidl Kipfilet", image_url: "https://plus.unsplash.com/premium_photo-1723579413852-d71dbd8641d2?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl },
+    { name: "AH Kipfilet", image_url: "https://static.ah.nl/dam/product/AHI_4354523130303937373135?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: ah },
+    { name: "Jumbo Kipfilet", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/12122024_1734017700588_1734017707185_2378607000000_1.png", store: jumbo },
+    { name: "Vomar Kipfilet", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/SCHARRELKIPFILET-2-O-S-2394040000000-0-638368473858399987.jpg", store: vomar },
+    { name: "Lidl Kipfilet", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/SCHARRELKIPFILET-2-O-S-2394040000000-0-638368473858399987.jpg", store: lidl },
     { name: "AH Zalmfilet", image_url: "https://images.unsplash.com/photo-1499125562588-29fb8a56b5d5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah },
     { name: "Jumbo Zalmfilet", image_url: "https://images.unsplash.com/photo-1499125562588-29fb8a56b5d5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
     { name: "Vomar Zalmfilet", image_url: "https://images.unsplash.com/photo-1499125562588-29fb8a56b5d5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
@@ -112,20 +116,20 @@ product_definitions = {
     { name: "Jumbo Kip Curry", image_url: "https://plus.unsplash.com/premium_photo-1723579413852-d71dbd8641d2?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
     { name: "Vomar Kip Curry", image_url: "https://plus.unsplash.com/premium_photo-1723579413852-d71dbd8641d2?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
     { name: "Lidl Kip Curry", image_url: "https://plus.unsplash.com/premium_photo-1723579413852-d71dbd8641d2?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl },
-    { name: "AH Groente Lasagne", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: ah }, # Reuse Wortelen image (vegetable-based)
-    { name: "Jumbo Groente Lasagne", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: jumbo },
-    { name: "Vomar Groente Lasagne", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: vomar },
-    { name: "Lidl Groente Lasagne", image_url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", store: lidl }
+    { name: "AH Groente Lasagne", image_url: "https://static.ah.nl/dam/product/AHI_4354523130303530323239?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: ah }, # Reuse Wortelen image (vegetable-based)
+    { name: "Jumbo Groente Lasagne", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/18012025_1737167997460_1737168055953_505994_DS_08720182017253_C1N1.png", store: jumbo },
+    { name: "Vomar Groente Lasagne", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/18012025_1737167997460_1737168055953_505994_DS_08720182017253_C1N1.png", store: vomar },
+    { name: "Lidl Groente Lasagne", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/18012025_1737167997460_1737168055953_505994_DS_08720182017253_C1N1.png", store: lidl }
   ],
   "Cheese" => [
-    { name: "AH Goudse Kaas", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: ah }, # Reuse Volle Melk image (dairy)
-    { name: "Jumbo Goudse Kaas", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: jumbo },
-    { name: "Vomar Goudse Kaas", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: vomar },
-    { name: "Lidl Goudse Kaas", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: lidl },
-    { name: "AH Cheddar Blok", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: ah },
-    { name: "Jumbo Cheddar Blok", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: jumbo },
-    { name: "Vomar Cheddar Blok", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: vomar },
-    { name: "Lidl Cheddar Blok", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/-Zuivelmeester-Halfvolle-Melk-2-L-8710624326364-1-637957265105713936.png", store: lidl }
+    { name: "AH Goudse Kaas", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Vergeer-Holland-Jong-Gouda-Kaas-48-200-g-8710866043548-1-637957248734609972.png", store: ah }, # Reuse Volle Melk image (dairy)
+    { name: "Jumbo Goudse Kaas", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Vergeer-Holland-Jong-Gouda-Kaas-48-200-g-8710866043548-1-637957248734609972.png", store: jumbo },
+    { name: "Vomar Goudse Kaas", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Vergeer-Holland-Jong-Gouda-Kaas-48-200-g-8710866043548-1-637957248734609972.png", store: vomar },
+    { name: "Lidl Goudse Kaas", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Vergeer-Holland-Jong-Gouda-Kaas-48-200-g-8710866043548-1-637957248734609972.png", store: lidl },
+    { name: "AH Cheddar Blok", image_url: "https://static.ah.nl/dam/product/AHI_43545236393638333132?revLabel=3&rendition=800x800_JPG_Q90&fileType=binary", store: ah },
+    { name: "Jumbo Cheddar Blok", image_url: "https://www.jumbo.com/dam-images/fit-in/360x360/Products/13112023_1699896782384_1699896792115_8718452695119_1.png", store: jumbo },
+    { name: "Vomar Cheddar Blok", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Vergeer-Holland-Geraspt-Cheddar-50-150-g-8710866032351-1-637957267211829625.png", store: vomar },
+    { name: "Lidl Cheddar Blok", image_url: "https://d3vricquk1sjgf.cloudfront.net/articles/Vergeer-Holland-Geraspt-Cheddar-50-150-g-8710866032351-1-637957267211829625.png", store: lidl }
   ],
   "Pasta, Rice & International" => [
     { name: "AH Spaghetti", image_url: "https://static.ah.nl/dam/product/AHI_4354523130303830363437?revLabel=1&rendition=800x800_JPG_Q90&fileType=binary", store: ah }, # No direct match, leave empty
