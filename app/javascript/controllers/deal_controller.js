@@ -68,4 +68,7 @@ export default class extends Controller {
       }
     });
   }
+  preventExpand(event) {
+    event.stopPropagation(); // Prevents the click from bubbling up to expandDetails
+  }
 }
