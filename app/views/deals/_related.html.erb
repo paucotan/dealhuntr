@@ -1,16 +1,14 @@
-<div class="expanded-content">
+<div class="expanded-content" data-related-deals-target="expandedContent">
   <div class="product-frame">
     <div class="product-image-card" id="deal-<%= deal.id %>">
       <% if deal.product.image_url.present? %>
         <%= image_tag deal.product.image_url, class: "card-img-top" %>
       <% end %>
-
       <div class="deal-prices">
         <p class="text-muted">€<%= deal.price %></p>
         <p class="discounted-price-text font-weight-bold">€<%= deal.discounted_price %></p>
       </div>
     </div>
-
     <div class="product-info">
       <div class="details">
         <h5 class="product-name"><%= deal.product.name %></h5>
@@ -23,10 +21,8 @@
         </p>
         <%= image_tag deal.store.logo_url, class: "choosen_store_id" %>
       </div>
-
       <div class="d-flex align-items-center gap-2 mt-2">
         <%= button_to "Add To List", shopping_lists_path(deal_id: deal.id), method: :post, class: "btn  btn-sm add-to-list", data: { action: "click->deal#preventExpand" } %>
-
         <% if current_user && current_user.favourites.exists?(product_id: deal.product.id) %>
           <% fav = current_user.favourites.find_by(product_id: deal.product.id) %>
           <%= button_to favourite_path(fav), method: :delete, remote: true, class: "fav-btn btn p-0", data: { turbo_stream: true } do %>
@@ -40,30 +36,24 @@
       </div>
     </div>
   </div>
-
   <div class="other-stores">
     <% related_deals.each do |related_deal| %>
-      <div class="small-store-card" style="position: relative;">
-
+      <div class="small-store-card" style="position: relative;" data-action="click->deal#swapWithRelated"
+        data-deal-id="<%= related_deal.id %>">
         <div class="product-image-wrapper">
           <% if related_deal.product.image_url.present? %>
             <%= image_tag related_deal.product.image_url, class: "product-image-small" %>
           <% end %>
         </div>
-
         <div class="store-logo-wrapper" style="position: absolute; top: 8px; right: 8px;">
           <%= image_tag related_deal.store.logo_url, class: "store-logo-small" %>
         </div>
-
         <div class="price-wrapper mt-1">
           <p class="store-price">
             €<%= related_deal.discounted_price || related_deal.price %>
           </p>
         </div>
-
       </div>
     <% end %>
-</div>
-
-
+  </div>
 </div>
