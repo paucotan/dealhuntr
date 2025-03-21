@@ -5,7 +5,6 @@ export default class extends Controller {
 
   expandDetails(event) {
     event.stopPropagation();
-    event.preventDefault();
     const container = this.element;
     const dealId = this.element.dataset.dealId;
     const parentColumn = container.closest(".deal-column");
@@ -31,13 +30,8 @@ export default class extends Controller {
       .catch(err => console.error(err));
   }
 
-  preventExpand(event) {
-    event.stopPropagation();
-  }
-
   swapWithRelated(event) {
     event.stopPropagation();
-    event.preventDefault();
 
     const container = this.element;
     const relatedDealId = event.currentTarget.dataset.dealId;
@@ -58,7 +52,7 @@ export default class extends Controller {
       .catch(err => console.error(err));
   }
 
-  collapseOtherCards() {
+  collapseOtherCards(event) {
     const expandedCards = document.querySelectorAll(".expanded");
     expandedCards.forEach(card => {
       if (card !== this.element) {
