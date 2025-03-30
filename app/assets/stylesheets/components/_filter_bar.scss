@@ -32,7 +32,16 @@
   gap: 1rem;
 
   @media (max-width: 768px) {
+    .store-logos {
+      gap: 0.3rem;
+    }
+
+    .filter-wrapper {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
     gap: 0;
+
   }
 }
 
@@ -41,12 +50,5 @@
 }
 
 @media (max-width: 768px) {
-  .store-logos {
-    gap: 0.3rem;
-  }
 
-  .filter-wrapper {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
 }
