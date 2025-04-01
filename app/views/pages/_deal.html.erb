@@ -14,11 +14,11 @@
       <div class="fav-icon-container">
         <% if current_user && current_user.favourites.exists?(product_id: deal.product.id) %>
           <% fav = current_user.favourites.find_by(product_id: deal.product.id) %>
-          <%= button_to favourite_path(fav), method: :delete, remote: true, class: "fav-btn btn", data: { turbo_stream: true } do %>
+          <%= button_to favourite_path(fav), method: :delete, remote: true, class: "fav-btn btn", data: { turbo_stream: true }, form: { data: { turbo: false } } do %>
             <i class="fa-solid fa-star"></i>
           <% end %>
         <% else %>
-          <%= button_to favourites_path(product_id: deal.product.id), method: :post, remote: true, class: "fav-btn btn", data: { turbo_stream: true } do %>
+          <%= button_to favourites_path(product_id: deal.product.id), method: :post, remote: true, class: "fav-btn btn", data: { turbo_stream: true }, form: { data: { turbo: false } } do %>
             <i class="fa-regular fa-star"></i>
           <% end %>
         <% end %>
