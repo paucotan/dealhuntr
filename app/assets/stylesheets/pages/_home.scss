@@ -1,8 +1,22 @@
 body {
   padding: 0;
-  margin: 0;
-  max-width: 430px;
   margin: 0 auto;
+  font-family: 'Inria Sans', Arial, Helvetica, sans-serif;
+  color: #5C5A5A;
+};
+
+@media (max-width: 767px) {
+  body {
+    padding-top: 10px;
+    padding-bottom: 60px; // for mobile fixed-bottom navbar
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: 70px; // height of fixed-top desktop navbar
+    padding-bottom: 0; // remove mobile spacing
+  }
 }
 
 #search-results {
@@ -61,6 +75,6 @@ body {
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0 10px;
+  // gap: 0.5rem;
+  // padding: 0 10px;
 }

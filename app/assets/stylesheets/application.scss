@@ -3,15 +3,3 @@
 
 @import "components/index";
 @import "pages/index";
-
-
-body {
-  font-family: 'Inria Sans', Arial, Helvetica, sans-serif;
-  color: #5C5A5A;
-};
-
-@media (max-width: 992px ) {
-  body {
-    padding-top: 10px;
-  }
-}

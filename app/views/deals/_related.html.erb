@@ -1,4 +1,4 @@
-<div class="expanded-content" data-related-deals-target="expandedContent">
+<div class="card-body expanded-content" data-related-deals-target="expandedContent">
   <div class="product-frame">
     <div class="product-image-card" id="deal-<%= deal.id %>">
       <% if deal.product.image_url.present? %>
@@ -36,23 +36,16 @@
       </div>
     </div>
   </div>
-  <div class="other-stores">
+
+  <h6 class="mt-3 mb-2">Also available at:</h6>
+  <div class="other-stores d-flex flex-wrap gap-2">
     <% related_deals.each do |related_deal| %>
       <div class="small-store-card" style="position: relative;" data-action="click->deal#swapWithRelated"
         data-deal-id="<%= related_deal.id %>">
-        <div class="product-image-wrapper">
-          <% if related_deal.product.image_url.present? %>
-            <%= image_tag related_deal.product.image_url, class: "product-image-small" %>
-          <% end %>
-        </div>
-        <div class="store-logo-wrapper" style="position: absolute; top: 8px; right: 8px;">
-          <%= image_tag related_deal.store.logo_url, class: "store-logo-small" %>
-        </div>
-        <div class="price-wrapper mt-1">
-          <p class="store-price">
-            €<%= related_deal.discounted_price || related_deal.price %>
-          </p>
-        </div>
+        <%= image_tag related_deal.store.logo_url, class: "store-logo-small" %>
+        <p class="store-price text-center mt-1 mb-0">
+          €<%= related_deal.discounted_price || related_deal.price %>
+        </p>
       </div>
     <% end %>
   </div>
