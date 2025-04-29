@@ -1,7 +1,7 @@
 **Dealhuntr - Your Personal Grocery Deal Hunter**
 ====================================================
 
-[![dealhuntr logo](/dealhuntr.png)](https://www.dealhuntr.com)
+<img src="/dealhuntr.png" alt="dealhuntr logo" width="50%">
 
 **📢 Introduction**
 ---------------
