@@ -16,6 +16,8 @@ Welcome to Dealhuntr, your ultimate companion for hunting the best grocery deals
 * **Favourites List**: Save items for future reference and receive notifications when they go on sale.
 * **Intuitive Interface**: Built using Bootstrap, Turbo, HTML/CSS, and Ruby on Rails.
 
+⚠️ **Note**: This version of Dealhuntr runs on demo data via a seed file, due to web scraping limitations on Heroku. Prices and offers are for demonstration purposes only.
+
 **🛠️ Technical Details**
 --------------------
 
