@@ -27,14 +27,14 @@ Welcome to Dealhuntr, your ultimate companion for hunting the best grocery deals
 **🚀 Getting Started**
 -------------------
 
-1. Visit our website at [www.dealhuntr.com](http://www.dealhuntr.com) to explore the features and start hunting deals!
+1. Visit our website at [www.dealhuntr.com](http://www.dealhuntr.nl) to explore the features and start hunting deals!
 2. Register or log in using your email address to access all features.
 3. Browse through our comparison tool, add products to your cart, and save items for future reference.
 
 **🤝 Contributing**
 ---------------
 
-If you're interested in contributing to Dealhuntr's development or would like to suggest new features, please contact us at [your@email.com](mailto:your@email.com).
+If you're interested in contributing to Dealhuntr's development or would like to suggest new features, please leave a comment.
 
 **🙏 Acknowledgments**
 -------------------
